@@ -1,28 +1,19 @@
-Project Name
-Heading
+# Share Anything
 
-Name the product in a way the reader (i.e. your target customers) will understand.
-Sub-Heading
+#### The Airbnb for everything else.
 
-Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
-Summary
+### You've got stuff that people want. Other people have stuff that you want. Instead of being envious, why not make some extra cash? Share Anything is a community that allows users to easily share anything for a price.
 
-Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
-Problem
+### Problem
+The ability to share or use services or products is fragmented. There's one service for renting apartments, another for sharing cars. There's a site for every service or product, but not a site **for** every service and product. 
 
-Describe the problem your product solves.
-Solution
+### Solution
+Share Anything provides a simple interface for finding or sharing anything you could ever want.  It allows you to specify sharing for set intervals and provides a simple way to handle transactions.
 
-Describe how your product elegantly solves the problem.
-Quote from You
+> We're so excited to be the first to offer the last sharing service you'll ever need.
 
-A quote from a spokesperson in your company.
-How to Get Started
+### Sign up to start sharing, it's as simple as that.
 
-Describe how easy it is to get started.
-Customer Quote
+> I've always wanted a hot tub, but could never justify the purchase. With Share Anything, I'm tubbing every night!
 
-Provide a quote from a hypothetical customer that describes how they experienced the benefit.
-Closing and Call to Action
-
-Wrap it up and give pointers where the reader should go next.
+### Check out our rad site to get started!
