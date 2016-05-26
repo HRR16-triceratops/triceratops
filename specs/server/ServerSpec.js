@@ -1,9 +1,12 @@
 var expect = require('chai').expect;
 var request = require('request');
 
+var server = require('../../index.js');
 var db = require('../../server/db/db');
 var User = require('../../server/db/user/user');
 var Product = require('../../server/db/product/product');
+
+var baseUrl = 'http://localhost:8080';
 
 /************************************************************/
 // Mocha doesn't have a way to designate pending before blocks.
@@ -16,12 +19,23 @@ var xbeforeEach = function(){};
 
 
 describe('', function() {
+  
+
 
   beforeEach(function() {
     // log out currently signed in user
-    request('http://127.0.0.1:4568/logout', function(error, res, body) {});
+    request(baseUrl + '/profile', function(error, res, body) {});
 
     // delete link for roflzoo from db so it can be created later for the test
+    Product.find({}).then(function (docs) {
+      docs.forEach(function (doc) {
+        doc.remove().then(function () {
+          console.log(doc, 'Removed');
+        })
+      })
+    })
+    
+    
     db.knex('urls')
       .where('url', '=', 'http://roflzoo.com/')
       .del()
@@ -330,4 +344,10 @@ describe('', function() {
 
   }); // 'Account Login'
 
+});
+
+after(function () {
+  server.close(function () {
+    console.log('server closed');
+  });
 });
