@@ -4,7 +4,8 @@
   "description": "You've got stuff that people want. Other people have stuff that you want. Instead of being envious, why not make some extra cash? Share Anything is a community that allows users to easily share anything for a price.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -18,5 +19,14 @@
   "bugs": {
     "url": "https://github.com/HRR16-triceratops/triceratops/issues"
   },
-  "homepage": "https://github.com/HRR16-triceratops/triceratops#readme"
+  "homepage": "https://github.com/HRR16-triceratops/triceratops#readme",
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "cookie-parser": "^1.4.2",
+    "express": "^4.13.4",
+    "express-jwt": "^3.4.0",
+    "express-session": "^1.13.0",
+    "jsonwebtoken": "^7.0.0",
+    "morgan": "^1.7.0"
+  }
 }
