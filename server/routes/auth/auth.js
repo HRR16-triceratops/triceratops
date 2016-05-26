@@ -5,17 +5,37 @@ var User = require("../../db/user/user.js");
 var express = require('express');
 var router = express.Router();
 
-// create helper method
-router.get('/', function(req, res){
-  res.send('Hello authentication');
+router.get('/login', function(req, res){
+  // User.find({email: req.body.email})
+  // })
+  // .then(comparePassword(savedPassword, req.body.password))
+  // .then(function(){
+  //   res.redirect('/products');
+  // })
+  // .catch(function(){
+  //   res.redirect('/login');
 });
 
-  // check user with User model
-  // create user with User model
-  
-// '/login'
-// '/logout'
-// '/signup'
+router.get('/logout', function(req, res){
+  //
+});
+
+
+router.get('/signup', function(req, res){
+  // var password = hashPassword(req.body.password);
+  // var newUser = new User({
+  //   email: req.body.email,
+  //   password: password
+  // });
+  // newUser.save()
+  //   .then(function(){
+  //   res.end();
+  //   })
+  //   .catch(function(err){
+  //     console.log(err);
+  //   });
+});
+
 
 // export router
 module.exports = router;

@@ -6,15 +6,23 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/', function(req, res){
-  res.send('Hello profiles');
+  //
 });
+
+router.post('/', function(req, res){
+  //
+});
+
+router.put('/', function(req, res){
+  //
+});
+
 // create helper method
   // get listing belong to user
   // get username for user
   // delete listing
   // post new listing
   
-// '/' GET, POST, DELETE, (PUT)
 
 // export router
 module.exports = router;
