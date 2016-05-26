@@ -1,0 +1,12 @@
+## Mac OSX ##
+.DS_Store
+
+## NPM ##
+node_modules/
+
+## Compiled files ##
+build/
+
+## API keys ##
+
+## Others ##

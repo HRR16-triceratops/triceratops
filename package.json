@@ -1,0 +1,22 @@
+{
+  "name": "triceratops",
+  "version": "1.0.0",
+  "description": "You've got stuff that people want. Other people have stuff that you want. Instead of being envious, why not make some extra cash? Share Anything is a community that allows users to easily share anything for a price.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HRR16-triceratops/triceratops.git"
+  },
+  "keywords": [
+    "hot-tub-tonight"
+  ],
+  "author": "Team Triceratops",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HRR16-triceratops/triceratops/issues"
+  },
+  "homepage": "https://github.com/HRR16-triceratops/triceratops#readme"
+}

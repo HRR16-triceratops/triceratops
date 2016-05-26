@@ -1,6 +1,6 @@
 [![Stories in Ready](https://badge.waffle.io/HRR16-triceratops/triceratops.png?label=ready&title=Ready)](https://waffle.io/HRR16-triceratops/triceratops)
 # Project Name
-Hot-Tub Tonight
+Share Anything
 > Pithy project description
 
 ## Team
@@ -25,11 +25,9 @@ For Hot tub
 
 ## Requirements
 
-- Node 0.10.x
-- Redis 2.6.x
-- Postgresql 9.1.x
-- etc
-- etc
+- Node 6.0.x
+- Npm 3.8.x
+- MongoDB 3.2.x
 
 ## Development
 
@@ -38,7 +36,7 @@ For Hot tub
 From within the root directory:
 
 ```sh
-sudo npm install -g bower
+sudo npm install -g bower gulp
 npm install
 bower install
 ```
