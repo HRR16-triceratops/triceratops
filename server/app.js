@@ -11,11 +11,11 @@ var products = require('./routes/products/products.js');
 
 var app = express();
 
-app.use(express.static('./build')); 
+app.use(express.static('../build')); 
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(cookieParser('hot-tub-tonight!'));
+app.use(cookieParser());
 app.use(session({
   secret: "triceratops-pillows",
   cookie: { maxAge: 60 *1000},

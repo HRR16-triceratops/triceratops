@@ -21,7 +21,7 @@ router.get('/logout', function(req, res){
 });
 
 
-router.get('/signup', function(req, res){
+router.post('/signup', function(req, res){
   // var password = hashPassword(req.body.password);
   // var newUser = new User({
   //   email: req.body.email,
