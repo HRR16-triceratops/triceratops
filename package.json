@@ -7,7 +7,7 @@
     "go": "webpack-dev-server --content-base build/",
     "build": "webpack --progress --profile --colors --display-error-details --display-cached",
     "postinstall": "npm install webpack -g && npm run build",
-    "test": ""
+    "test": "./node_modules/.bin/mocha --bail --reporter nyan specs/server/ServerSpec.js; pkill -n node;"
   },
   "repository": {
     "type": "git",
