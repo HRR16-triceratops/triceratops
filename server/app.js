@@ -30,4 +30,4 @@ app.use('/profile', profile);
 app.use('/products', products);
 app.use('/*', products);
 
-exports.app = app;
+module.exports = app;
