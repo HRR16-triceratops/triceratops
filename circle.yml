@@ -5,4 +5,4 @@ deployment:
       appname: share-anything-staging
 test:
   override:
-    - 
+    - echo "test"
