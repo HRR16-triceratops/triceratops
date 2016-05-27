@@ -37,7 +37,7 @@ describe('', function() {
     var options = {
       'method': 'POST',
       'followAllRedirects': true,
-      'uri': `http://localhost:${port}/auth/login`,
+      'uri': 'http://localhost:' + port + '/auth/login',
       'json': {
         'username': 'Phillip',
         'password': 'Phillip'
@@ -101,7 +101,7 @@ describe('', function() {
           'Authorization': 'Bearer ' + 'incorrectToken'
         },
         'followAllRedirects': true,
-        'uri': `http://localhost:${port}/products`,
+        'uri': 'http://localhost:' + port + '/products',
         'json': {
           type: 'tool',
           title: 'Testing tool',
@@ -122,7 +122,7 @@ describe('', function() {
       var options2 = {
         'method': 'POST',
         'followAllRedirects': true,
-        'uri': `http://localhost:${port}/auth/login`,
+        'uri': 'http://localhost:' + port + '/auth/login',
         'json': {
           'username': 'Phillip',
           'password': 'wrongPwd'
