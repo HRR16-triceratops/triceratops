@@ -1,5 +1,8 @@
 var jwt = require('jsonwebtoken');
 
+// Set JWT Secret 
+var secret = process.env.JWT_SECRET || 'sleepingpuppies';
+
 /**
  *  Support function for generating JWT token
  *  @expected data with call - user object (username, displayName, email)
@@ -11,8 +14,7 @@ exports.generateToken = function(user){
     displayName: user.displayName,
     email: user.email
   };
-  //need to add back in the env variable process.env.JWT_SECRET
-  return token = jwt.sign(u, "sleepingpuppies", {
+  return token = jwt.sign(u, secret, {
     expiresIn: 60 * 60 * 24
   });
 };

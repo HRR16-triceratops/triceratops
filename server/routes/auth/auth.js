@@ -27,14 +27,14 @@ router.post('/login', function(req, res){
                 token: token
               });
             } else {
-              res.send("Username or password incorrect");
+              res.status(401).send("Username or password incorrect");
             }
           })
           .catch(function(err){
             res.status(404).send(err);
           });
       } else {
-        res.send("Username or password incorrect");
+        res.status(401).send("Username or password incorrect");
       }
     })
     .catch(function(err){
