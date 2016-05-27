@@ -4,9 +4,9 @@
   "description": "You've got stuff that people want. Other people have stuff that you want. Instead of being envious, why not make some extra cash? Share Anything is a community that allows users to easily share anything for a price.",
   "scripts": {
     "start": "node index.js",
-    "go": "webpack-dev-server --content-base build/",
-    "build": "webpack --progress --profile --colors --display-error-details --display-cached",
-    "postinstall": "npm install webpack -g && npm run build"
+    "go": "concurrently \"npm run build\" \"nodemon index.js\"",
+    "devserver": "webpack-dev-server --content-base build/",
+    "build": "webpack --progress --profile --colors --display-error-details --display-cached -w"
   },
   "repository": {
     "type": "git",
@@ -40,6 +40,7 @@
     "babel-preset-react": "6.5.0",
     "bootstrap": "^3.3.6",
     "bootstrap-material-design": "^0.5.9",
+    "concurrently": "^2.1.0",
     "copy-webpack-plugin": "3.0.0",
     "css-loader": "^0.23.1",
     "html-webpack-plugin": "2.17.0",
