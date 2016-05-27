@@ -12,6 +12,7 @@ var utils = require('../../utils/utils.js');
  *  @return {Object} - contains user data object (username, displayName, email) and JWT token string
  */
 router.post('/login', function(req, res){
+  console.log(req.body);
   var user = req.body;
   User.findOne({username: user.username})
     .then(function(found){
@@ -27,14 +28,14 @@ router.post('/login', function(req, res){
                 token: token
               });
             } else {
-              res.send("Username or password incorrect");
+              res.status(401)send("Username or password incorrect");
             }
           })
           .catch(function(err){
             res.status(404).send(err);
           });
       } else {
-        res.send("Username or password incorrect");
+        res.status(401).send("Username or password incorrect");
       }
     })
     .catch(function(err){
