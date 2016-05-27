@@ -5,7 +5,7 @@ var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   // uses our init.js for entry point
-  entry: __dirname + '/client/js/init.jsx',
+  entry: __dirname + '/client/components/init.jsx',
 
   output: {
     // outputs pack to bundle js.

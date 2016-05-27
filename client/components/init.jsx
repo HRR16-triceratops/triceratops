@@ -12,6 +12,8 @@ import SearchComponent from './search.jsx';
 import UserComponent from './user.jsx';
 import CreateShareComponent from './createShare.jsx';
 import DetailComponent from './detail.jsx';
+import LoginComponent from './login.jsx';
+import TestComponent from './test.jsx'; 
 
 ReactDOM.render(
   <Router history={browserHistory}>
@@ -20,6 +22,8 @@ ReactDOM.render(
 		    <Route path="/share" component={DetailComponent} />
 		    <Route path="/create" component={CreateShareComponent} />
 		    <Route path="/user" component={UserComponent} />
+        <Route path="/login" component={LoginComponent} />
+        <Route path="/test" component={TestComponent} />
 	   </Route>
   </Router>, 
   document.getElementById('root')

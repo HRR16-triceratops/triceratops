@@ -3,6 +3,18 @@ import ReactDOM from 'react-dom';
 import { Router, Route, IndexRoute, Link, History } from "react-router";
 
 var NavComponent = React.createClass({
+
+  // ONCE STATE MANAGEMENT IS IN PLAY, ABLE TO TOGGLE ACTIVE STATE OF NAV ITEMS
+  // componentDidMount: function(){
+  //   const url = this.props.location.pathname; 
+  // },
+
+  // setActive: function(linkRoute){
+  //   if (url === linkRoute) {
+  //     return 
+  //   }
+  // }
+
   render: function() {
     return (
       <div>
@@ -15,13 +27,9 @@ var NavComponent = React.createClass({
             <li className="active"><Link to="/">Home</Link></li>
             <li><Link to="/create">Create</Link></li>
             <li><Link to="/share">Share</Link></li>
-          </ul>
-            <form class="form-inline pull-xs-right">
-              <input class="form-control" type="text" placeholder="Search"></input>
-              <button class="btn btn-success-outline" type="submit">Search</button>
-            </form>
-          <ul className="nav navbar-nav">
             <li><Link to="/user">User</Link></li>
+            <li><Link to="/login">Login</Link></li>
+            <li><Link to="/test">Test</Link></li>
           </ul>
         </div>
       </nav>
