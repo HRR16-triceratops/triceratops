@@ -137,6 +137,23 @@ describe('', function() {
       });
     });
     
+    it('Reject with 401 code if User try to login with Wrong password', function (done) {
+      var options = {
+        'method': 'POST',
+        'followAllRedirects': true,
+        'uri': `http://localhost:${port}/auth/login`,
+        'json': {
+          'username': 'Phillip',
+          'password': 'wrongpassword'
+        }
+      };
+      
+      request(options, function (err, res, body) {
+        if(err) return done(err);
+        expect(res.statusCode).to.equal(401);
+        done();
+      });
+    });
   });
 
 
