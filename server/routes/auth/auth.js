@@ -28,7 +28,7 @@ router.post('/login', function(req, res){
                 token: token
               });
             } else {
-              res.status(401)send("Username or password incorrect");
+              res.status(401).send("Username or password incorrect");
             }
           })
           .catch(function(err){
