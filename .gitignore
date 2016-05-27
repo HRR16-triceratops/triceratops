@@ -3,8 +3,10 @@
 
 ## NPM ##
 node_modules/
+npm-debug.log
 
 ## Compiled files ##
+build/
 
 ## API keys ##
 

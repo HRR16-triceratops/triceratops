@@ -1,8 +1,12 @@
 deployment:
   staging:
-    branch: master
+    branch: staging
     heroku:
       appname: share-anything-staging
+  prod: 
+    branch: master
+    heroku:
+      appname: share-anything
 test:
   override:
     - echo "test"

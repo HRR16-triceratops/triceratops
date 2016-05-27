@@ -1,41 +1,85 @@
-// import DB
-// import User model
 var db = require("../../db/db.js");
 var User = require("../../db/user/user.js");
+var jwt = require('jsonwebtoken');
 var express = require('express');
 var router = express.Router();
+var utils = require('../../utils/utils.js');
 
-router.get('/login', function(req, res){
-  // User.find({email: req.body.email})
-  // })
-  // .then(comparePassword(savedPassword, req.body.password))
-  // .then(function(){
-  //   res.redirect('/products');
-  // })
-  // .catch(function(){
-  //   res.redirect('/login');
+
+/**
+ *  Request Handler for POST Method
+ *  @expected data with Req - Login credentials (username, password)
+ *  @return {Object} - contains user data object (username, displayName, email) and JWT token string
+ */
+router.post('/login', function(req, res){
+  console.log(req.body);
+  var user = req.body;
+  User.findOne({username: user.username})
+    .then(function(found){
+      if(found){
+        found.comparePassword(user.password)
+          .then(function(result){
+            if(result){
+              console.log("User authenticated!");
+              found = utils.getCleanUser(found);
+              var token = utils.generateToken(found);
+              res.json({
+                user: found,
+                token: token
+              });
+            } else {
+              res.status(401).send("Username or password incorrect");
+            }
+          })
+          .catch(function(err){
+            res.status(404).send(err);
+          });
+      } else {
+        res.status(401).send("Username or password incorrect");
+      }
+    })
+    .catch(function(err){
+      res.status(404).send(err);
+    });
 });
 
-router.get('/logout', function(req, res){
-  //
-});
-
-
+/**
+ *  Request Handler for POST(create) Method
+ *  @expected data with Req - Complete user data(username, password, displayName, email)
+ *  @return {Object} - contains user data object (username, displayName, email) and JWT token string
+ */
 router.post('/signup', function(req, res){
-  // var password = hashPassword(req.body.password);
-  // var newUser = new User({
-  //   email: req.body.email,
-  //   password: password
-  // });
-  // newUser.save()
-  //   .then(function(){
-  //   res.end();
-  //   })
-  //   .catch(function(err){
-  //     console.log(err);
-  //   });
-});
+  var user = req.body;
+  User.findOne({username: user.username})
+    .then(function(found){
+      if(!found){
+        var newUser = new User({
+          username: user.username,
+          password: user.password,
+          displayName: user.displayName,
+          email: user.email
+        });
+        newUser.save()
+          .then(function(newUser){
+            console.log("Account created!");
+            var token = utils.generateToken(newUser);
+            res.json({
+              user: newUser,
+              token: token
+            });
+          })
+          .catch(function(err){
+            res.status(500).send(err);
+          });   
+      } else {
+        console.log("Account already exists");
+        res.send("Account already exists");
+      }
+    })
+    .catch(function(error){
+      res.status(404).send(err);
+    });
 
+  });
 
-// export router
 module.exports = router;
