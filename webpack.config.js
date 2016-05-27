@@ -10,9 +10,12 @@ module.exports = {
   output: {
     // outputs pack to bundle js.
     path: __dirname + '/build',
-    filename: "bundle.js"
+    filename: "bundle.js",
+    sourceMapFilename: 'bundle.map'
   },
 
+  devtool: '#source-map',
+  
   module: {
     loaders: [
       { 
