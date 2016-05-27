@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "description": "You've got stuff that people want. Other people have stuff that you want. Instead of being envious, why not make some extra cash? Share Anything is a community that allows users to easily share anything for a price.",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --content-base build/",
+    "go": "webpack-dev-server --content-base build/",
     "build": "webpack --progress --profile --colors --display-error-details --display-cached"
   },
   "repository": {
@@ -40,8 +39,5 @@
     "redux-devtools": "^3.3.1",
     "style-loader": "^0.13.1",
     "webpack-dev-server": "^1.14.1"
-  },
-  "dependencies": {
-    "express": "^4.13.4"
   }
 }
