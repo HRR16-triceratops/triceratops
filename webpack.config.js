@@ -1,39 +1,45 @@
-console.log("my webpack config file loaded!");
+console.log("Webpack config file loaded!");
 
-// or replace with   var CopyWebpackPlugin = require('copy-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 // var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    entry: __dirname + '/client/js/init.js',
-    output: {
-        path: __dirname + '/build',
-        filename: "bundle.js"
-    },
+  // uses our init.js for entry point
+  entry: __dirname + '/client/js/init.jsx',
 
-    module: {
-        loaders: [{
-            loaders: [ //loaders is Array, loader is string
-                'babel-loader' // loads babel-core, which reads .babelrc,
-                // which is where actual babel presets for transformations
-                // exists. 
-            ],
-            test: /\.jsx?$/,
-            exclude: /(node_modules)/
-        }]
-    },
+  output: {
+    // outputs pack to bundle js.
+    path: __dirname + '/build',
+    filename: "bundle.js"
+  },
 
-    plugins: [
-            new CopyWebpackPlugin([
+  module: {
+    loaders: [
+      { 
+        // runs all jsx through babel
+        test: /\.jsx?$/,
+        exclude: /(node_modules)/,
+        loaders: ['babel-loader']     
+      },
+      { 
+        // loads all css through style-loader
+        test: /\.css$/,
+        loader: "style-loader!css-loader" 
+      }
+    ]
+  },
 
-                {
-                    from: __dirname + '/client/html/'
-                }
-            ])
-        ]
-        // plugins: [new HtmlWebpackPlugin({
-        // 	title: 'My App',
-        // 	filename: ''
-        // })]
+  plugins: [
+    new CopyWebpackPlugin
+    ([
+      {
+        from: __dirname + '/client/index.html'
+      }
+    ])
+  ]
+    // plugins: [new HtmlWebpackPlugin({
+    //  title: 'My App',
+    //  filename: ''
+    // })]
 
 };
