@@ -17,25 +17,29 @@ router.post('/login', function(req, res){
   User.findOne({username: user.username})
     .then(function(found){
       if(found){
-        if(found.comparePassword(user.password)){
-          console.log("User authenticated!");
-          found = utils.getCleanUser(found);
-          var token = utils.generateToken(found);
-          res.json({
-            user: found,
-            token: token
+        found.comparePassword(user.password)
+          .then(function(result){
+            if(result){
+              console.log("User authenticated!");
+              found = utils.getCleanUser(found);
+              var token = utils.generateToken(found);
+              res.json({
+                user: found,
+                token: token
+              });
+            } else {
+              res.status(401)send("Username or password incorrect");
+            }
+          })
+          .catch(function(err){
+            res.status(404).send(err);
           });
-        } else {
-          res.status(401).send("Username or password incorrect");
-        }
       } else {
         res.status(401).send("Username or password incorrect");
       }
     })
     .catch(function(err){
-      if(err){
       res.status(404).send(err);
-      }
     });
 });
 
