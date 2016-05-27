@@ -4,10 +4,11 @@
   "description": "You've got stuff that people want. Other people have stuff that you want. Instead of being envious, why not make some extra cash? Share Anything is a community that allows users to easily share anything for a price.",
   "scripts": {
     "start": "node index.js",
-    "postinstall": "npm install webpack -g && npm run build",
-    "test": "./node_modules/.bin/mocha --reporter nyan specs/server/ServerSpec.js; pkill -n node;",
+    "postinstall": "npm install webpack -g && npm run deploybuild",
+    "test": "./node_modules/.bin/mocha --reporter nyan specs/server/ServerSpec.js;",
     "go": "concurrently \"npm run build\" \"nodemon index.js\"",
     "devserver": "webpack-dev-server --content-base build/",
+    "deploybuild": "webpack --display-error-details --display-cached",
     "build": "webpack --progress --profile --colors --display-error-details --display-cached -w"
   },
   "repository": {

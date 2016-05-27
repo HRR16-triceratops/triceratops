@@ -1,6 +1,7 @@
 var expect = require('chai').expect;
 var jwt = require('jsonwebtoken');
 var request = require('request');
+var expressJwt = require('express-jwt');
 
 var app = require('../../server/app.js');
 var db = require('../../server/db/db');
@@ -31,44 +32,22 @@ describe('', function() {
     });
   });
 
-  // beforeEach(function(done) {
-
-  //   // delete product collection from db so it can be created later for the test
-  //   Product.find({}).then(function (docs) {
-  //     docs.forEach(function (doc) {
-  //       doc.remove().then(function () {
-  //         console.log(doc, 'Removed');
-  //       });
-  //     });
-  //   }).then(function () {
-  //     // delete user collection from db so it can be created later for the test
-  //     User.find({}).then(function (docs) {
-  //         docs.forEach(function (doc) {
-  //           doc.remove().then(function () {
-  //             console.log(doc, 'Removed');
-  //             done();
-  //           });
-  //         });
-  //       }).catch(function (err) {
-  //         done(err);
-  //         throw {
-  //           type: 'DatabaseError',
-  //           message: 'Failed to clear User Colletion'
-  //         };
-  //       });
-  //   }).catch(function (err) {
-  //     console.log('no product!!!!');
-  //     done(err);
-  //   });
-  // });
-
   describe('User authentication', function () {
+
+    var options = {
+      'method': 'POST',
+      'followAllRedirects': true,
+      'uri': `http://localhost:${port}/auth/login`,
+      'json': {
+        'username': 'Phillip',
+        'password': 'Phillip'
+      }
+    };  
     
     before(function (done) {
       User.find({}).then(function (docs) {
           docs.forEach(function (doc) {
             doc.remove().then(function () {
-              console.log(doc, 'Removed');
             });
           });
         }).catch(function (err) {
@@ -96,16 +75,6 @@ describe('', function() {
     });
 
     it('Login with Existing User Data', function (done) {
-      var options = {
-        'method': 'POST',
-        'followAllRedirects': true,
-        'uri': `http://localhost:${port}/auth/login`,
-        'json': {
-          'username': 'Phillip',
-          'password': 'Phillip'
-        }
-      };
-      
       request(options, function (err, res, body) {
         if(err) return done(err);
         expect(res.statusCode).to.equal(200);
@@ -116,18 +85,6 @@ describe('', function() {
     });
     
     it('Signup with new User', function (done) {
-      var options = {
-        'method': 'POST',
-        'followAllRedirects': true,
-        'uri': `http://localhost:${port}/auth/signup`,
-        'json': {
-          'username': 'Dustin',
-          'password': 'Dustin',
-          'displayName': 'Dustin',
-          'email': 'dustin@test.com'
-        }
-      };
-      
       request(options, function (err, res, body) {
         if(err) return done(err);
         expect(res.statusCode).to.equal(200);
@@ -137,24 +94,48 @@ describe('', function() {
       });
     });
     
+    it('Verify User with HTTP Request Header contains JWT data', function (done) {
+      var options2 = {
+        'method': 'POST',
+        'headers': {
+          'Authorization': 'Bearer ' + 'incorrectToken'
+        },
+        'followAllRedirects': true,
+        'uri': `http://localhost:${port}/products`,
+        'json': {
+          type: 'tool',
+          title: 'Testing tool',
+          description: 'description',
+          price: 15,
+          author: 'author'
+        }
+      };
+      
+      request(options2, function (err, res, body) {
+        if(err) return done(err);
+        expect(res.statusCode).to.equal(401);
+        done();
+      })
+    });
+    
     it('Reject with 401 code if User try to login with Wrong password', function (done) {
-      var options = {
+      var options2 = {
         'method': 'POST',
         'followAllRedirects': true,
         'uri': `http://localhost:${port}/auth/login`,
         'json': {
           'username': 'Phillip',
-          'password': 'wrongpassword'
+          'password': 'wrongPwd'
         }
-      };
-      
-      request(options, function (err, res, body) {
+      };  
+      request(options2, function (err, res, body) {
         if(err) return done(err);
         expect(res.statusCode).to.equal(401);
         done();
       });
     });
   });
+});
 
 
 
@@ -414,4 +395,3 @@ describe('', function() {
 
   // }); // 'Account Login'
 
-});

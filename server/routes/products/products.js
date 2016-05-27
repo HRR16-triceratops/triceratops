@@ -2,7 +2,9 @@ var db = require("../../db/db.js");
 var User = require("../../db/user/user.js");
 var Product = require("../../db/product/product.js");
 var express = require('express');
+var expressJwt = require('express-jwt');
 var router = express.Router();
+var secret = process.env.JWT_SECRET || 'sleepingpuppies';
 
 /**
  *  Request Handler for GET(read) Method
@@ -14,7 +16,7 @@ router.get('/', function(req, res){
     res.send(docs);
   }).catch(function (err) {
     console.log(err);
-    res.status(404).send('weird....');
+    res.status(404).send('DatabaseError');
   })
 });
 
@@ -23,7 +25,7 @@ router.get('/', function(req, res){
  *  @expected data with Req - Complete product data(type, title, description, price, locationInfo, author)
  *  @return {Object} - contains every data including timestamps, ObjectId, isActivated
  */
-router.post('/', function(req, res){
+router.post('/', expressJwt({secret: secret}) ,function(req, res){
   var prod = req.body;
   var newProduct = new Product({
     type: prod.type,
@@ -36,11 +38,11 @@ router.post('/', function(req, res){
   });
   
   newProduct.save().then(function (doc) {
-    res.send(doc).catch(function (err) {
-      console.log(err);
-      res.status(404).send('weird....');
-    });
-  })
+    res.send(doc);
+  }).catch(function (err) {
+    console.log(err);
+    res.status(404).send('DatabaseError');
+  });
 });
 
 /**
@@ -48,14 +50,14 @@ router.post('/', function(req, res){
  *  @expected data with Req - 1. ObjectId as parameter(req.params.id)
  *                            2. Complete product data including the field need to be updated(req.body)
  */
-router.put('/:id', function(req, res){
+router.put('/:id', expressJwt({secret: secret}), function(req, res){
   var id = req.params.id;
   var prod = req.body;
   Product.findByIdAndUpdate(id, prod).then(function (doc) {
     res.end();
   }).catch(function (err) {
     console.log(err);
-    res.status(404).send('weird....');
+    res.status(404).send('DatabaseError');
   });
 });
 
