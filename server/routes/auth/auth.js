@@ -1,32 +1,10 @@
-// import DB
-// import User model
 var db = require("../../db/db.js");
 var User = require("../../db/user/user.js");
 var jwt = require('jsonwebtoken');
 var express = require('express');
 var router = express.Router();
+var utils = require('../../utils/utils.js');
 
-//Token Generator Function
-var generateToken = function(user){
-  var u = {
-    username: user.username,
-    displayName: user.displayName,
-    email: user.email
-  };
-  //need to add back in the env variable process.env.JWT_SECRET
-  return token = jwt.sign(u, "sleepingpuppies", {
-    expiresIn: 60 * 60 * 24
-  });
-};
-
-var getCleanUser = function(user){
-  var user = user.toJSON();
-  return {
-    username: user.username,
-    displayName: user.displayName,
-    email: user.email
-  };
-};
 
 //Route handling for user login.
 router.post('/login', function(req, res){
@@ -37,9 +15,9 @@ router.post('/login', function(req, res){
     }
     if(found){
       if(found.comparePassword(user.password)){
-        console.log("user authenticated!");
-        found = getCleanUser(found);
-        var token = generateToken(found);
+        console.log("User authenticated!");
+        found = utils.getCleanUser(found);
+        var token = utils.generateToken(found);
         res.json({
           user: found,
           token: token
@@ -51,12 +29,7 @@ router.post('/login', function(req, res){
   });
 });
 
-
-router.get('/logout', function(req, res){
-
-});
-
-
+//Route handling for user signup.
 router.post('/signup', function(req, res){
 
   var user = req.body;
@@ -76,8 +49,8 @@ router.post('/signup', function(req, res){
         if(err){
           res.status(500).send(err);
         } else {
-          console.log("user created!");
-          var token = generateToken(newUser);
+          console.log("Account created!");
+          var token = utils.generateToken(newUser);
           res.json({
             user: newUser,
             token: token
@@ -86,11 +59,9 @@ router.post('/signup', function(req, res){
       });   
     } else {
       console.log("Account already exists");
-      res.send("User already exists");
+      res.send("Account already exists");
     }
   });
 });
 
-
-// export router
 module.exports = router;
