@@ -5,22 +5,20 @@ var User = require("../../db/user/user.js");
 var express = require('express');
 var router = express.Router();
 
-// var generateToken(user)
 
-router.get('/login', function(req, res){
-  User.find({}, function(err,body){
-    res.send(body);
+router.post('/login', function(req, res){
+  var user = req.body;
+  User.findOne({username: user.username}, function(err,found){
+    if(found){
+      if(found.comparePassword(user.password)){
+        console.log("user authenticated!");
+        res.end();
+      }
+    } else {
+      res.redirect("/signup");
+    }
   });
 });
-
-  // User.find({email: req.body.email})
-  // })
-  // .then(comparePassword(savedPassword, req.body.password))
-  // .then(function(){
-  //   res.redirect('/products');
-  // })
-  // .catch(function(){
-  //   res.redirect('/login');
 
 
 router.get('/logout', function(req, res){
