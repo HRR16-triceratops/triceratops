@@ -6,7 +6,7 @@
     "start": "node index.js",
     "go": "webpack-dev-server --content-base build/",
     "build": "webpack --progress --profile --colors --display-error-details --display-cached",
-    "postinstall": "npm run build"
+    "postinstall": "npm install webpack -g && npm run build"
   },
   "repository": {
     "type": "git",
