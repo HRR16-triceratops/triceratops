@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node index.js",
     "postinstall": "npm install webpack -g && npm run deploybuild",
-    "test": "./node_modules/.bin/mocha --reporter nyan specs/server/ServerSpec.js;",
+    "test": "./node_modules/.bin/mocha --reporter spec specs/server/ServerSpec.js;",
     "go": "concurrently \"npm run build\" \"nodemon index.js\"",
     "devserver": "webpack-dev-server --content-base build/",
     "deploybuild": "webpack --display-error-details --display-cached",

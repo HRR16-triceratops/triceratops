@@ -21,8 +21,9 @@ router.get('/', function(req, res){
 });
 
 /**
- *  Request Handler for POST(create) Method
+ *  Request Handler for POST(create) Method with JWT verification middleware
  *  @expected data with Req - Complete product data(type, title, description, price, locationInfo, author)
+ *  @expected Header with Req - { "Authorization": "Bearer <JWT_TOKEN>"}
  *  @return {Object} - contains every data including timestamps, ObjectId, isActivated
  */
 router.post('/', expressJwt({secret: secret}) ,function(req, res){
@@ -46,9 +47,10 @@ router.post('/', expressJwt({secret: secret}) ,function(req, res){
 });
 
 /**
- *  Request Handler for PUT(update) Method
+ *  Request Handler for PUT(update) Method with JWT verification middleware
  *  @expected data with Req - 1. ObjectId as parameter(req.params.id)
  *                            2. Complete product data including the field need to be updated(req.body)
+ *  @expected Header with Req - { "Authorization": "Bearer <JWT_TOKEN>"}
  */
 router.put('/:id', expressJwt({secret: secret}), function(req, res){
   var id = req.params.id;
