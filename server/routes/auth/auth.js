@@ -12,6 +12,7 @@ var utils = require('../../utils/utils.js');
  *  @return {Object} - contains user data object (username, displayName, email) and JWT token string
  */
 router.post('/login', function(req, res){
+  console.log(req.body);
   var user = req.body;
   User.findOne({username: user.username})
     .then(function(found){
