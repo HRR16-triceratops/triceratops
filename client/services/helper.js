@@ -5,7 +5,7 @@ import axios from 'axios';
  *  set equal to 'default' which the server will register as invalid
  *  and redirect to login.
  */
-var localStorageToken = local.storage.getItem('token') ? local.storage.getItem('token') : 'default';
+var localStorageToken = window.localStorage.getItem('token') ? window.localStorage.getItem('token') : 'default';
 
 
 /**
