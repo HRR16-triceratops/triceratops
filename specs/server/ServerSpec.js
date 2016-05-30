@@ -1,6 +1,6 @@
+/*eslint-env mocha */
 var expect = require('chai').expect;
 var request = require('request');
-var mocha = require('mocha');
 
 var app = require('../../server/app.js');
 var User = require('../../server/db/user/user');
@@ -34,36 +34,36 @@ describe('', function() {
 
     before(function (done) {
       User.find({}).then(function (docs) {
-          docs.forEach(function (doc) {
-            doc.remove().then(function () {
-            });
+        docs.forEach(function (doc) {
+          doc.remove().then(function () {
           });
+        });
+      }).catch(function (err) {
+        done(err);
+        throw {
+          type: 'DatabaseError',
+          message: 'Failed to clear User Colletion'
+        };
+      }).then(function () {
+        new User({
+          'username': 'Phillip',
+          'password': 'Phillip',
+          'displayName': 'Phillip',
+          'email': 'test@test.com'
+        }).save().then(function(){
+          done();
         }).catch(function (err) {
           done(err);
           throw {
             type: 'DatabaseError',
-            message: 'Failed to clear User Colletion'
+            message: 'Failed to save new User'
           };
-        }).then(function () {
-          new User({
-              'username': 'Phillip',
-              'password': 'Phillip',
-              'displayName': 'Phillip',
-              'email': 'test@test.com'
-          }).save().then(function(){
-            done();
-          }).catch(function (err) {
-            done(err);
-            throw {
-              type: 'DatabaseError',
-              message: 'Failed to save new User'
-            };
-          });
         });
+      });
     });
 
     it('Login with Existing User Data', function (done) {
-      request(options, function (err, res, body) {
+      request(options, function (err, res) {
         if(err) return done(err);
         tokenOfPhillip = res.body.token;
         expect(res.statusCode).to.equal(200);
@@ -74,7 +74,7 @@ describe('', function() {
     });
 
     it('Signup with new User', function (done) {
-      request(options, function (err, res, body) {
+      request(options, function (err, res) {
         if(err) return done(err);
         expect(res.statusCode).to.equal(200);
         expect(res.body).to.have.property('token');
@@ -93,7 +93,7 @@ describe('', function() {
           'password': 'wrongPwd'
         }
       };
-      request(options2, function (err, res, body) {
+      request(options2, function (err, res) {
         if(err) return done(err);
         expect(res.statusCode).to.equal(401);
         done();
@@ -116,11 +116,11 @@ describe('', function() {
           author: 'author'
         }
       };
-      request(options2, function (err, res, body) {
+      request(options2, function (err, res) {
         if(err) return done(err);
         expect(res.statusCode).to.equal(401);
         done();
-      })
+      });
     });
 
     it('Verify User with JWT data included in Request Header(Accept Case)', function (done) {
@@ -139,11 +139,11 @@ describe('', function() {
           author: 'author'
         }
       };
-      request(options3, function (err, res, body) {
+      request(options3, function (err, res) {
         if(err) return done(err);
         expect(res.statusCode).to.equal(200);
         done();
-      })
+      });
     });
   });
 
@@ -158,38 +158,38 @@ describe('', function() {
 
     before(function (done) {
       Product.find({}).then(function (docs) {
-          docs.forEach(function (doc) {
-            doc.remove().then(function () {
-            });
+        docs.forEach(function (doc) {
+          doc.remove().then(function () {
           });
+        });
+      }).catch(function (err) {
+        done(err);
+        throw {
+          type: 'DatabaseError',
+          message: 'Failed to clear Product Colletion'
+        };
+      }).then(function () {
+        new Product({
+          type: 'tool',
+          title: 'Testing tool',
+          description: 'description',
+          price: 15,
+          author: 'author',
+          isActivated: true
+        }).save().then(function(){
+          done();
         }).catch(function (err) {
           done(err);
           throw {
             type: 'DatabaseError',
-            message: 'Failed to clear Product Colletion'
+            message: 'Failed to save new Product'
           };
-        }).then(function () {
-          new Product({
-            type: 'tool',
-            title: 'Testing tool',
-            description: 'description',
-            price: 15,
-            author: 'author',
-            isActivated: true
-          }).save().then(function(){
-            done();
-          }).catch(function (err) {
-            done(err);
-            throw {
-              type: 'DatabaseError',
-              message: 'Failed to save new Product'
-            };
-          });
         });
+      });
     });
 
     it('Should Return List of Product', function (done) {
-      request(options, function (err, res, body) {
+      request(options, function (err, res) {
         if(err) return done(err);
         expect(res.statusCode).to.equal(200);
         expect(JSON.parse(res.body)).to.have.lengthOf(1);
@@ -213,9 +213,9 @@ describe('', function() {
           author: 'Phillip'
         }
       };
-      request(options1, function (err, res, body) {
+      request(options1, function (err) {
         if(err) return done(err);
-        request(options, function (err, res, body) {
+        request(options, function (err, res) {
           if(err) return done(err);
           var body = JSON.parse(res.body);
           idOfSecondItem = body[1]._id;
@@ -224,7 +224,7 @@ describe('', function() {
           expect(body[1]).to.have.property('author');
           done();
         });
-      })
+      });
     });
 
     it('Be Able to Update exist Product', function (done) {
@@ -243,9 +243,9 @@ describe('', function() {
           author: 'Phillip'
         }
       };
-      request(options1, function (err, res, body) {
+      request(options1, function (err) {
         if(err) return done(err);
-        request(options, function (err, res, body) {
+        request(options, function (err, res) {
           if(err) return done(err);
           var body = JSON.parse(res.body);
           expect(res.statusCode).to.equal(200);
@@ -254,7 +254,7 @@ describe('', function() {
           expect(body[1].description).to.equal('Totally changed Description');
           done();
         });
-      })
+      });
     });
   });
 });
