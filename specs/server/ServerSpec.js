@@ -1,30 +1,18 @@
 var expect = require('chai').expect;
-var jwt = require('jsonwebtoken');
 var request = require('request');
-var expressJwt = require('express-jwt');
+var mocha = require('mocha');
 
 var app = require('../../server/app.js');
-var db = require('../../server/db/db');
 var User = require('../../server/db/user/user');
 var Product = require('../../server/db/product/product');
-var utils = require('../../server/utils/utils.js');
 var port = process.env.PORT || 8080;
-
-/************************************************************/
-// Mocha doesn't have a way to designate pending before blocks.
-// Mimic the behavior of xit and describe with xbeforeEach.
-// Remove the 'x' from beforeEach block when working on
-// authentication tests.
-/************************************************************/
-var xbeforeEach = function(){};
-/************************************************************/
 
 
 describe('', function() {
-  
+
   var tokenOfPhillip;
   before(function (done) {
-    app.listen(port, function (err, result) {
+    app.listen(port, function (err) {
       if(err) {
         done(err);
       } else {
@@ -42,8 +30,8 @@ describe('', function() {
         'username': 'Phillip',
         'password': 'Phillip'
       }
-    };  
-    
+    };
+
     before(function (done) {
       User.find({}).then(function (docs) {
           docs.forEach(function (doc) {
@@ -70,7 +58,7 @@ describe('', function() {
               type: 'DatabaseError',
               message: 'Failed to save new User'
             };
-          });  
+          });
         });
     });
 
@@ -84,7 +72,7 @@ describe('', function() {
         done();
       });
     });
-    
+
     it('Signup with new User', function (done) {
       request(options, function (err, res, body) {
         if(err) return done(err);
@@ -94,7 +82,7 @@ describe('', function() {
         done();
       });
     });
-    
+
     it('Reject with 401 code if User try to login with Wrong password', function (done) {
       var options2 = {
         'method': 'POST',
@@ -104,14 +92,14 @@ describe('', function() {
           'username': 'Phillip',
           'password': 'wrongPwd'
         }
-      };  
+      };
       request(options2, function (err, res, body) {
         if(err) return done(err);
         expect(res.statusCode).to.equal(401);
         done();
       });
     });
-    
+
     it('Verify User with JWT data included in Request Header(Reject Case)', function (done) {
       var options2 = {
         'method': 'POST',
@@ -134,7 +122,7 @@ describe('', function() {
         done();
       })
     });
-    
+
     it('Verify User with JWT data included in Request Header(Accept Case)', function (done) {
       var options3 = {
         'method': 'POST',
@@ -158,7 +146,7 @@ describe('', function() {
       })
     });
   });
-  
+
   describe('/products - Product Manipulation', function() {
 
     var idOfSecondItem;
@@ -166,8 +154,8 @@ describe('', function() {
       'method': 'GET',
       'followAllRedirects': true,
       'uri': 'http://localhost:' + port + '/products'
-    }; 
-    
+    };
+
     before(function (done) {
       Product.find({}).then(function (docs) {
           docs.forEach(function (doc) {
@@ -196,10 +184,10 @@ describe('', function() {
               type: 'DatabaseError',
               message: 'Failed to save new Product'
             };
-          });  
+          });
         });
     });
-    
+
     it('Should Return List of Product', function (done) {
       request(options, function (err, res, body) {
         if(err) return done(err);
@@ -208,7 +196,7 @@ describe('', function() {
         done();
       });
     });
-    
+
     it('Be Able to store new Product', function (done) {
       var options1 = {
         'method': 'POST',
@@ -238,7 +226,7 @@ describe('', function() {
         });
       })
     });
-    
+
     it('Be Able to Update exist Product', function (done) {
       var options1 = {
         'method': 'PUT',
