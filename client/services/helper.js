@@ -15,7 +15,7 @@ var localStorageToken = window.localStorage.getItem('token') ? window.localStora
  */
 var postHelper = function(url, data){
   
-  axios.post(url, {
+  return axios.post(url, {
     headers: {
       Authorization: "Bearer " + localStorageToken
     },
@@ -32,7 +32,7 @@ var postHelper = function(url, data){
  *  @return {Object}
  */
 var getHelper = function(url){
-    axios.get(url, {
+    return axios.get(url, {
       headers: {
         Authorization: "Bearer " + localStorageToken
       }
@@ -48,7 +48,7 @@ var getHelper = function(url){
  *  @return {Object}
  */
 var putHelper = function(url, data){
-  axios.put(url, {
+  return axios.put(url, {
     headers: {
       Authorization: "Bearer " + localStorageToken
     },
