@@ -1,6 +1,4 @@
-var db = require("../../db/db.js");
-var User = require("../../db/user/user.js");
-var Product = require("../../db/product/product.js");
+var Product = require('../../db/product/product.js');
 var express = require('express');
 var expressJwt = require('express-jwt');
 var router = express.Router();
@@ -17,7 +15,7 @@ router.get('/', function(req, res){
   }).catch(function (err) {
     console.log(err);
     res.status(404).send('DatabaseError');
-  })
+  });
 });
 
 /**
@@ -37,7 +35,7 @@ router.post('/', expressJwt({secret: secret}) ,function(req, res){
     author: prod.author,
     isActivated: true
   });
-  
+
   newProduct.save().then(function (doc) {
     res.send(doc);
   }).catch(function (err) {
@@ -55,7 +53,7 @@ router.post('/', expressJwt({secret: secret}) ,function(req, res){
 router.put('/:id', expressJwt({secret: secret}), function(req, res){
   var id = req.params.id;
   var prod = req.body;
-  Product.findByIdAndUpdate(id, prod).then(function (doc) {
+  Product.findByIdAndUpdate(id, prod).then(function () {
     res.end();
   }).catch(function (err) {
     console.log(err);
