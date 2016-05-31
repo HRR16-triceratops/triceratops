@@ -20,7 +20,7 @@ router.get('/', function(req, res){
 
 /**
  *  Request Handler for POST(create) Method with JWT verification middleware
- *  @expected data with Req - Complete product data(type, title, description, price, locationInfo, author)
+ *  @expected data with Req - Complete product data(type, title, summary (200 char limit) description, price, locationInfo, author)
  *  @expected Header with Req - { "Authorization": "Bearer <JWT_TOKEN>"}
  *  @return {Object} - contains every data including timestamps, ObjectId, isActivated
  */
@@ -29,6 +29,7 @@ router.post('/', expressJwt({secret: secret}) ,function(req, res){
   var newProduct = new Product({
     type: prod.type,
     title: prod.title,
+    summary: prod.summary,
     description: prod.description,
     price: prod.price,
     locationInfo: prod.locationInfo,
