@@ -1,39 +1,58 @@
 import React from 'react';
-import { Component } from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../actions/index.js';
+import LoginComponent from '../components/login.jsx';
 
-class Login extends Component {
-  constructor(props){
-    super(props);
-  }
+console.log('Login page loaded!');
 
-  render(){
-    return (
-      <div>
-         <div class="well bs-component">
-          <form class="form-horizontal">
-            <fieldset>
-              <legend>Signin</legend>
-              <div class="form-group">
-                <label for="inputEmail" class="col-md-2 control-label">Email</label>
+//For any field errors upon submission (i.e. not instant check)
+const validateAndSignInUser = (values, dispatch) => {
+  return new Promise((resolve, reject) => {
 
-                <div class="col-md-10">
-                  <input type="email" class="form-control" id="inputEmail" placeholder="Email" />
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="inputPassword" class="col-md-2 control-label">Password</label>
+    dispatch(actions.makeLoginRequest(values))
+    .then((response) => {
+      let data = response.payload.data;
+      //if any one of these exist, then there is a field error
+      if(response.payload.status != 200) {
+        //let other components know of error by updating the redux` state
+        dispatch(actions.loginFailure(response.payload));
+        reject(data); //this is for redux-form itself
+      } else {
+        //store JWT Token to browser session storage
+        //If you use localStorage instead of sessionStorage, then this w/ persisted across tabs and new windows.
+        //sessionStorage = persisted only in current tab
+        sessionStorage.setItem('jwtToken', response.payload.data.token);
+        //let other components know that we got user and things are fine by updating the redux` state
+        dispatch(actions.loginSuccess(response.payload));
+        resolve();//this is for redux-form itself
+      }
+    });
+  });
+};
 
-                <div class="col-md-10">
-                  <input type="password" class="form-control" id="inputPassword" placeholder="Password" />
-                </div>
-              </div>
-              <button class="btn btn-success-outline" type="submit">Login</button>
-            </fieldset>
-          </form>
-        </div>
-      </div>
-    );
-  }
+const mapDispatchToProps = (dispatch) => {
+  return {
+    makeLoginRequest: (userData) => {
+      dispatch(actions.makeLoginRequest(userData));
+    },
+    loginSuccess: (user) => {
+      dispatch(actions.loginSuccess(user));
+    },
+    loginFailure: (err) => {
+      dispatch(actions.loginFailure(err));
+    },
+    resetMe: () =>{
+      //sign up is not reused, so we dont need to resetUserFields
+      //in our case, it will remove authenticated users
+       // dispatch(resetUserFields());
+    }
+  };
+};
+
+function mapStateToProps(state, ownProps) {
+  return {
+    user: state.user
+  };
 }
 
-export default Login;
+export default connect(mapStateToProps, mapDispatchToProps)(LoginComponent);
