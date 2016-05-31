@@ -52,6 +52,7 @@
     "lodash": "4.13.1",
     "mongodb": "^2.1.20",
     "mongoose": "^4.4.19",
+    "mongoose-type-url": "^1.0.2",
     "morgan": "^1.7.0",
     "react": "15.1.0",
     "react-dom": "15.1.0",
