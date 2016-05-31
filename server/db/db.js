@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 // Connect to Heroku db or local DB as deaults
-var url = process.env.MONGODB_URI || 'mongodb://localhost/shareanything'
+var url = process.env.MONGODB_URI || 'mongodb://localhost/shareanything';
 
 // Connect to mongo db
 mongoose.connect(url);

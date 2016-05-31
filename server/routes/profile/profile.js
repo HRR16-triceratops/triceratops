@@ -1,41 +1,40 @@
-var db = require("../../db/db.js");
-var User = require("../../db/user/user.js");
+var User = require('../../db/user/user.js');
 var express = require('express');
+var expressJwt = require('express-jwt');
 var router = express.Router();
+var secret = process.env.JWT_SECRET || 'sleepingpuppies';
 
 /**
  *  Request Handler for GET(read) Method
  *  @expected data with Req - nothing
+ *  @expected Header with Req - { "Authorization": "Bearer <JWT_TOKEN>"}
  *  @return {Array} - Array of every product Object
  */
-router.get('/', function(req, res){
-  // Need to decide how to get JWT from client Request
-  // Header, Url, POST data
-  // assuming we get username somehow
-  var username = 'SOMEHOW';
-  
+
+ // Does this API needed????
+router.get('/:username', expressJwt({secret: secret}), function(req, res){
+  var username = req.params.username;
   User.findOne({username: username}).then(function (user) {
-    res.send(doc);
+    delete user._id;
+    delete user.password;
+    delete user.__v;
+    res.send(user);
   }).catch(function (err) {
     console.log(err);
     res.status(404).send('weird....');
-  })
-});
-
-router.post('/', function(req, res){
-  // Once we decide how to transfer token data,
-  // We will choose POST or GET handler
+  });
 });
 
 /**
  *  Request Handler for PUT(update) Method
  *  @expected data with Req - 1. ObjectId as parameter(req.params.id)
  *                            2. Complete user data including the field need to be updated(req.body)
+ *  @expected Header with Req - { "Authorization": "Bearer <JWT_TOKEN>"}
  */
-router.put('/:id', function(req, res){
+router.put('/:id', expressJwt({secret: secret}), function(req, res){
   var id = req.params.id;
   var user = req.body;
-  User.findByIdAndUpdate(id, user).then(function (doc) {
+  User.findByIdAndUpdate(id, user).then(function () {
     res.end();
   }).catch(function (err) {
     console.log(err);

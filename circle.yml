@@ -9,4 +9,4 @@ deployment:
       appname: share-anything
 test:
   override:
-    - echo "test"
+    - npm test
