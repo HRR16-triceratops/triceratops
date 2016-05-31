@@ -7,7 +7,6 @@ import axios from 'axios';
  */
 var localStorageToken = window.localStorage.getItem('token') ? window.localStorage.getItem('token') : 'default';
 
-
 /**
  *  Post helper function for making api calls to server
  *  @expected arguments - Url, data (i.e. object of user data or product data)
