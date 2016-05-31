@@ -1,11 +1,11 @@
 import React from 'react';
-import ReactDOM from 'react-dom'; 
+import ReactDOM from 'react-dom';
 import { Router, Route, IndexRoute, Link, History } from "react-router";
 
 console.log('detail page loaded!');
 
 var DetailComponent = React.createClass({
-        render: function() {
+      render: function() {
           return (
             <div>
               <div className="detail">
@@ -16,4 +16,4 @@ var DetailComponent = React.createClass({
         }
       });
 
-export default DetailComponent; 
+export default DetailComponent;

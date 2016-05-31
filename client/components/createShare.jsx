@@ -9,8 +9,8 @@ var CreateShareComponent = React.createClass({
           return (
             <div>
             <div className="newShare">
-              <h1>This is a new share</h1>
-              
+              <h1>This is a new share!</h1>
+
             </div>
             </div>
           );
