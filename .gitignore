@@ -6,7 +6,8 @@ node_modules/
 npm-debug.log
 
 ## Compiled files ##
-build/
+build/bundle.js
+build/bundle.map
 
 ## API keys ##
 
