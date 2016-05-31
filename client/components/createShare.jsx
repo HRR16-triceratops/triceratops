@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom'; 
+import ReactDOM from 'react-dom';
 import { Router, Route, IndexRoute, Link, History } from "react-router";
 
 console.log('new share loaded!');
@@ -17,4 +17,4 @@ var CreateShareComponent = React.createClass({
         }
       });
 
-export default CreateShareComponent; 
+export default CreateShareComponent;

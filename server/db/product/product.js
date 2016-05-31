@@ -1,5 +1,4 @@
 var mongoose = require('../db.js');
-var Promise = require('bluebird');
 
 var Schema = mongoose.Schema;
 
@@ -32,10 +31,10 @@ var ProductSchema = new Schema({
 });
 
 ProductSchema.methods = {
-  
+
   /**
    * toggleActivation() =>
-   *  @return {object} - model instance of Product with toggled 'isActivated' key. 
+   *  @return {object} - model instance of Product with toggled 'isActivated' key.
    *                     simply chain .save() to save it to DB
    */
   toggleActivation: function toggleActivation () {
