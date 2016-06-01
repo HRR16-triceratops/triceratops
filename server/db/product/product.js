@@ -18,7 +18,7 @@ var ProductSchema = new Schema({
   },
   summary: {
     type: String,
-    maxlength: 200, 
+    maxlength: 200,
     required: true
   },
   description: {
@@ -31,9 +31,25 @@ var ProductSchema = new Schema({
   },
   locationInfo: Object,
   author: {
-    type: String,
+    type: String, // username
     required: true
   },
+  rentSchedule: [ // store multiple rentSchedule
+    {
+      username: {
+        type: String, // username who rent this item
+        required: true
+      },
+      from: {
+        type: String, // 'YYYY-MM-DD'
+        required: true
+      },
+      to: {
+        type: String,
+        required: true
+      }
+    }
+  ],
   isActivated: Boolean
 }, {
   timestamps: true
@@ -51,6 +67,5 @@ ProductSchema.methods = {
     return this;
   }
 };
-
 
 module.exports = mongoose.model('products', ProductSchema);

@@ -62,7 +62,7 @@ class NavBar extends Component {
             <li>
               <TextField className="navSearch" hintText="Search..." />
             </li>
-            <li>
+            <li className="nav-item">
               {!isAuthenticated &&
                 <Link to="/login"><FlatButton label="Login"/></Link>
               }

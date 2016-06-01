@@ -115,7 +115,7 @@ describe('', function() {
           summary: 'summary',
           description: 'description',
           price: 15,
-          author: 'author'
+          author: 'Phillip'
         }
       };
       request(options2, function (err, res) {
@@ -140,7 +140,7 @@ describe('', function() {
           summary: 'summary',
           description: 'description',
           price: 15,
-          author: 'author'
+          author: 'Phillip'
         }
       };
       request(options3, function (err, res) {
@@ -180,7 +180,7 @@ describe('', function() {
           summary: 'summary',
           description: 'description',
           price: 15,
-          author: 'author',
+          author: 'Phillip',
           isActivated: true
         }).save().then(function(){
           done();
@@ -250,7 +250,14 @@ describe('', function() {
           summary: 'Totally changed summary',
           description: 'Totally changed Description',
           price: 150,
-          author: 'Phillip'
+          author: 'Phillip',
+          rentSchedule: [
+            {
+              username: 'Phillip',
+              from: '2016-06-13',
+              to: '2016-06-15'
+            }
+          ]
         }
       };
       request(options1, function (err) {
@@ -262,6 +269,7 @@ describe('', function() {
           expect(body).to.have.lengthOf(2);
           expect(body[1]).to.have.property('author');
           expect(body[1].description).to.equal('Totally changed Description');
+          expect(body[1].rentSchedule[0].username).to.equal('Phillip');
           done();
         });
       });
