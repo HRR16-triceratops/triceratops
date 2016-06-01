@@ -1,15 +1,26 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/index.js';
+import { Link } from 'react-router';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import FlatButton from 'material-ui/FlatButton';
 
 console.log('Login page loaded!');
 
-var LoginComponent = React.createClass({
-  render: function() {
+export default class LoginComponent extends Component {
+  static get childContextTypes() {
+    return { muiTheme: React.PropTypes.object };
+  }
+
+  getChildContext(){
+    return {  muiTheme: getMuiTheme()};
+  }
+
+  render() {
     const {fields: {username, password}, handleSubmit} = this.props;
     return (
       <div>
-         <div class="well bs-component">
+        <div class="well bs-component">
           <form onSubmit={handleSubmit(this.props.makeLoginRequest.bind(this))} class="form-horizontal">
             <fieldset>
               <legend>Login</legend>
@@ -28,12 +39,13 @@ var LoginComponent = React.createClass({
                 </div>
               </div>
               <button class="btn btn-success-outline" type="submit">Login</button>
+              <Link to="/signup">
+                <FlatButton label="Signup" />
+              </Link>
             </fieldset>
           </form>
         </div>
       </div>
     );
   }
-});
-
-export default LoginComponent;
+}

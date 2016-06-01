@@ -58,6 +58,9 @@ router.post('/signup', function(req, res){
         newUser.save()
           .then(function(newUser){
             console.log('Account created!');
+            console.log(newUser);
+            newUser = utils.getCleanUser(newUser);
+            console.log(newUser);
             var token = utils.generateToken(newUser);
             res.json({
               user: newUser,

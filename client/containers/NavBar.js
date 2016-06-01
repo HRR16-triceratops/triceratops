@@ -1,5 +1,5 @@
-import React, { Component, PropTypes } from 'react'; 
-import { connect } from 'react-redux'; 
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
@@ -60,6 +60,9 @@ export default class NavBar extends Component {
             <li>
               <TextField className="navSearch" hintText="Search..." />
             </li>
+            <li>
+              <Link to="/login"><FlatButton label="Login"/></Link>
+            </li>
           </ul>
         </nav>
       </div>
@@ -70,4 +73,4 @@ export default class NavBar extends Component {
 // Root.propTypes = {
 //   store: PropTypes.object.isRequired,
 //   history: PropTypes.object.isRequired
-// }; 
+// };

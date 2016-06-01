@@ -8,7 +8,7 @@ var SignupComponent = React.createClass({
     return (
       <div>
          <div class="well bs-component">
-          <form onSubmit={handleSubmit(this.props.makeLoginRequest.bind(this))} class="form-horizontal">
+          <form onSubmit={handleSubmit(this.props.makeSignupRequest.bind(this))} class="form-horizontal">
             <fieldset>
               <legend>Login</legend>
               <div class="form-group">
@@ -32,7 +32,7 @@ var SignupComponent = React.createClass({
                   <input type="password" class="form-control" id="inputPassword" placeholder="Password" {...password}/>
                 </div>
               </div>
-              <button class="btn btn-success-outline" type="submit">Login</button>
+              <button class="btn btn-success-outline" type="submit">Signup</button>
             </fieldset>
           </form>
         </div>

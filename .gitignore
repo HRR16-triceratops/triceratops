@@ -14,3 +14,4 @@ build/bundle.map
 ## Others ##
 .floo
 .flooignore
+.tern-project

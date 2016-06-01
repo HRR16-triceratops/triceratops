@@ -18,6 +18,12 @@ const auth = (state = {
       isAuthenticated: true,
       token: action.payload.token
     };
+  case types.SIGNUP_SUCCESS:
+    return {
+      ...state,
+      isAuthenticated: true,
+      token: action.payload.token
+    };
   case types.LOGOUT:
     return {
       ...state,
