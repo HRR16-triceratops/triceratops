@@ -15,12 +15,13 @@ class ManageListings extends Component {
 
     render() {
     		const { viewManagedListing, viewAddNewListingForm } = this.props.ui.ManageListings; 
+            const { fields, isAttemptingToAdd } = this.props.ui.AddNewListingForm; 
             const { ListingsPendingRemoval } = this.props.ui.SingleListingItemEditable;
             const { dispatch, rentedItems } = this.props; 
 
         return (
             <div>
-                <pre>viewManagedListing: {JSON.stringify(this.props.ui, null , 2)}</pre>
+                <pre>State UI tree: {JSON.stringify(this.props.ui, null , 2)}</pre>
 				<h3>ManageListings Component here!</h3>
 
                 <button onClick={()=>{
@@ -29,7 +30,13 @@ class ManageListings extends Component {
                 }}>
                     Create New Listing
                 </button>
-                {viewAddNewListingForm ? <AddNewListingForm /> : null}
+                {viewAddNewListingForm ?
+                    <AddNewListingForm 
+                        fields={fields} 
+                        isAttemptingToAdd={isAttemptingToAdd}
+                        dispatch={dispatch.bind(this)}
+
+                    /> : null}
 
 				<button onClick={()=>{
                     dispatch(toggleViewManageListings());

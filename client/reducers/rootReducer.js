@@ -29,7 +29,9 @@ const auth = (state = {
 
 // user reducer
 // remember to remove fake username for lols
+// NEEDS ID PROPERTY! 
 const user = (state = {
+    id: 982380,
     username: 'RogRog',
     displayName: null,
     email: null,
@@ -54,18 +56,6 @@ const user = (state = {
             return state;
     };
 };
-
-// server-side schema
-// query - is author id based or username based? 
-// var newProduct = new Product({
-//     type: prod.type,
-//     title: prod.title,
-//     description: prod.description,
-//     price: prod.price,
-//     locationInfo: prod.locationInfo,
-//     author: prod.author,
-//     isActivated: true
-//   });
 
 // remember to replace products back with empty array for initial state value
 const fakeProductsList = [{
@@ -97,8 +87,15 @@ const fakeProductsList = [{
 // const products = (state = [], action) => {
 const products = (state = fakeProductsList, action) => {
     switch (action.type) {
-        // add case types and deal with payloads
-
+        case types.REMOVELISTING_SUCCESS:
+            return state.filter((item) => {
+                return item.id !== action.itemId;
+            });
+        case types.ADDLISTING_SUCCESS:
+            return [
+                ...state,
+                action.newItem
+            ];
         default:
             return state;
     }
@@ -120,9 +117,73 @@ const ui = (state = {
                 109202: 109202
             */
         }
+    },
+    AddNewListingForm: {
+        fields: {
+            type: '',
+            title: '',
+            description: '',
+            price: '',
+            locationInfo: '',
+            from: '',
+            to: ''
+        },
+        isAttemptingToAdd: false
     }
 }, action) => {
     switch (action.type) {
+        case types.ADDLISTING_REQUEST:
+            return {
+                ...state,
+                AddNewListingForm: {
+                    ...state.AddNewListingForm,
+                    isAttemptingToAdd: true
+                }
+            };
+            // Refactor out duplication of two below, same ui result. 
+        case types.ADDLISTING_SUCCESS:
+            return {
+                ...state,
+                AddNewListingForm: {
+                    fields: {
+                        type: '',
+                        title: '',
+                        description: '',
+                        price: '',
+                        locationInfo: '',
+                        from: '',
+                        to: ''
+                    },
+                    isAttemptingToAdd: false
+                }
+            };
+        case types.ADDLISTING_FAILURE:
+            return {
+                ...state,
+                AddNewListingForm: {
+                    fields: {
+                        type: '',
+                        title: '',
+                        description: '',
+                        price: '',
+                        locationInfo: '',
+                        from: '',
+                        to: ''
+                    },
+                    isAttemptingToAdd: false
+                }
+            };
+
+        case types.UI_UPDATE_FORMFIELD:
+            var newFields = {...state.AddNewListingForm.fields };
+            newFields[action.fieldKey] = action.fieldValue;
+            return {
+                ...state,
+                AddNewListingForm: {
+                    ...state.AddNewListingForm,
+                    fields: newFields
+                }
+            };
         case types.REMOVELISTING_REQUEST:
             return {
                 ...state,
@@ -131,12 +192,38 @@ const ui = (state = {
                     ListingsPendingRemoval: {
                         ...state.SingleListingItemEditable.ListingsPendingRemoval,
                         [action.itemId]: action.itemId
-                    }   
+                    }
                 }
-            }; 
+            };
 
+            // update pending list for UI state tree
+        case types.REMOVELISTING_SUCCESS:
+            var updatedListingsPendingRemoval = Object.assign({}, state
+                .SingleListingItemEditable
+                .ListingsPendingRemoval);
+            delete updatedListingsPendingRemoval[action.itemId];
+            return {
+                ...state,
+                SingleListingItemEditable: {
+                    ...state.SingleListingItemEditable,
+                    ListingsPendingRemoval: updatedListingsPendingRemoval
+                }
+            };
+
+            // Refactor, as duplicates above code 
+        case types.REMOVELISTING_FAILURE:
+            var updatedListingsPendingRemoval = Object.assign({}, state
+                .SingleListingItemEditable
+                .ListingsPendingRemoval);
+            delete updatedListingsPendingRemoval[action.itemId];
+            return {
+                ...state,
+                SingleListingItemEditable: {
+                    ...state.SingleListingItemEditable,
+                    ListingsPendingRemoval: updatedListingsPendingRemoval
+                }
+            };
         case types.UI_TOGGLE_VIEW_MANAGEDLISTING:
-            // console.log('=== REDUCER-UI: UI_TOGGLE_VIEW_MANAGEDLISTING being handled! ==='); 
             return {
                 ...state,
                 ManageListings: {
@@ -151,7 +238,7 @@ const ui = (state = {
                     ...state.ManageListings,
                     viewAddNewListingForm: !state.ManageListings.viewAddNewListingForm
                 }
-            }; 
+            };
         default:
             return state;
     };

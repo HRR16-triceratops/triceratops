@@ -62,7 +62,7 @@
 
 	var _Root2 = _interopRequireDefault(_Root);
 
-	var _configureStore = __webpack_require__(583);
+	var _configureStore = __webpack_require__(585);
 
 	var _configureStore2 = _interopRequireDefault(_configureStore);
 
@@ -35701,19 +35701,19 @@
 
 	var _ManageListings2 = _interopRequireDefault(_ManageListings);
 
-	var _Login = __webpack_require__(558);
+	var _Login = __webpack_require__(581);
 
 	var _Login2 = _interopRequireDefault(_Login);
 
-	var _TestComponent = __webpack_require__(580);
+	var _TestComponent = __webpack_require__(582);
 
 	var _TestComponent2 = _interopRequireDefault(_TestComponent);
 
-	var _SingleListingItemDetailed = __webpack_require__(581);
+	var _SingleListingItemDetailed = __webpack_require__(583);
 
 	var _SingleListingItemDetailed2 = _interopRequireDefault(_SingleListingItemDetailed);
 
-	var _Profile = __webpack_require__(582);
+	var _Profile = __webpack_require__(584);
 
 	var _Profile2 = _interopRequireDefault(_Profile);
 
@@ -36010,11 +36010,11 @@
 
 	var _reactRedux = __webpack_require__(532);
 
-	var _SingleListingItemEditable = __webpack_require__(586);
+	var _SingleListingItemEditable = __webpack_require__(558);
 
 	var _SingleListingItemEditable2 = _interopRequireDefault(_SingleListingItemEditable);
 
-	var _AddNewListingForm = __webpack_require__(587);
+	var _AddNewListingForm = __webpack_require__(580);
 
 	var _AddNewListingForm2 = _interopRequireDefault(_AddNewListingForm);
 
@@ -36049,6 +36049,9 @@
 	            var _props$ui$ManageListi = this.props.ui.ManageListings;
 	            var viewManagedListing = _props$ui$ManageListi.viewManagedListing;
 	            var viewAddNewListingForm = _props$ui$ManageListi.viewAddNewListingForm;
+	            var _props$ui$AddNewListi = this.props.ui.AddNewListingForm;
+	            var fields = _props$ui$AddNewListi.fields;
+	            var isAttemptingToAdd = _props$ui$AddNewListi.isAttemptingToAdd;
 	            var ListingsPendingRemoval = this.props.ui.SingleListingItemEditable.ListingsPendingRemoval;
 	            var _props = this.props;
 	            var dispatch = _props.dispatch;
@@ -36061,7 +36064,7 @@
 	                _react2.default.createElement(
 	                    'pre',
 	                    null,
-	                    'viewManagedListing: ',
+	                    'State UI tree: ',
 	                    JSON.stringify(this.props.ui, null, 2)
 	                ),
 	                _react2.default.createElement(
@@ -36077,7 +36080,12 @@
 	                        } },
 	                    'Create New Listing'
 	                ),
-	                viewAddNewListingForm ? _react2.default.createElement(_AddNewListingForm2.default, null) : null,
+	                viewAddNewListingForm ? _react2.default.createElement(_AddNewListingForm2.default, {
+	                    fields: fields,
+	                    isAttemptingToAdd: isAttemptingToAdd,
+	                    dispatch: dispatch.bind(this)
+
+	                }) : null,
 	                _react2.default.createElement(
 	                    'button',
 	                    { onClick: function onClick() {
@@ -36123,100 +36131,59 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+		value: true
 	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _react = __webpack_require__(299);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactRedux = __webpack_require__(532);
+	var _reactRouter = __webpack_require__(465);
+
+	var _SingleListingItemSimple = __webpack_require__(556);
+
+	var _SingleListingItemSimple2 = _interopRequireDefault(_SingleListingItemSimple);
 
 	var _index = __webpack_require__(559);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	// Refactor to add confirmation step before removal.
+	// Refactor to add additional 'edit' button to edit existing postings (remove noscript tag).
+	var SingleListingItemEditable = function SingleListingItemEditable(props) {
+		var dispatch = props.dispatch;
+		var item = props.item;
+		var isItemPendingRemoval = props.isItemPendingRemoval;
 
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+		return _react2.default.createElement(
+			'div',
+			null,
+			_react2.default.createElement(_SingleListingItemSimple2.default, { item: item }),
+			isItemPendingRemoval ? _react2.default.createElement(
+				'div',
+				null,
+				'Item is Pending Removal...'
+			) : null,
+			_react2.default.createElement(
+				'noscript',
+				null,
+				_react2.default.createElement(
+					'button',
+					null,
+					'Edit'
+				)
+			),
+			_react2.default.createElement(
+				'button',
+				{ onClick: function onClick() {
+						dispatch((0, _index.removeRentedItem)(item.id));
+					} },
+				'Remove'
+			)
+		);
+	};
 
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	// import the actionCreator/thunk
-	// dispatch it from Login (once hooked up to redux store)
-
-	var Login = function (_Component) {
-	    _inherits(Login, _Component);
-
-	    function Login(props) {
-	        _classCallCheck(this, Login);
-
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Login).call(this, props));
-
-	        _this.state = {
-	            username: '',
-	            password: ''
-	        };
-	        return _this;
-	    }
-
-	    _createClass(Login, [{
-	        key: 'handleUsernameChange',
-	        value: function handleUsernameChange(e) {
-	            this.setState({
-	                username: e.target.value
-	            });
-	        }
-	    }, {
-	        key: 'handlePasswordChange',
-	        value: function handlePasswordChange(e) {
-	            this.setState({
-	                password: e.target.value
-	            });
-	        }
-	    }, {
-	        key: 'handleSubmit',
-	        value: function handleSubmit(e) {
-	            e.preventDefault();
-	            var username = this.state.username.trim();
-	            var password = this.state.password;
-	            // checks/validation. Then dispatch thunk.
-	            this.props.dispatch((0, _index.attemptLogin)(username, password));
-	            // did order matter?
-	            this.setState({
-	                username: '',
-	                password: ''
-	            });
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            return _react2.default.createElement(
-	                'div',
-	                null,
-	                _react2.default.createElement(
-	                    'div',
-	                    null,
-	                    'Login component here'
-	                ),
-	                _react2.default.createElement(
-	                    'form',
-	                    { onSubmit: this.handleSubmit.bind(this) },
-	                    _react2.default.createElement('input', { type: 'text', placeholder: 'Your username', value: this.state.username, onChange: this.handleUsernameChange.bind(this) }),
-	                    _react2.default.createElement('input', { type: 'text', placeholder: 'Your password', value: this.state.password, onChange: this.handlePasswordChange.bind(this) }),
-	                    _react2.default.createElement('input', { type: 'submit', value: 'Post' })
-	                )
-	            );
-	        }
-	    }]);
-
-	    return Login;
-	}(_react.Component);
-
-	Login = (0, _reactRedux.connect)()(Login);
-	exports.default = Login;
+	exports.default = SingleListingItemEditable;
 
 /***/ },
 /* 559 */
@@ -36225,9 +36192,9 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-		value: true
+	    value: true
 	});
-	exports.removeRentedItem = exports.toggleViewAddNewListingForm = exports.toggleViewManageListings = undefined;
+	exports.removeRentedItem = exports.toggleViewAddNewListingForm = exports.toggleViewManageListings = exports.updateFormField = exports.addNewListing = undefined;
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -36243,129 +36210,167 @@
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
+	// Refactor - all user actions should, as an intermediate step,
+	// fetch new user data from server and hydrate local state!
+	// make it its own action, and handled by a reducer.. ?
+	/*
+		if can't figure a way to do it wihitn combineReducers, or wrapping it inside a HOR,
+		then every single reducer inside of combinedReducer will also deal with a
+		STATE_HYDRATE action that sets { ...action.payload.ui } or { ... }
+	*/
+
+	var addListingRequest = function addListingRequest() {
+	    console.log('inside action creator - addListingRequest');
+	    return {
+	        type: types.ADDLISTING_REQUEST
+	    };
+	};
+
+	var addListingSuccess = function addListingSuccess(newItem) {
+	    // remmeber in UI state, to clear all fields once successful!
+	    return {
+	        type: types.ADDLISTING_SUCCESS,
+	        newItem: newItem
+	    };
+	};
+
+	var addListingFailure = function addListingFailure() {
+	    return {
+	        type: types.ADDLISTING_FAILURE
+	    };
+	};
+
+	var addNewListing = exports.addNewListing = function addNewListing() {
+	    // remember author (no id required, assigned by Mongo);
+	    return function (dispatch, getState) {
+	        dispatch(addListingRequest());
+	        // assume that author in newProduct points to a user.id, rather than user name string.
+	        // has to be logged in to even be able to get this far, so assume id can be got.
+	        var author = getState().user.id;
+	        // grab current ui-form-data state and author state (above)
+	        // let newProductData = {
+	        //     ...getState().ui.AddNewListingForm.fields,
+	        //     author: author
+	        // };
+	        // //assume succesful
+	        // let newItemReturnedFromServer = {
+	        // 		id: 88291,
+	        //     type: 'couch',
+	        //     title: 'best couch',
+	        //     description: 'description of best couch!',
+	        //     price: 150,
+	        //     locationInfo: 'australia',
+	        //     author: 'RogRog'
+	        // };
+	        // // mock API delay
+	        // setTimeout(()=>{
+	        // 	// inside success handler/then/callback
+	        // 	 dispatch(addListingSuccess(newItemReturnedFromServer));
+	        // 	 // mock failure
+	        // 	  dispatch(addListingFailure()); // should only mutate state-ui
+	        // },3000);
+	        console.log('author inside addNewListing thunk is: ' + author);
+
+	        var mockNewProduct = {
+	            type: 'couch',
+	            title: 'best couch',
+	            description: 'description of best couch!',
+	            price: 150,
+	            locationInfo: 'australia',
+	            author: 'RogRog'
+	        };
+	        // make API call to server
+	        return _helper2.default.postHelper('/products', mockNewProduct).then(function (response) {
+	            console.log('===================================');
+	            console.log('response received from server!');
+	            console.log(response);
+	            console.log('===================================');
+	            dispatch(addListingSuccess(newItem));
+	        }).catch(function (err) {
+	            console.log("trying to add product, but failed! catch handler in promise!");
+	        });
+	    };
+	};
+
+	var updateFormField = exports.updateFormField = function updateFormField(fieldKey, fieldValue) {
+	    return {
+	        type: types.UI_UPDATE_FORMFIELD,
+	        fieldKey: fieldKey,
+	        fieldValue: fieldValue
+	    };
+	};
+
 	// action creators
 	var loginRequest = function loginRequest() {
-		return {
-			type: types.LOGIN_REQUEST
-		};
+	    return {
+	        type: types.LOGIN_REQUEST
+	    };
 	};
 
 	var loginFailure = function loginFailure() {
-		return {
-			type: types.LOGIN_FAILURE
-		};
+	    return {
+	        type: types.LOGIN_FAILURE
+	    };
 	};
 
 	var loginSuccess = function loginSuccess(payloadObj) {
-		return {
-			type: types.LOGIN_SUCCESS,
-			payload: _extends({}, payloadObj)
-		};
+	    return {
+	        type: types.LOGIN_SUCCESS,
+	        payload: _extends({}, payloadObj)
+	    };
 	};
 
 	var toggleViewManageListings = exports.toggleViewManageListings = function toggleViewManageListings() {
-		// console.log('=== ACTION CREATOR: toggleViewManageListings invoked! ===');
-		return {
-			type: types.UI_TOGGLE_VIEW_MANAGEDLISTING
-		};
+	    // console.log('=== ACTION CREATOR: toggleViewManageListings invoked! ===');
+	    return {
+	        type: types.UI_TOGGLE_VIEW_MANAGEDLISTING
+	    };
 	};
 
 	var toggleViewAddNewListingForm = exports.toggleViewAddNewListingForm = function toggleViewAddNewListingForm() {
-		return {
-			type: types.UI_TOGGLE_VIEW_ADDNEWLISTINGFORM
-		};
+	    return {
+	        type: types.UI_TOGGLE_VIEW_ADDNEWLISTINGFORM
+	    };
 	};
 
 	var removeListingRequest = function removeListingRequest(itemId) {
-		console.log('===== inside action creator: removeListingRequest');
-		return {
-			type: types.REMOVELISTING_REQUEST,
-			itemId: itemId
-		};
+	    return {
+	        type: types.REMOVELISTING_REQUEST,
+	        itemId: itemId
+	    };
 	};
 
-	var removeListingSuccess = function removeListingSuccess() {
-		console.log('does nothing!');
+	var removeListingSuccess = function removeListingSuccess(itemId) {
+	    return {
+	        type: types.REMOVELISTING_SUCCESS,
+	        itemId: itemId
+	    };
 	};
 
-	var removeListingFailure = function removeListingFailure() {
-		console.log('does nothing!');
+	var removeListingFailure = function removeListingFailure(itemId) {
+	    return {
+	        type: types.REMOVELISTING_FAILURE,
+	        itemId: itemId
+	    };
 	};
 
-	/**
-	 *  Put helper function for making api calls to server to update data in db
-	 *  @expected arguments - Url, data (i.e. object of user data or product data)
-	 *  @return {Object}
-	 */
-	// util.putHelper = function(url, data) {
-	//     return axios.put(url, {
-	//             headers: {
-	//                 Authorization: "Bearer " + localStorageToken
-	//             },
-	//             params: {
-	//                 ID: data.id
-	//             },
-	//             data: data
-	//         })
-	//         .then(function(res) {
-	//             return res;
-	//         });
-	// };
-
-	// thunk
+	// thunks
 	var removeRentedItem = exports.removeRentedItem = function removeRentedItem(itemId) {
-		console.log('===== inside thunk removeRentedItem');
-
-		return function (dispatch) {
-			// notify state that listing removal is pending
-			dispatch(removeListingRequest(itemId));
-			// api put call to remove item
-
-			// util.putHelper('http://www.google.com.au', {data: 99999})
-			// 	.then((res)=>{
-			// 		console.log("doing something inside util.puthelper!")
-			// 	})
-			// success - update state with success action and payload (new state)
-			// optimistic render (modify state client-side);
-			// failure - update state with failure action (no payload)
-		};
-
-		// return {
-		// 	type: types.REMOVE_RENTED_ITEM,
-		// 	itemId: itemId
-		// };
+	    return function (dispatch) {
+	        // notify state that listing removal is pending
+	        dispatch(removeListingRequest(itemId));
+	        // api put call to remove item. Mock it for now.
+	        setTimeout(function () {
+	            // mock success response, which confirms that server-state/db updated with removal.
+	            // now simply update local state (no need to call down whole data, but probably best
+	            // when considering multiple users, good time to rehydrate local state tree)
+	            dispatch(removeListingSuccess(itemId));
+	        }, 3000);
+	        // failure mimics removeListingSuccess in UI reducer (to stop spinner), but does not get
+	        // handled at all by products reducer (because actual products state should not change on
+	        //  failure);
+	    };
 	};
-
-	// export function testFunction(){
-	// 	console.log("see if this test function exports properly for use!");
-	// 	return("some value from testFunction");
-	// };
-
-	// // thunks
-	// export const attemptLogin = (username,password) => {
-	// 	console.log('================ attemptLogin thunk invoked! =================');
-	// 	return (dispatch, getState) => {
-	// 		dispatch(loginRequest());
-	// 		// make API call here with help of helpers.
-	// 				util.postLoginRequestToServer(username, password, (err, response)=>{
-	// 					if (err) {
-	// 						dispatch(loginFailure());
-	// 					}
-	// 					if (response){
-	// 						// window.localStorage.setItem('token', response.token)
-	// 						// parse response? for token and user info.
-	// 						console.log('====================================');
-	// 						console.log('the response came back as follows:');
-	// 						console.log(JSON.stringify(response,null,2));
-	// 						console.log('====================================');
-	// 						// dispatch(loginSuccess(payloadObj));
-	// 					}
-
-	// 				});
-	// 				// if successful, dispatch LOGIN SUCCESS
-	// 				// else dispatch LOGIN FAILURE
-	// 	};
-	// };
 
 /***/ },
 /* 560 */
@@ -36388,8 +36393,13 @@
 
 	var REMOVE_RENTED_ITEM = exports.REMOVE_RENTED_ITEM = 'REMOVE_RENTED_ITEM';
 
+	var ADDLISTING_REQUEST = exports.ADDLISTING_REQUEST = 'ADDLISTING_REQUEST';
+	var ADDLISTING_SUCCESS = exports.ADDLISTING_SUCCESS = 'ADDLISTING_SUCCESS';
+	var ADDLISTING_FAILURE = exports.ADDLISTING_FAILURE = 'ADDLISTING_FAILURE';
+
 	var UI_TOGGLE_VIEW_MANAGEDLISTING = exports.UI_TOGGLE_VIEW_MANAGEDLISTING = 'UI_TOGGLE_VIEW_MANAGEDLISTING';
 	var UI_TOGGLE_VIEW_ADDNEWLISTINGFORM = exports.UI_TOGGLE_VIEW_ADDNEWLISTINGFORM = 'UI_TOGGLE_VIEW_ADDNEWLISTINGFORM';
+	var UI_UPDATE_FORMFIELD = exports.UI_UPDATE_FORMFIELD = 'UI_UPDATE_FORMFIELD';
 
 /***/ },
 /* 561 */
@@ -36415,17 +36425,19 @@
 	 */
 	var localStorageToken = window.localStorage.getItem('token') ? window.localStorage.getItem('token') : 'default';
 
-	util.postLoginRequestToServer = function (username, password, callback) {
-	    // do I even need window.location.hostname ? or is it .host?
-	    return _axios2.default.post(window.location.host + '/login', {
-	        username: username,
-	        password: password
-	    }).then(function (response) {
-	        callback(null, response);
-	    }).catch(function (err) {
-	        callback(err);
-	    });
-	};
+	// util.postLoginRequestToServer = (username, password, callback) => {
+	//   // do I even need window.location.hostname ? or is it .host?
+	//   return axios.post(window.location.host + '/login', {
+	//     username: username,
+	//     password: password
+	//   })
+	//   .then((response)=>{
+	//     callback(null, response);
+	//   })
+	//   .catch((err)=>{
+	//     callback(err);
+	//   });
+	// };
 
 	/**
 	 *  Post helper function for making api calls to server
@@ -37660,6 +37672,184 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(465);
+
+	var _index = __webpack_require__(559);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// ADD STATE MANAGEMENT REDUCERS.
+	// then add others.
+
+	// for back button?
+	var AddNewListingForm = function AddNewListingForm(props) {
+	  var dispatch = props.dispatch;
+	  var fields = props.fields;
+	  var isAttemptingToAdd = props.isAttemptingToAdd;
+
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(
+	      'form',
+	      { onSubmit: function onSubmit(e) {
+	          console.log('submit button pressed!');
+	          e.preventDefault();
+	          dispatch((0, _index.addNewListing)());
+	        } },
+	      _react2.default.createElement(
+	        'pre',
+	        null,
+	        JSON.stringify(fields, null, 2)
+	      ),
+	      _react2.default.createElement(
+	        'h3',
+	        null,
+	        'AddNewListingForm Component here!'
+	      ),
+	      isAttemptingToAdd ? _react2.default.createElement(
+	        'p',
+	        null,
+	        'Adding new listing, please wait...'
+	      ) : null,
+	      Object.keys(fields).map(function (fieldKey, ind) {
+	        return _react2.default.createElement(
+	          'div',
+	          { key: ind },
+	          fieldKey,
+	          ':',
+	          _react2.default.createElement('input', { title: 'TEST TITLE!', type: 'text',
+	            value: fields[fieldKey],
+	            onChange: function onChange(e) {
+	              var fieldValue = e.target.value;
+	              dispatch((0, _index.updateFormField)(fieldKey, fieldValue));
+	            }
+	          })
+	        );
+	      }),
+	      _react2.default.createElement('input', { type: 'submit', value: 'Post' })
+	    )
+	  );
+	};
+
+	exports.default = AddNewListingForm;
+
+/***/ },
+/* 581 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(532);
+
+	var _index = __webpack_require__(559);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	// import the actionCreator/thunk
+	// dispatch it from Login (once hooked up to redux store)
+
+	var Login = function (_Component) {
+	    _inherits(Login, _Component);
+
+	    function Login(props) {
+	        _classCallCheck(this, Login);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Login).call(this, props));
+
+	        _this.state = {
+	            username: '',
+	            password: ''
+	        };
+	        return _this;
+	    }
+
+	    _createClass(Login, [{
+	        key: 'handleUsernameChange',
+	        value: function handleUsernameChange(e) {
+	            this.setState({
+	                username: e.target.value
+	            });
+	        }
+	    }, {
+	        key: 'handlePasswordChange',
+	        value: function handlePasswordChange(e) {
+	            this.setState({
+	                password: e.target.value
+	            });
+	        }
+	    }, {
+	        key: 'handleSubmit',
+	        value: function handleSubmit(e) {
+	            e.preventDefault();
+	            var username = this.state.username.trim();
+	            var password = this.state.password;
+	            // checks/validation. Then dispatch thunk.
+	            this.props.dispatch((0, _index.attemptLogin)(username, password));
+	            // did order matter?
+	            this.setState({
+	                username: '',
+	                password: ''
+	            });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(
+	                    'div',
+	                    null,
+	                    'Login component here'
+	                ),
+	                _react2.default.createElement(
+	                    'form',
+	                    { onSubmit: this.handleSubmit.bind(this) },
+	                    _react2.default.createElement('input', { type: 'text', placeholder: 'Your username', value: this.state.username, onChange: this.handleUsernameChange.bind(this) }),
+	                    _react2.default.createElement('input', { type: 'text', placeholder: 'Your password', value: this.state.password, onChange: this.handlePasswordChange.bind(this) }),
+	                    _react2.default.createElement('input', { type: 'submit', value: 'Post' })
+	                )
+	            );
+	        }
+	    }]);
+
+	    return Login;
+	}(_react.Component);
+
+	Login = (0, _reactRedux.connect)()(Login);
+	exports.default = Login;
+
+/***/ },
+/* 582 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
 
@@ -37743,7 +37933,7 @@
 	exports.default = TestComponent;
 
 /***/ },
-/* 581 */
+/* 583 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37821,7 +38011,7 @@
 	exports.default = SingleListingItemDetailed;
 
 /***/ },
-/* 582 */
+/* 584 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37889,7 +38079,7 @@
 	exports.default = Profile;
 
 /***/ },
-/* 583 */
+/* 585 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37901,24 +38091,28 @@
 
 	var _redux = __webpack_require__(539);
 
-	var _reduxThunk = __webpack_require__(584);
+	var _reduxThunk = __webpack_require__(586);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-	var _rootReducer = __webpack_require__(585);
+	var _rootReducer = __webpack_require__(587);
 
 	var _rootReducer2 = _interopRequireDefault(_rootReducer);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function configureStore(initialState) {
-	  return (0, _redux.createStore)(_rootReducer2.default, initialState, (0, _redux.applyMiddleware)(_reduxThunk2.default));
+	  return (0, _redux.createStore)(_rootReducer2.default, initialState,
+	  // applyMiddleware(thunk)
+	  (0, _redux.compose)((0, _redux.applyMiddleware)(_reduxThunk2.default), window.devToolsExtension ? window.devToolsExtension() : function (f) {
+	    return f;
+	  }));
 	}
 	// import api from '../middleware/api'
 	;
 
 /***/ },
-/* 584 */
+/* 586 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -37946,7 +38140,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 585 */
+/* 587 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37970,6 +38164,8 @@
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 	// auth reducer
 	var auth = function auth() {
@@ -37998,8 +38194,10 @@
 
 	// user reducer
 	// remember to remove fake username for lols
+	// NEEDS ID PROPERTY!
 	var user = function user() {
 	    var state = arguments.length <= 0 || arguments[0] === undefined ? {
+	        id: 982380,
 	        username: 'RogRog',
 	        displayName: null,
 	        email: null,
@@ -38024,18 +38222,6 @@
 	            return state;
 	    };
 	};
-
-	// server-side schema
-	// query - is author id based or username based?
-	// var newProduct = new Product({
-	//     type: prod.type,
-	//     title: prod.title,
-	//     description: prod.description,
-	//     price: prod.price,
-	//     locationInfo: prod.locationInfo,
-	//     author: prod.author,
-	//     isActivated: true
-	//   });
 
 	// remember to replace products back with empty array for initial state value
 	var fakeProductsList = [{
@@ -38070,8 +38256,12 @@
 	    var action = arguments[1];
 
 	    switch (action.type) {
-	        // add case types and deal with payloads
-
+	        case types.REMOVELISTING_SUCCESS:
+	            return state.filter(function (item) {
+	                return item.id !== action.itemId;
+	            });
+	        case types.ADDLISTING_SUCCESS:
+	            return [].concat(_toConsumableArray(state), [action.newItem]);
 	        default:
 	            return state;
 	    }
@@ -38094,11 +38284,69 @@
 	                    109202: 109202
 	                */
 	            }
+	        },
+	        AddNewListingForm: {
+	            fields: {
+	                type: '',
+	                title: '',
+	                description: '',
+	                price: '',
+	                locationInfo: '',
+	                from: '',
+	                to: ''
+	            },
+	            isAttemptingToAdd: false
 	        }
 	    } : arguments[0];
 	    var action = arguments[1];
 
 	    switch (action.type) {
+	        case types.ADDLISTING_REQUEST:
+	            return _extends({}, state, {
+	                AddNewListingForm: _extends({}, state.AddNewListingForm, {
+	                    isAttemptingToAdd: true
+	                })
+	            });
+	        // Refactor out duplication of two below, same ui result.
+	        case types.ADDLISTING_SUCCESS:
+	            return _extends({}, state, {
+	                AddNewListingForm: {
+	                    fields: {
+	                        type: '',
+	                        title: '',
+	                        description: '',
+	                        price: '',
+	                        locationInfo: '',
+	                        from: '',
+	                        to: ''
+	                    },
+	                    isAttemptingToAdd: false
+	                }
+	            });
+	        case types.ADDLISTING_FAILURE:
+	            return _extends({}, state, {
+	                AddNewListingForm: {
+	                    fields: {
+	                        type: '',
+	                        title: '',
+	                        description: '',
+	                        price: '',
+	                        locationInfo: '',
+	                        from: '',
+	                        to: ''
+	                    },
+	                    isAttemptingToAdd: false
+	                }
+	            });
+
+	        case types.UI_UPDATE_FORMFIELD:
+	            var newFields = _extends({}, state.AddNewListingForm.fields);
+	            newFields[action.fieldKey] = action.fieldValue;
+	            return _extends({}, state, {
+	                AddNewListingForm: _extends({}, state.AddNewListingForm, {
+	                    fields: newFields
+	                })
+	            });
 	        case types.REMOVELISTING_REQUEST:
 	            return _extends({}, state, {
 	                SingleListingItemEditable: _extends({}, state.SingleListingItemEditable, {
@@ -38106,8 +38354,26 @@
 	                })
 	            });
 
+	        // update pending list for UI state tree
+	        case types.REMOVELISTING_SUCCESS:
+	            var updatedListingsPendingRemoval = Object.assign({}, state.SingleListingItemEditable.ListingsPendingRemoval);
+	            delete updatedListingsPendingRemoval[action.itemId];
+	            return _extends({}, state, {
+	                SingleListingItemEditable: _extends({}, state.SingleListingItemEditable, {
+	                    ListingsPendingRemoval: updatedListingsPendingRemoval
+	                })
+	            });
+
+	        // Refactor, as duplicates above code
+	        case types.REMOVELISTING_FAILURE:
+	            var updatedListingsPendingRemoval = Object.assign({}, state.SingleListingItemEditable.ListingsPendingRemoval);
+	            delete updatedListingsPendingRemoval[action.itemId];
+	            return _extends({}, state, {
+	                SingleListingItemEditable: _extends({}, state.SingleListingItemEditable, {
+	                    ListingsPendingRemoval: updatedListingsPendingRemoval
+	                })
+	            });
 	        case types.UI_TOGGLE_VIEW_MANAGEDLISTING:
-	            // console.log('=== REDUCER-UI: UI_TOGGLE_VIEW_MANAGEDLISTING being handled! ===');
 	            return _extends({}, state, {
 	                ManageListings: _extends({}, state.ManageListings, {
 	                    viewManagedListing: !state.ManageListings.viewManagedListing
@@ -38134,105 +38400,6 @@
 	});
 
 	exports.default = rootReducer;
-
-/***/ },
-/* 586 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _react = __webpack_require__(299);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRouter = __webpack_require__(465);
-
-	var _SingleListingItemSimple = __webpack_require__(556);
-
-	var _SingleListingItemSimple2 = _interopRequireDefault(_SingleListingItemSimple);
-
-	var _index = __webpack_require__(559);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	// Refactor to add confirmation step before removal.
-	// Refactor to add additional 'edit' button to edit existing postings (remove noscript tag).
-	var SingleListingItemEditable = function SingleListingItemEditable(props) {
-		var dispatch = props.dispatch;
-		var item = props.item;
-		var isItemPendingRemoval = props.isItemPendingRemoval;
-
-		return _react2.default.createElement(
-			'div',
-			null,
-			_react2.default.createElement(_SingleListingItemSimple2.default, { item: item }),
-			isItemPendingRemoval ? _react2.default.createElement(
-				'div',
-				null,
-				'Item is Pending Removal...'
-			) : null,
-			_react2.default.createElement(
-				'noscript',
-				null,
-				_react2.default.createElement(
-					'button',
-					null,
-					'Edit'
-				)
-			),
-			_react2.default.createElement(
-				'button',
-				{ onClick: function onClick() {
-						dispatch((0, _index.removeRentedItem)(item.id));
-					} },
-				'Remove'
-			)
-		);
-	};
-
-	exports.default = SingleListingItemEditable;
-
-/***/ },
-/* 587 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _react = __webpack_require__(299);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRouter = __webpack_require__(465);
-
-	var _SingleListingItemSimple = __webpack_require__(556);
-
-	var _SingleListingItemSimple2 = _interopRequireDefault(_SingleListingItemSimple);
-
-	var _index = __webpack_require__(559);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	// for back button?
-
-
-	var AddNewListingForm = function AddNewListingForm(props) {
-
-		return _react2.default.createElement(
-			'div',
-			null,
-			'AddNewListingForm Component here!'
-		);
-	};
-
-	exports.default = AddNewListingForm;
 
 /***/ }
 /******/ ]);

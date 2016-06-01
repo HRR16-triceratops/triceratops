@@ -8,19 +8,19 @@ let util = {};
  */
 var localStorageToken = window.localStorage.getItem('token') ? window.localStorage.getItem('token') : 'default';
 
-util.postLoginRequestToServer = (username, password, callback) => {
-  // do I even need window.location.hostname ? or is it .host? 
-  return axios.post(window.location.host + '/login', {
-    username: username,
-    password: password
-  })
-  .then((response)=>{
-    callback(null, response); 
-  })
-  .catch((err)=>{
-    callback(err); 
-  });
-}; 
+// util.postLoginRequestToServer = (username, password, callback) => {
+//   // do I even need window.location.hostname ? or is it .host? 
+//   return axios.post(window.location.host + '/login', {
+//     username: username,
+//     password: password
+//   })
+//   .then((response)=>{
+//     callback(null, response); 
+//   })
+//   .catch((err)=>{
+//     callback(err); 
+//   });
+// }; 
 
 /**
  *  Post helper function for making api calls to server
