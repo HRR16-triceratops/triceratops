@@ -36201,12 +36201,10 @@
 	 *  @return {Object}
 	 */
 	var postHelper = function postHelper(url, data) {
-	
-	  return _axios2.default.post(url, {
+	  return _axios2.default.post(url, data, {
 	    headers: {
 	      Authorization: 'Bearer ' + localStorageToken
-	    },
-	    body: data
+	    }
 	  }).then(function (res) {
 	    return res;
 	  });
@@ -36233,14 +36231,10 @@
 	 *  @return {Object}
 	 */
 	var putHelper = function putHelper(url, data) {
-	  return _axios2.default.put(url, {
+	  return _axios2.default.put(url, data, {
 	    headers: {
 	      Authorization: 'Bearer ' + localStorageToken
-	    },
-	    params: {
-	      ID: data.id
-	    },
-	    data: data
+	    }
 	  }).then(function (res) {
 	    return res;
 	  });
@@ -38195,11 +38189,27 @@
 	    var _this = this;
 	
 	    var handleSubmit = function handleSubmit(e) {
-	      console.log('It works!');
 	      var name = username.value;
 	      var pwd = password.value;
 	      e.preventDefault();
-	      _this.props.makeLoginRequest.bind(_this)({ username: name, password: pwd });
+	      _this.props.makeLoginRequest.bind(_this)({ username: name, password: pwd }).then(function (resp) {
+	        console.log(resp);
+	        var data = resp.payload.data;
+	        //if any one of these exist, then there is a field error
+	        if (resp.payload.status != 200) {
+	          //let other components know of error by updating the redux` state
+	          dispatch(actions.loginFailure(resp.payload));
+	          reject(data); //this is for redux-form itself
+	        } else {
+	            //store JWT Token to browser session storage
+	            //If you use localStorage instead of sessionStorage, then this w/ persisted across tabs and new windows.
+	            //sessionStorage = persisted only in current tab
+	            sessionStorage.setItem('jwtToken', resp.payload.data.token);
+	            //let other components know that we got user and things are fine by updating the redux` state
+	            dispatch(actions.loginSuccess(resp.payload));
+	            resolve(); //this is for redux-form itself
+	          }
+	      });
 	    };
 	    var username = void 0;
 	    var password = void 0;
