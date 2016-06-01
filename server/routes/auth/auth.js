@@ -80,6 +80,11 @@ router.post('/signup', function(req, res){
     });
 });
 
+/**
+ *  Request Handler for Verification Request
+ *  @expected Header with Req - User's Token data should be included
+ *  @return {Object} - contains user data object (username, displayName, email) and JWT token string
+ */
 router.get('/verify', function(req, res) {
   var token = req.headers.authorization.split(' ')[1];
   jwt.verify(token, secret, function(err, user) {

@@ -4,8 +4,6 @@ import * as actions from '../actions/index.js';
 import ProfileComponent from '../components/Profile.js';
 import { push } from 'react-router-redux';
 
-console.log('Signup page loaded!');
-
 const mapDispatchToProps = (dispatch) => {
   return {
     redirectToLogin: () => {
