@@ -20,7 +20,7 @@ const styles = {
   }
 };
 
-export default class NavBar extends Component {
+class NavBar extends Component {
 
   static get childContextTypes() {
     return { muiTheme: React.PropTypes.object };
@@ -32,6 +32,7 @@ export default class NavBar extends Component {
 
   render() {
     // const { store, history } = this.props
+    const { isAuthenticated } = this.props.auth;
     return (
       <div>
         <nav className="navbar navbar-light ">
@@ -61,7 +62,12 @@ export default class NavBar extends Component {
               <TextField className="navSearch" hintText="Search..." />
             </li>
             <li>
-              <Link to="/login"><FlatButton label="Login"/></Link>
+              {!isAuthenticated &&
+                <Link to="/login"><FlatButton label="Login"/></Link>
+              }
+              {isAuthenticated &&
+                <FlatButton label="Logout"/>
+              }
             </li>
           </ul>
         </nav>
@@ -70,6 +76,13 @@ export default class NavBar extends Component {
   }
 }
 
+function mapStateToProps(state, ownProps) {
+  return {
+    auth: state.auth
+  };
+}
+
+export default connect(mapStateToProps)(NavBar);
 // Root.propTypes = {
 //   store: PropTypes.object.isRequired,
 //   history: PropTypes.object.isRequired

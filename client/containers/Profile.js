@@ -1,6 +1,6 @@
 import { Component } from 'react';
-import React from 'react'; 
-import { Link } from 'react-router'; 
+import React from 'react';
+import { Link } from 'react-router';
 
 class Profile extends Component {
 
@@ -18,4 +18,4 @@ class Profile extends Component {
 	}
 }
 
-export default Profile; 
+export default Profile;

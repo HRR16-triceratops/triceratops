@@ -52,15 +52,13 @@ router.post('/signup', function(req, res){
         var newUser = new User({
           username: user.username,
           password: user.password,
-          displayName: user.displayName,
+          displayName: user.displayName ? user.displayName : user.username,
           email: user.email
         });
         newUser.save()
           .then(function(newUser){
             console.log('Account created!');
-            console.log(newUser);
             newUser = utils.getCleanUser(newUser);
-            console.log(newUser);
             var token = utils.generateToken(newUser);
             res.json({
               user: newUser,

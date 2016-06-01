@@ -71,7 +71,7 @@ export const attemptLogin = (userData) => {
         } else {
           window.localStorage.setItem('jwtToken', data.token);
           dispatch(loginSuccess(data.user, data.token));
-          browserHistory.push('/listings');
+          browserHistory.push('/profile');
         }
       })
       .catch(err => {
@@ -88,14 +88,13 @@ export const attemptSignup = (userData) => {
     var url = '/auth/signup';
     return helper.postHelper(url, userData)
       .then(resp => {
-        console.log(resp);
         let data = resp.data;
         if(resp.status != 200) {
           console.log('resp status is not 200');
         } else {
           window.localStorage.setItem('jwtToken', data.token);
           dispatch(signupSuccess(data.user, data.token));
-          browserHistory.push('/listings');
+          browserHistory.push('/profile');
         }
       })
       .catch(err => {
