@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/index.js';
-import ProfileComponent from '../components/profile.js';
+import ProfileComponent from '../components/Profile.js';
 import { push } from 'react-router-redux';
 
 console.log('Signup page loaded!');
