@@ -8,6 +8,8 @@ const mapDispatchToProps = (dispatch) => {
     attemptVerify: () => {
       console.log('work');
       let token = window.localStorage.getItem('jwtToken');
+
+      // If there is no token, do nothing
       if(!token || token === '') {
         return;
       }
