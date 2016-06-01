@@ -42,4 +42,15 @@ router.put('/:id', expressJwt({secret: secret}), function(req, res){
   });
 });
 
+router.put('/rent/:id', expressJwt({secret: secret}), function(req, res){
+  var id = req.params.id;
+  var user = req.body;
+  User.findByIdAndUpdate(id, user).then(function () {
+    res.end();
+  }).catch(function (err) {
+    console.log(err);
+    res.status(404).send('weird....');
+  });
+});
+
 module.exports = router;

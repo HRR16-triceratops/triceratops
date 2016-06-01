@@ -65,6 +65,19 @@ ProductSchema.methods = {
   toggleActivation: function toggleActivation () {
     this.isActivated = !this.isActivated;
     return this;
+  },
+
+  rentalUpdate: function rentalUpdate (update) {
+      if (update.username !== undefined){
+      this.rentSchedule[0] = {
+        username: update.username,
+        from: "available",
+        to: "available"
+      };
+      return this;
+    } else {
+      throw err;
+    }
   }
 };
 

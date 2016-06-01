@@ -63,4 +63,23 @@ router.put('/:id', expressJwt({secret: secret}), function(req, res){
   });
 });
 
+/**
+ *  Request Handler for PUT(update) Method with JWT verification middleware
+ *  @expected data with Req - 1. ObjectId as parameter(req.params.id)
+ *                            2. Complete product data including the field need to be updated(req.body)
+ *  @expected Header with Req - { "Authorization": "Bearer <JWT_TOKEN>"}
+ */
+router.put('/rent/:id', expressJwt({secret: secret}), function(req, res){
+  var id = req.params.id;
+  var update = req.body;
+  Product.findById(id, function(err, found){
+    found.rentalUpdate(update);
+    found.save()
+    .then(function(){
+      res.json(found);
+    });
+  });
+});
+
+
 module.exports = router;
