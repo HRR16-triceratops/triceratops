@@ -8,8 +8,8 @@ console.log('Login page loaded!');
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    search: (query) => {
-      dispatch(actions.search(query));
+    makeLoginRequest: (userData) => {
+      dispatch(actions.attemptLogin(userData));
     },
     resetMe: () =>{
       //sign up is not reused, so we dont need to resetUserFields
