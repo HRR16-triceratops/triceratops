@@ -274,5 +274,35 @@ describe('', function() {
         });
       });
     });
+
+    it('Be Able to Update Products Rental Schedule By Only Sending the productId and rentSchedule Object', function (done) {
+      var options1 = {
+        'method': 'PUT',
+        'headers': {
+          'Authorization': 'Bearer ' + tokenOfPhillip
+        },
+        'followAllRedirects': true,
+        'uri': 'http://localhost:' + port + '/products/rent/' + idOfSecondItem,
+        'json': {
+          username: 'notPhillip'
+        }
+      };
+      request(options1, function (err) {
+        if(err) return done(err);
+        request(options, function (err, res) {
+          if(err) return done(err);
+          var body = JSON.parse(res.body);
+          expect(res.statusCode).to.equal(200);
+          expect(body).to.have.lengthOf(2);
+          expect(body[1]).to.have.property('author');
+          expect(body[1].description).to.equal('Totally changed Description');
+          expect(body[1].rentSchedule[0].username).to.equal('notPhillip');
+          expect(body[1].rentSchedule[0].from).to.equal('available');
+          expect(body[1].rentSchedule[0].to).to.equal('available');
+          done();
+        });
+      });
+    });
+
   });
 });
