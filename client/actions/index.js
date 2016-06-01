@@ -1,5 +1,6 @@
 import * as types from '../constants/ActionTypes';
 import helper from '../services/helper';
+import { browserHistory } from 'react-router'
 
 // action creators
 export const makeLoginRequest = (userData) => {
@@ -52,6 +53,7 @@ export const attemptLogin = (userData) => {
         } else {
           window.localStorage.setItem('jwtToken', data.token);
           dispatch(loginSuccess(data.user, data.token));
+          browserHistory.push('/listings');
         }
       })
       .catch(err => {
