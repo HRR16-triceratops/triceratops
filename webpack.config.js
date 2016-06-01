@@ -5,7 +5,7 @@ var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   // uses our init.js for entry point
-  entry: __dirname + '/client/components/init.jsx',
+  entry: __dirname + '/client/index.js',
 
   output: {
     // outputs pack to bundle js.
@@ -24,11 +24,14 @@ module.exports = {
         exclude: /(node_modules)/,
         loaders: ['babel-loader']     
       },
-      { 
-        // loads all css through style-loader
-        test: /\.css$/,
-        loader: "style-loader!css-loader" 
-      }
+      { test: /\.css$/, loader: "style-loader!css-loader" },
+      { test: /\.png$/, loader: "url-loader?limit=100000" },
+      { test: /\.jpg$/, loader: "file-loader" },
+      { test: /\.svg$/, loader: 'url?limit=65000&mimetype=image/svg+xml&name=public/fonts/[name].[ext]' },
+      { test: /\.woff$/, loader: 'url?limit=65000&mimetype=application/font-woff&name=public/fonts/[name].[ext]' },
+      { test: /\.woff2$/, loader: 'url?limit=65000&mimetype=application/font-woff2&name=public/fonts/[name].[ext]' },
+      { test: /\.[ot]tf$/, loader: 'url?limit=65000&mimetype=application/octet-stream&name=public/fonts/[name].[ext]' },
+      { test: /\.eot$/, loader: 'url?limit=65000&mimetype=application/vnd.ms-fontobject&name=public/fonts/[name].[ext]' }
     ]
   },
 
@@ -36,7 +39,8 @@ module.exports = {
     new CopyWebpackPlugin
     ([
       {
-        from: __dirname + '/client/index.html'
+        from: __dirname + '/client/index.html',
+        to: __dirname + '/build/index.html'
       }
     ])
   ]

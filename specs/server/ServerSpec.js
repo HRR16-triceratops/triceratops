@@ -111,6 +111,8 @@ describe('', function() {
         'json': {
           type: 'tool',
           title: 'Testing tool',
+          imgURL: 'https://01.img.society6.com/society6/img/J0f8mnNFknGCucYPzgxLReNrhEk/w_550,h_550/rectangular-pillows/small/front/~artwork/s6-0003/asset_13/302698_1OzFCGmfSi/~~/triceratops-qv5-rectangular-pillows.jpg',
+          summary: 'summary',
           description: 'description',
           price: 15,
           author: 'author'
@@ -134,6 +136,8 @@ describe('', function() {
         'json': {
           type: 'tool',
           title: 'Testing tool',
+          imgURL: 'https://01.img.society6.com/society6/img/J0f8mnNFknGCucYPzgxLReNrhEk/w_550,h_550/rectangular-pillows/small/front/~artwork/s6-0003/asset_13/302698_1OzFCGmfSi/~~/triceratops-qv5-rectangular-pillows.jpg',
+          summary: 'summary',
           description: 'description',
           price: 15,
           author: 'author'
@@ -172,6 +176,8 @@ describe('', function() {
         new Product({
           type: 'tool',
           title: 'Testing tool',
+          imgURL: 'https://01.img.society6.com/society6/img/J0f8mnNFknGCucYPzgxLReNrhEk/w_550,h_550/rectangular-pillows/small/front/~artwork/s6-0003/asset_13/302698_1OzFCGmfSi/~~/triceratops-qv5-rectangular-pillows.jpg',
+          summary: 'summary',
           description: 'description',
           price: 15,
           author: 'author',
@@ -208,6 +214,8 @@ describe('', function() {
         'json': {
           type: 'tool',
           title: 'new Testing tool',
+          imgURL: 'http://rlv.zcache.com/triceratops_dinosaur_accent_pillow-r1453815fd3314238bdb228f7c5a07367_z6i0e_512.jpg?rlvnet=1',
+          summary: 'new summary',
           description: 'new description',
           price: 150,
           author: 'Phillip'
@@ -238,6 +246,8 @@ describe('', function() {
         'json': {
           type: 'tool',
           title: 'Totally changed title',
+          imgURL: 'https://01.img.society6.com/society6/img/7SOHrbrMK1DCZslctHiIIMICPLw/w_550,h_550/rectangular-pillows/small/front/~artwork/s6-0033/a/15468785_15199668/~~/triceratops-triangles-rectangular-pillows.jpg',
+          summary: 'Totally changed summary',
           description: 'Totally changed Description',
           price: 150,
           author: 'Phillip'

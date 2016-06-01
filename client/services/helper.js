@@ -5,8 +5,7 @@ import axios from 'axios';
  *  set equal to 'default' which the server will register as invalid
  *  and redirect to login.
  */
-var localStorageToken = window.localStorage.getItem('token') ? window.localStorage.getItem('token') : 'default';
-
+var localStorageToken = window.localStorage.getItem('jwtToken') ? window.localStorage.getItem('jwtToken') : 'default';
 
 /**
  *  Post helper function for making api calls to server
@@ -14,12 +13,10 @@ var localStorageToken = window.localStorage.getItem('token') ? window.localStora
  *  @return {Object}
  */
 var postHelper = function(url, data){
-
-  return axios.post(url, {
+  return axios.post(url, data, {
     headers: {
       Authorization: 'Bearer ' + localStorageToken
-    },
-    body: data
+    }
   })
   .then(function(res){
     return res;
@@ -48,14 +45,10 @@ var getHelper = function(url){
  *  @return {Object}
  */
 var putHelper = function(url, data){
-  return axios.put(url, {
+  return axios.put(url, data, {
     headers: {
       Authorization: 'Bearer ' + localStorageToken
-    },
-    params: {
-      ID: data.id
-    },
-    data: data
+    }
   })
   .then(function(res){
     return res;

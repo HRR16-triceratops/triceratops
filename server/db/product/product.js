@@ -12,6 +12,15 @@ var ProductSchema = new Schema({
     type: String,
     required: true
   },
+  imgURL: {
+    type: mongoose.SchemaTypes.Url,
+    required: true
+  },
+  summary: {
+    type: String,
+    maxlength: 200, 
+    required: true
+  },
   description: {
     type: String,
     required: true
