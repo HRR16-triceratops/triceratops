@@ -1,6 +1,10 @@
 import React from 'react'; 
 import { Component } from 'react'; 
 
+// WARNING! 
+// Move this, as this appears to be a Container. 
+// Move to containers folder, update all pathnames/pointers
+
 class SingleListingItemDetailed extends Component {
 	constructor(props){
 		super(props)

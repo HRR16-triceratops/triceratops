@@ -5,6 +5,7 @@ import { Link } from 'react-router';
 export default class NavBar extends Component {
   render() {
     // const { store, history } = this.props
+    // Refactor so that maps li-Link elements from an array of routes/Nav descriptions
     return (
       <div>
   			<ul>

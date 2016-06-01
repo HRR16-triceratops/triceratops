@@ -21,10 +21,11 @@ class PreTestComponent extends Component {
         );
     }
 };
+
 const mapStateToProps = (state) => {
-	return state; 
+	return state;
 };
 
-const TestComponent = connect(mapStateToProps)(PreTestComponent); 
+let TestComponent = connect(mapStateToProps)(PreTestComponent); 
 
 export default TestComponent;

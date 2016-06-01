@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+let util = {};
 /**
  *  Access JWT token from user's browser. If user has no token,
  *  set equal to 'default' which the server will register as invalid
@@ -7,22 +8,36 @@ import axios from 'axios';
  */
 var localStorageToken = window.localStorage.getItem('token') ? window.localStorage.getItem('token') : 'default';
 
+util.postLoginRequestToServer = (username, password, callback) => {
+  // do I even need window.location.hostname ? or is it .host? 
+  return axios.post(window.location.host + '/login', {
+    username: username,
+    password: password
+  })
+  .then((response)=>{
+    callback(null, response); 
+  })
+  .catch((err)=>{
+    callback(err); 
+  });
+}; 
+
 /**
  *  Post helper function for making api calls to server
  *  @expected arguments - Url, data (i.e. object of user data or product data)
  *  @return {Object}
  */
-var postHelper = function(url, data){
-  
-  return axios.post(url, {
-    headers: {
-      Authorization: "Bearer " + localStorageToken
-    },
-    body: data
-  })
-  .then(function(res){
-    return res;
-  });
+util.postHelper = function(url, data) {
+
+    return axios.post(url, {
+            headers: {
+                Authorization: "Bearer " + localStorageToken
+            },
+            body: data
+        })
+        .then(function(res) {
+            return res;
+        });
 };
 
 /**
@@ -30,15 +45,15 @@ var postHelper = function(url, data){
  *  @expected arguments - Url
  *  @return {Object}
  */
-var getHelper = function(url){
+util.getHelper = function(url) {
     return axios.get(url, {
-      headers: {
-        Authorization: "Bearer " + localStorageToken
-      }
-    })
-    .then(function(res){
-      return res;
-    });
+            headers: {
+                Authorization: "Bearer " + localStorageToken
+            }
+        })
+        .then(function(res) {
+            return res;
+        });
 };
 
 /**
@@ -46,17 +61,19 @@ var getHelper = function(url){
  *  @expected arguments - Url, data (i.e. object of user data or product data)
  *  @return {Object}
  */
-var putHelper = function(url, data){
-  return axios.put(url, {
-    headers: {
-      Authorization: "Bearer " + localStorageToken
-    },
-    params: {
-      ID: data.id
-    },
-    data: data
-  })
-  .then(function(res){
-    return res;
-  });
+util.putHelper = function(url, data) {
+    return axios.put(url, {
+            headers: {
+                Authorization: "Bearer " + localStorageToken
+            },
+            params: {
+                ID: data.id
+            },
+            data: data
+        })
+        .then(function(res) {
+            return res;
+        });
 };
+
+export default util; 

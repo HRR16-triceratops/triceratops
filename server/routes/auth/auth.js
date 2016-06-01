@@ -5,7 +5,6 @@ var express = require('express');
 var router = express.Router();
 var utils = require('../../utils/utils.js');
 
-
 /**
  *  Request Handler for POST Method
  *  @expected data with Req - Login credentials (username, password)

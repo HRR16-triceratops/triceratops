@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import React from 'react'; 
 import { Link } from 'react-router'; 
+import { connect } from 'react-redux'; 
 
 class Profile extends Component {
 
@@ -17,5 +18,7 @@ class Profile extends Component {
 			)
 	}
 }
+
+// const Profile = connect(mapStateToProps)(Profile); 
 
 export default Profile; 
