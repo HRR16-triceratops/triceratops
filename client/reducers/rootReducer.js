@@ -2,6 +2,7 @@ import * as types from '../constants/ActionTypes';
 // import merge from 'lodash/merge';
 import { routerReducer as routing } from 'react-router-redux';
 import { combineReducers } from 'redux';
+import {reducer as formReducer} from 'redux-form';
 
 // auth reducer
 const auth = (state = {
@@ -73,8 +74,10 @@ const ui = (state = {
   }
 };
 
+
 // need to add routing to handle route states syncing w/browser history ..
 const rootReducer = combineReducers({
+  form: formReducer,
   auth,
   user,
   ui,

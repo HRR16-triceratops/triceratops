@@ -1,13 +1,14 @@
 import * as types from '../constants/ActionTypes';
 import helper from '../services/helper';
-import { browserHistory } from 'react-router'
+import { browserHistory } from 'react-router';
+import {reset} from 'redux-form';
 
 // action creators
 export const makeLoginRequest = (userData) => {
   return {
     type: types.LOGIN_REQUEST,
     payload: userData
-	};
+  };
 };
 
 export const loginSuccess = (user, token) => {
@@ -58,6 +59,8 @@ export const attemptLogin = (userData) => {
       })
       .catch(err => {
         console.error(err);
+        dispatch(loginFailure(err));
+        dispatch(reset('LoginForm'));
       });
   };
 };

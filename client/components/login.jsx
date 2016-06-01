@@ -6,36 +6,25 @@ console.log('Login page loaded!');
 
 var LoginComponent = React.createClass({
   render: function() {
-    const handleSubmit = (e) => {
-      let name = username.value;
-      let pwd = password.value;
-      e.preventDefault();
-      this.props.makeLoginRequest.bind(this)({username: name, password: pwd});
-    };
-    let username;
-    let password;
+    const {fields: {username, password}, handleSubmit} = this.props;
     return (
       <div>
          <div class="well bs-component">
-          <form onSubmit={handleSubmit} class="form-horizontal">
+          <form onSubmit={handleSubmit(this.props.makeLoginRequest.bind(this))} class="form-horizontal">
             <fieldset>
               <legend>Login</legend>
               <div class="form-group">
                 <label for="inputUsername" class="col-md-2 control-label">Username</label>
 
                 <div class="col-md-10">
-                  <input type="email" class="form-control" id="inputUsername" placeholder="Username" ref={(node) => {
-                    username = node;
-                  }}/>
+                  <input type="text" class="form-control" id="inputUsername" placeholder="Username" {...username}/>
                 </div>
               </div>
               <div class="form-group">
                 <label for="inputPassword" class="col-md-2 control-label">Password</label>
 
                 <div class="col-md-10">
-                  <input type="password" class="form-control" id="inputPassword" placeholder="Password" ref={(node) => {
-                    password = node;
-                  }}/>
+                  <input type="password" class="form-control" id="inputPassword" placeholder="Password" {...password}/>
                 </div>
               </div>
               <button class="btn btn-success-outline" type="submit">Login</button>

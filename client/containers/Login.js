@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/index.js';
 import LoginComponent from '../components/login.jsx';
+import { reduxForm } from 'redux-form';
 
 console.log('Login page loaded!');
 
@@ -24,4 +25,7 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginComponent);
+export default reduxForm({
+  form: 'LoginForm',
+  fields: ['username', 'password']
+}, mapStateToProps, mapDispatchToProps)(LoginComponent);
