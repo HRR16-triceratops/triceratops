@@ -7,7 +7,6 @@ import Root from './containers/Root';
 import configureStore from './store/configureStore';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import 'bootstrap/dist/css/bootstrap.css';
-// require ("./node_modules/bootstrap/dist/css/bootstrap.min.css");
 require ("./styles/styles-main.css");
 
 injectTapEventPlugin();

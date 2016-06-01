@@ -1,14 +1,15 @@
 import React from 'react';
 import NavBar from '../containers/NavBar'; 
-
-// import classes from './CoreLayout.scss'
-// import '../../styles/core.scss'
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 export const CoreLayout = ({ children }) => (
   <div>
     
     <NavBar />
-    {children}
+    <MuiThemeProvider muiTheme={getMuiTheme()}>
+      {children}
+    </MuiThemeProvider>
     
   </div>
 );

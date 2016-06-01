@@ -7,9 +7,6 @@ import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 import IconButton from 'material-ui/IconButton';
 import ActionHome from 'material-ui/svg-icons/action/home';
-// import mui, {ListItem, IconButton, Styles} from 'material-ui';
-// import IconMenu from 'material-ui/lib/menus/icon-menu';
-// import MenuItem from 'material-ui/lib/menus/menu-item';
 
 const styles = {
   mediumIcon: {
@@ -19,7 +16,7 @@ const styles = {
   medium: {
     width: 42,
     height: 42,
-    padding: 5,
+    padding: 5
   }
 };
 
