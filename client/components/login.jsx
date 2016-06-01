@@ -1,28 +1,41 @@
 import React from 'react';
-import { Router, Route, IndexRoute, Link, History } from "react-router";
+import { connect } from 'react-redux';
+import * as actions from '../actions/index.js';
 
 console.log('Login page loaded!');
 
 var LoginComponent = React.createClass({
   render: function() {
+    const handleSubmit = (e) => {
+      let name = username.value;
+      let pwd = password.value;
+      e.preventDefault();
+      this.props.makeLoginRequest.bind(this)({username: name, password: pwd});
+    };
+    let username;
+    let password;
     return (
       <div>
          <div class="well bs-component">
-          <form class="form-horizontal">
+          <form onSubmit={handleSubmit} class="form-horizontal">
             <fieldset>
-              <legend>Signin</legend>
+              <legend>Login</legend>
               <div class="form-group">
-                <label for="inputEmail" class="col-md-2 control-label">Email</label>
+                <label for="inputUsername" class="col-md-2 control-label">Username</label>
 
                 <div class="col-md-10">
-                  <input type="email" class="form-control" id="inputEmail" placeholder="Email" />
+                  <input type="email" class="form-control" id="inputUsername" placeholder="Username" ref={(node) => {
+                    username = node;
+                  }}/>
                 </div>
               </div>
               <div class="form-group">
                 <label for="inputPassword" class="col-md-2 control-label">Password</label>
 
                 <div class="col-md-10">
-                  <input type="password" class="form-control" id="inputPassword" placeholder="Password" />
+                  <input type="password" class="form-control" id="inputPassword" placeholder="Password" ref={(node) => {
+                    password = node;
+                  }}/>
                 </div>
               </div>
               <button class="btn btn-success-outline" type="submit">Login</button>

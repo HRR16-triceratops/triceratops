@@ -17,7 +17,6 @@ router.post('/login', function(req, res){
         found.comparePassword(user.password)
           .then(function(result){
             if(result){
-              console.log('User authenticated!');
               found = utils.getCleanUser(found);
               var token = utils.generateToken(found);
               res.json({
