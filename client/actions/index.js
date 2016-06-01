@@ -117,6 +117,12 @@ export const verifyFailure = (err) => {
   };
 };
 
+export const search = (query) => {
+  return {
+    type: types.SEARCH,
+    payload: query.search
+  };
+};
 
 //////////////////////////////////////////////////////////////
 // Asynchronous Action Creator combination
