@@ -24,6 +24,12 @@ const auth = (state = {
       isAuthenticated: true,
       token: action.payload.token
     };
+  case types.VERIFY_SUCCESS:
+    return {
+      ...state,
+      isAuthenticated: true,
+      token: action.payload.token
+    };
   case types.LOGOUT:
     return {
       ...state,
@@ -49,6 +55,20 @@ const user = (state = {
       displayName: action.payload.user.displayName,
       email: action.payload.user.email
     };
+  case types.SIGNUP_SUCCESS:
+    return {
+      ...state,
+      username: action.payload.user.username,
+      displayName: action.payload.user.displayName,
+      email: action.payload.user.email
+    };
+  case types.VERIFY_SUCCESS:
+    return {
+      ...state,
+      username: action.payload.user.username,
+      displayName: action.payload.user.displayName,
+      email: action.payload.user.email
+    };
   case types.LOGOUT:
     return {
       ...state,
@@ -66,6 +86,11 @@ const ui = (state = {
 }, action) => {
   switch (action.type) {
   case types.LOGIN_REQUEST:
+    return {
+      ...state,
+      isAuthenticating: true
+    };
+  case types.SIGNUP_REQUEST:
     return {
       ...state,
       isAuthenticating: true

@@ -8,9 +8,13 @@ export default class Root extends Component {
   constructor(props) {
     super(props);
   }
-  
+
+  componentDidMount() {
+    this.props.attemptVerify();
+  }
+
   render() {
-    const { store, history } = this.props
+    const { store, history } = this.props;
     return (
       <Provider store={store}>
         <Router history={history} routes={routes} />

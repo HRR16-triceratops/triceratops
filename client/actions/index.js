@@ -58,6 +58,32 @@ export const logOut = () => {
   };
 };
 
+export const verifyUser = (token) => {
+  return {
+    type: types.VERIFY_USER,
+    payload: {
+      token: token
+    }
+  };
+};
+
+export const verifySuccess = (user, token) => {
+  return {
+    type: types.VERIFY_SUCCESS,
+    payload: {
+      user: user,
+      token: token
+    }
+  };
+};
+
+export const verifyFailure = (err) => {
+  return {
+    type: types.VERIFY_FAILURE,
+    payload: err
+  };
+};
+
 export const attemptLogin = (userData) => {
   return function (dispatch) {
     dispatch(makeLoginRequest(userData));
@@ -101,6 +127,21 @@ export const attemptSignup = (userData) => {
         console.error(err);
         dispatch(signupFailure(err));
         dispatch(reset('SignupForm'));
+      });
+  };
+};
+
+export const attemptVerify = (token) => {
+  return (dispatch) => {
+    let url = '/auth/verify';
+    dispatch(verifyUser(token));
+    return helper.getHelper(url)
+      .then(resp => {
+        let data = resp.data;
+        dispatch(verifySuccess(data.user, data.token));
+      })
+      .catch(err => {
+        dispatch(verifyFailure(err));
       });
   };
 };

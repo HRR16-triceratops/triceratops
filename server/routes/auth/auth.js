@@ -2,6 +2,8 @@ var User = require('../../db/user/user.js');
 var express = require('express');
 var router = express.Router();
 var utils = require('../../utils/utils.js');
+var jwt = require('jsonwebtoken');
+var secret = process.env.JWT_SECRET || 'sleepingpuppies';
 
 
 /**
@@ -76,6 +78,30 @@ router.post('/signup', function(req, res){
     .catch(function(err){
       res.status(404).send(err);
     });
+});
+
+router.get('/verify', function(req, res) {
+  var token = req.headers.authorization.split(' ')[1];
+  jwt.verify(token, secret, function(err, user) {
+    if(err) {
+      console.log(err);
+      return res.status(401).end();
+    }
+    User.findOne({username: user.username})
+      .then(function(user) {
+        if(user) {
+          user = utils.getCleanUser(user);
+          res.json({
+            user: user,
+            token: token
+          });
+        }
+      })
+      .catch(function(err) {
+        console.log(err);
+        res.status(500).end();
+      });
+  });
 });
 
 module.exports = router;

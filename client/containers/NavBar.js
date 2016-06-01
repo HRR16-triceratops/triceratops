@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import * as actions from '../actions/index.js';
 
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
@@ -66,7 +67,7 @@ class NavBar extends Component {
                 <Link to="/login"><FlatButton label="Login"/></Link>
               }
               {isAuthenticated &&
-                <FlatButton label="Logout"/>
+                <FlatButton onClick={this.props.logout} label="Logout"/>
               }
             </li>
           </ul>
@@ -76,13 +77,21 @@ class NavBar extends Component {
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logout: () => {
+      dispatch(actions.logOut());
+    }
+  };
+};
+
 function mapStateToProps(state, ownProps) {
   return {
     auth: state.auth
   };
 }
 
-export default connect(mapStateToProps)(NavBar);
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
 // Root.propTypes = {
 //   store: PropTypes.object.isRequired,
 //   history: PropTypes.object.isRequired

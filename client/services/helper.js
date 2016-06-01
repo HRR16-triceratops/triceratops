@@ -5,7 +5,7 @@ import axios from 'axios';
  *  set equal to 'default' which the server will register as invalid
  *  and redirect to login.
  */
-var localStorageToken = window.localStorage.getItem('token') ? window.localStorage.getItem('token') : 'default';
+var localStorageToken = window.localStorage.getItem('jwtToken') ? window.localStorage.getItem('jwtToken') : 'default';
 
 /**
  *  Post helper function for making api calls to server
