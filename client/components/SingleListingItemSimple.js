@@ -7,7 +7,7 @@ import { Link } from 'react-router';
 
 const SingleListingItemSimple = (props) => {
 	return (
-		<div>
+		<div className="col-md-4">
 			<h3>Item: {props.item.title}</h3>
 			<img src="http://bit.ly/1UrCXd2"/>
 			<p><b>Description: </b>{props.item.description}</p>

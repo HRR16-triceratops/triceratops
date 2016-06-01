@@ -1,3 +1,17 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500);
+
 body {
-  background-color: #99A6AE;
+  font-family: 'Roboto', sans-serif;
+  background-color: #E0F7FA;
+}
+
+#root {
+  max-width: 960px;
+  padding: 10px 20px;
+  margin: auto;
+}
+
+.navSearch {
+  margin-top: 7px;
+  padding-left: 7px;
 }
