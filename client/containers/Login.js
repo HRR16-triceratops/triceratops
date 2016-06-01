@@ -1,17 +1,31 @@
-import { Component } from 'react';
-import React from 'react'; 
+import React from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../actions/index.js';
+import LoginComponent from '../components/login.jsx';
+import { reduxForm } from 'redux-form';
 
-class Login extends Component {
+console.log('Login page loaded!');
 
-	constructor(props){
-		super(props);
-	}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    makeLoginRequest: (userData) => {
+      dispatch(actions.attemptLogin(userData));
+    },
+    resetMe: () =>{
+      //sign up is not reused, so we dont need to resetUserFields
+      //in our case, it will remove authenticated users
+       // dispatch(resetUserFields());
+    }
+  };
+};
 
-	render(){
-		return (
-				<div>Login component here</div>
-			)
-	}
+function mapStateToProps(state, ownProps) {
+  return {
+    user: state.user
+  };
 }
 
-export default Login; 
+export default reduxForm({
+  form: 'LoginForm',
+  fields: ['username', 'password']
+}, mapStateToProps, mapDispatchToProps)(LoginComponent);
