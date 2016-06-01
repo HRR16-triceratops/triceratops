@@ -9,7 +9,7 @@ import Login from './containers/Login';
 import Signup from './containers/SignupContainer.js';
 import TestComponent from './components/TestComponent';
 import SingleListingItemDetailed from './components/SingleListingItemDetailed';
-import Profile from './containers/Profile';
+import Profile from './containers/ProfileContainer';
 
 export default (
   <Route path="/" component={CoreLayout}>
