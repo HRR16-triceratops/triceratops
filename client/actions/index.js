@@ -3,19 +3,19 @@ import helper from '../services/helper';
 
 // action creators
 export const makeLoginRequest = (userData) => {
-  var url = '/auth/login';
-  var request = helper.postHelper(url, userData);
-
-	return {
-		type: types.LOGIN_REQUEST,
-    payload: request
+  return {
+    type: types.LOGIN_REQUEST,
+    payload: userData
 	};
 };
 
-export const loginSuccess = (user) => {
+export const loginSuccess = (user, token) => {
   return {
     type: types.LOGIN_SUCCESS,
-    payload: user
+    payload: {
+      user: user,
+      token: token
+    }
   };
 };
 
@@ -39,12 +39,23 @@ export const logOut = () => {
   };
 };
 
-// thunks
-// attemptLogin(username,password){
-// 	return (dispatch, getState) => {
-// 		dispatch(makeLoginRequest());
-// 		// make API call here with help of helpers.
-// 				// if successful, dispatch LOGIN SUCCESS
-// 				// else dispatch LOGIN FAILURE
-// 	};
-// }
+export const attemptLogin = (userData) => {
+  return function (dispatch) {
+    dispatch(makeLoginRequest(userData));
+    var url = '/auth/login';
+    return helper.postHelper(url, userData)
+      .then(resp => {
+        console.log(resp);
+        let data = resp.data;
+        if(resp.status != 200) {
+          dispatch(loginFailure(resp.payload));
+        } else {
+          window.localStorage.setItem('jwtToken', data.token);
+          dispatch(loginSuccess(data.user, data.token));
+        }
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  };
+};

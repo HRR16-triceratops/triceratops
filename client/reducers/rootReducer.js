@@ -6,7 +6,8 @@ import { combineReducers } from 'redux';
 // auth reducer
 const auth = (state = {
   isAuthenticated: false,
-  token: null
+  token: null,
+  user: null
 }, action) => {
   switch (action.type) {
   // assumes that JWT token is held in action.payload.
@@ -37,9 +38,9 @@ const user = (state = {
   case types.LOGIN_SUCCESS:
     return {
       ...state,
-      username: action.payload.username,
-      displayName: action.payload.displayName,
-      email: action.payload.email
+      username: action.payload.user.username,
+      displayName: action.payload.user.displayName,
+      email: action.payload.user.email
     };
   case types.LOGOUT:
     return {
