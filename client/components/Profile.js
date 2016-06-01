@@ -22,6 +22,13 @@ class Profile extends Component {
           <p>Username : {this.props.user.username}</p>
           <p>Email : {this.props.user.email}</p>
           <button><Link to="/manage">Manage your Listings</Link></button>
+          {/*<ul>
+            {
+              this.props.user.sharingHistory.map(item => {
+                return <li>{item.title} / {item.summary} / {item.price} </li>
+              })
+            }
+          </ul>*/}
         </div>
       );
   }

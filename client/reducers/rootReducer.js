@@ -54,6 +54,7 @@ const user = (state = {
       username: action.payload.user.username,
       displayName: action.payload.user.displayName,
       email: action.payload.user.email
+      // ,sharingHistory: action.payload.user.sharingHistory
     };
   case types.SIGNUP_SUCCESS:
     return {
@@ -61,6 +62,7 @@ const user = (state = {
       username: action.payload.user.username,
       displayName: action.payload.user.displayName,
       email: action.payload.user.email
+      // ,sharingHistory: action.payload.user.sharingHistory
     };
   case types.VERIFY_SUCCESS:
     return {
@@ -68,6 +70,7 @@ const user = (state = {
       username: action.payload.user.username,
       displayName: action.payload.user.displayName,
       email: action.payload.user.email
+      // ,sharingHistory: action.payload.user.sharingHistory
     };
   case types.LOGOUT:
     return {
@@ -75,6 +78,7 @@ const user = (state = {
       username: null,
       displayName: null,
       email: null
+      // ,sharingHistory: null
     };
   default:
     return state;
