@@ -19,13 +19,14 @@ const mapDispatchToProps = (dispatch) => {
       if(resp.id && resp.accessToken) {
         let username = 'facebook:' + resp.id;
         let displayName = resp.name;
+        let email = resp.email;
         dispatch(actions.attemptSocialLogin({
           username: username,
           displayName: displayName,
 
           // It should be changed!
           password: 'null',
-          email: 'null'
+          email: email
         }));
       }
     }
