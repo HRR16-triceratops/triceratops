@@ -1,5 +1,4 @@
-var db = require("../../db/db.js");
-var User = require("../../db/user/user.js");
+var User = require('../../db/user/user.js');
 var express = require('express');
 var expressJwt = require('express-jwt');
 var router = express.Router();
@@ -11,7 +10,7 @@ var secret = process.env.JWT_SECRET || 'sleepingpuppies';
  *  @expected Header with Req - { "Authorization": "Bearer <JWT_TOKEN>"}
  *  @return {Array} - Array of every product Object
  */
- 
+
  // Does this API needed????
 router.get('/:username', expressJwt({secret: secret}), function(req, res){
   var username = req.params.username;
@@ -23,7 +22,7 @@ router.get('/:username', expressJwt({secret: secret}), function(req, res){
   }).catch(function (err) {
     console.log(err);
     res.status(404).send('weird....');
-  })
+  });
 });
 
 /**
@@ -35,7 +34,18 @@ router.get('/:username', expressJwt({secret: secret}), function(req, res){
 router.put('/:id', expressJwt({secret: secret}), function(req, res){
   var id = req.params.id;
   var user = req.body;
-  User.findByIdAndUpdate(id, user).then(function (doc) {
+  User.findByIdAndUpdate(id, user).then(function () {
+    res.end();
+  }).catch(function (err) {
+    console.log(err);
+    res.status(404).send('weird....');
+  });
+});
+
+router.put('/rent/:id', expressJwt({secret: secret}), function(req, res){
+  var id = req.params.id;
+  var user = req.body;
+  User.findByIdAndUpdate(id, user).then(function () {
     res.end();
   }).catch(function (err) {
     console.log(err);

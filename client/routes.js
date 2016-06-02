@@ -2,13 +2,14 @@ import React from 'react';
 import { Route, IndexRedirect } from 'react-router';
 import CoreLayout from './components/CoreLayout';
 import NavBar from './containers/NavBar';
-// Containers are essentially representative of pages i.e. Page components 
-import Listings from './containers/Listings'; 
-import ManageListings from './containers/ManageListings'; 
-import Login from './containers/Login'; 
+// Containers are essentially representative of pages i.e. Page components
+import Listings from './containers/Listings';
+import ManageListings from './containers/ManageListings';
+import Login from './containers/Login';
+import Signup from './containers/SignupContainer.js';
 import TestComponent from './components/TestComponent';
-import SingleListingItemDetailed from './components/SingleListingItemDetailed'; 
-import Profile from './containers/Profile'; 
+import SingleListingItemDetailed from './components/SingleListingItemDetailed';
+import Profile from './containers/ProfileContainer';
 
 export default (
   <Route path="/" component={CoreLayout}>
@@ -17,6 +18,7 @@ export default (
     <Route path="listings/:itemId" component={SingleListingItemDetailed} />
     <Route path="manage" component={ManageListings} />
     <Route path="login" component={Login} />
+    <Route path="signup" component={Signup} />
     <Route path="profile" component={Profile} />
     <Route path="testRoute" component={TestComponent} />
   </Route>

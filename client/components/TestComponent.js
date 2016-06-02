@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'; 
+import { connect } from 'react-redux';
 
 class PreTestComponent extends Component {
 		constructor(props){
@@ -26,6 +26,7 @@ const mapStateToProps = (state) => {
 	return state;
 };
 
-let TestComponent = connect(mapStateToProps)(PreTestComponent); 
+
+const TestComponent = connect(mapStateToProps)(PreTestComponent);
 
 export default TestComponent;

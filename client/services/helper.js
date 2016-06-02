@@ -1,12 +1,11 @@
 import axios from 'axios';
 
-let util = {};
 /**
  *  Access JWT token from user's browser. If user has no token,
  *  set equal to 'default' which the server will register as invalid
  *  and redirect to login.
  */
-var localStorageToken = window.localStorage.getItem('token') ? window.localStorage.getItem('token') : 'default';
+var localStorageToken = window.localStorage.getItem('jwtToken') ? window.localStorage.getItem('jwtToken') : 'default';
 
 // util.postLoginRequestToServer = (username, password, callback) => {
 //   // do I even need window.location.hostname ? or is it .host? 
@@ -27,17 +26,16 @@ var localStorageToken = window.localStorage.getItem('token') ? window.localStora
  *  @expected arguments - Url, data (i.e. object of user data or product data)
  *  @return {Object}
  */
-util.postHelper = function(url, data) {
 
-    return axios.post(url, {
-            headers: {
-                Authorization: "Bearer " + localStorageToken
-            },
-            body: data
-        })
-        .then(function(res) {
-            return res;
-        });
+var postHelper = function(url, data){
+  return axios.post(url, data, {
+    headers: {
+      Authorization: 'Bearer ' + localStorageToken
+    }
+  })
+  .then(function(res){
+    return res;
+  });
 };
 
 /**
@@ -45,15 +43,16 @@ util.postHelper = function(url, data) {
  *  @expected arguments - Url
  *  @return {Object}
  */
-util.getHelper = function(url) {
-    return axios.get(url, {
-            headers: {
-                Authorization: "Bearer " + localStorageToken
-            }
-        })
-        .then(function(res) {
-            return res;
-        });
+
+var getHelper = function(url){
+  return axios.get(url, {
+    headers: {
+      Authorization: 'Bearer ' + localStorageToken
+    }
+  })
+  .then(function(res){
+    return res;
+  });
 };
 
 /**
@@ -61,19 +60,20 @@ util.getHelper = function(url) {
  *  @expected arguments - Url, data (i.e. object of user data or product data)
  *  @return {Object}
  */
-util.putHelper = function(url, data) {
-    return axios.put(url, {
-            headers: {
-                Authorization: "Bearer " + localStorageToken
-            },
-            params: {
-                ID: data.id
-            },
-            data: data
-        })
-        .then(function(res) {
-            return res;
-        });
+
+var putHelper = function(url, data){
+  return axios.put(url, data, {
+    headers: {
+      Authorization: 'Bearer ' + localStorageToken
+    }
+  })
+  .then(function(res){
+    return res;
+  });
 };
 
-export default util; 
+module.exports = {
+  postHelper: postHelper,
+  getHelper: getHelper,
+  putHelper: putHelper
+};

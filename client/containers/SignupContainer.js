@@ -1,15 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/index.js';
-import LoginComponent from '../components/login.jsx';
+import SignupComponent from '../components/signup.jsx';
 import { reduxForm } from 'redux-form';
 
-console.log('Login page loaded!');
+console.log('Signup page loaded!');
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    makeLoginRequest: (userData) => {
-      dispatch(actions.attemptLogin(userData));
+    makeSignupRequest: (userData) => {
+      dispatch(actions.attemptSignup(userData));
     },
     resetMe: () =>{
       //sign up is not reused, so we dont need to resetUserFields
@@ -21,11 +21,12 @@ const mapDispatchToProps = (dispatch) => {
 
 function mapStateToProps(state, ownProps) {
   return {
-    user: state.user
+    user: state.user,
+    token: state.auth.token
   };
 }
 
 export default reduxForm({
-  form: 'LoginForm',
-  fields: ['username', 'password']
-}, mapStateToProps, mapDispatchToProps)(LoginComponent);
+  form: 'SignupForm',
+  fields: ['username', 'email', 'password']
+}, mapStateToProps, mapDispatchToProps)(SignupComponent);

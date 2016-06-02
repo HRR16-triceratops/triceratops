@@ -44,23 +44,23 @@ UserSchema.methods = {
 // With Pre hook, hashPassword function will be called before saving onto DB
 UserSchema.pre('save', function hashPassword (next) {
   var user = this;
-  
+
   // only hash the password if it has been modified (or is new)
   if (!user.isModified('password')) {
     return next();
   }
-  
+
   // hash the password
   var cipher = Promise.promisify(bcrypt.hash);
   return cipher(user.password, saltRounds).then(function(hash) {
 
       // override the cleartext password with the hashed one
-      user.password = hash;
-      next();
-    }).catch(function(err) {
-      console.log(err);
-      next(err);
-    });
+    user.password = hash;
+    next();
+  }).catch(function(err) {
+    console.log(err);
+    next(err);
+  });
 });
 
 module.exports = mongoose.model('users', UserSchema);

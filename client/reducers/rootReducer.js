@@ -2,15 +2,29 @@ import * as types from '../constants/ActionTypes';
 // import merge from 'lodash/merge';
 import { routerReducer as routing } from 'react-router-redux';
 import { combineReducers } from 'redux';
+import { reducer as formReducer } from 'redux-form';
 
 // auth reducer
 const auth = (state = {
     isAuthenticated: false,
-    token: null
+    token: null,
+    user: null
 }, action) => {
     switch (action.type) {
-        // assumes that JWT token is held in action.payload. 
+        // assumes that JWT token is held in action.payload.
         case types.LOGIN_SUCCESS:
+            return {
+                ...state,
+                isAuthenticated: true,
+                token: action.payload.token
+            };
+        case types.SIGNUP_SUCCESS:
+            return {
+                ...state,
+                isAuthenticated: true,
+                token: action.payload.token
+            };
+        case types.VERIFY_SUCCESS:
             return {
                 ...state,
                 isAuthenticated: true,
@@ -24,7 +38,7 @@ const auth = (state = {
             };
         default:
             return state;
-    };
+    }
 };
 
 // user reducer
@@ -41,9 +55,26 @@ const user = (state = {
         case types.LOGIN_SUCCESS:
             return {
                 ...state,
-                username: action.payload.username,
-                displayName: action.payload.displayName,
-                email: action.payload.email
+                username: action.payload.user.username,
+                displayName: action.payload.user.displayName,
+                email: action.payload.user.email
+                    // ,sharingHistory: action.payload.user.sharingHistory
+            };
+        case types.SIGNUP_SUCCESS:
+            return {
+                ...state,
+                username: action.payload.user.username,
+                displayName: action.payload.user.displayName,
+                email: action.payload.user.email
+                    // ,sharingHistory: action.payload.user.sharingHistory
+            };
+        case types.VERIFY_SUCCESS:
+            return {
+                ...state,
+                username: action.payload.user.username,
+                displayName: action.payload.user.displayName,
+                email: action.payload.user.email
+                    // ,sharingHistory: action.payload.user.sharingHistory
             };
         case types.LOGOUT:
             return {
@@ -51,10 +82,11 @@ const user = (state = {
                 username: null,
                 displayName: null,
                 email: null
+                    // ,sharingHistory: null
             };
         default:
             return state;
-    };
+    }
 };
 
 // remember to replace products back with empty array for initial state value
@@ -239,18 +271,31 @@ const ui = (state = {
                     viewAddNewListingForm: !state.ManageListings.viewAddNewListingForm
                 }
             };
+
+        case types.LOGIN_REQUEST:
+            return {
+                ...state,
+                isAuthenticating: true
+            };
+        case types.SIGNUP_REQUEST:
+            return {
+                ...state,
+                isAuthenticating: true
+            }
         default:
             return state;
     };
 };
 
-// need to add routing to handle route states syncing w/browser history .. 
+
+// need to add routing to handle route states syncing w/browser history ..
 const rootReducer = combineReducers({
     products,
     auth,
     user,
     ui,
-    routing
+    routing,
+    form: formReducer
 });
 
 export default rootReducer;
