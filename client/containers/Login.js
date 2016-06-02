@@ -16,16 +16,18 @@ const mapDispatchToProps = (dispatch) => {
     },
     loginWithFB: (resp) => {
       console.log(resp);
-      let username = 'facebook:' + resp.id;
-      let displayName = resp.name;
-      dispatch(actions.attemptSocialLogin({
-        username: username,
-        displayName: displayName,
+      if(resp.status !== undefined) {
+        let username = 'facebook:' + resp.id;
+        let displayName = resp.name;
+        dispatch(actions.attemptSocialLogin({
+          username: username,
+          displayName: displayName,
 
-        // It should be changed!
-        password: 'null',
-        email: 'null'
-      }));
+          // It should be changed!
+          password: 'null',
+          email: 'null'
+        }));
+      }
     }
   };
 };
