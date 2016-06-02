@@ -4,7 +4,7 @@ import * as actions from '../actions/index.js';
 import { Link } from 'react-router';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import FlatButton from 'material-ui/FlatButton';
-import FacebookLogin from 'react-facebook-login';
+import FacebookLogin from './Facebook.js';
 
 console.log('Login page loaded!');
 
