@@ -49,6 +49,7 @@ export default class LoginComponent extends Component {
           appId="1734027273476564"
           autoLoad={false}
           callback={this.props.loginWithFB}
+          scope="public_profile, email"
           />
         </div>
       </div>
