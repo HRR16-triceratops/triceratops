@@ -7,6 +7,7 @@ const SingleListingItemSimple = (props) => {
   return (
     <div className="col-md-4">
       <Card>
+        {/* CardHeader should contain Location info */}
         <CardHeader
           title="Location"
           subtitle="Sharer"

@@ -1,5 +1,5 @@
-import { Component } from 'react';
 import React from 'react';
+import { Component } from 'react';
 import { Link } from 'react-router';
 import { browserHistory } from 'react-router';
 
@@ -26,9 +26,22 @@ class Profile extends Component {
           <p>Email : {this.props.user.email}</p>
           <button><Link to="/manage">Manage your Listings</Link></button>
           <ul>
+          <h4>Your Sharing List</h4>
             {
-              this.props.products.map(item => {
-                return <li key={item._id}>{item.title} / {item.summary} / {item.price} </li>
+              this.props.products.items.filter(item => {
+                return item.author === this.props.user.username;
+              }).map(item => {
+                return <li key={item._id}>{item.title} / {item.summary} / {item.price} </li>;
+              })
+            }
+          </ul>
+          <ul>
+          <h4>Upcoming Rent</h4>
+            {
+              this.props.products.items.filter(item => {
+                return item.rentSchedule.length === 0 ? false : item.rentSchedule[0].username === this.props.user.username;
+              }).map(item => {
+                return <li key={item._id}>{item.title} / {item.summary} / {item.price} </li>;
               })
             }
           </ul>
