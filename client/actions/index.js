@@ -4,14 +4,15 @@ import { push } from 'react-router-redux';
 import { reset } from 'redux-form';
 
 // Should probably implement products listings state update on each user interaction
-export const fetchUpdatedProducts = () => {
+export const fetchUpdatedProducts = (id = '') => {
   return dispatch => {
-    const url = '/products';
+    id = '/' + id;
+    const url = '/products' + id;
     helper.getHelper(url)
     .then(resp => {
       var updatedState = resp.data;
       if (resp.status == 200) {
-        dispatch(updateProductsState(updatedState));
+        Array.isArray(updatedState) ? dispatch(updateProductsState(updatedState)) : dispatch(updateProductDetail(updatedState));
       }
     })
     .catch(err => {
@@ -24,6 +25,13 @@ const updateProductsState = (updatedState) => {
   return {
     type: types.UPDATE_PRODUCTS_STATE,
     updatedProductsState: updatedState
+  };
+};
+
+const updateProductDetail = (product) => {
+  return {
+    type: types.UPDATE_PRODUCT_DETAIL,
+    payload: product
   };
 };
 
@@ -326,8 +334,9 @@ export const attemptSignup = (userData) => {
     .then(resp => {
       let data = resp.data;
       if(resp.status != 200) {
-        console.log('resp status is not 200');
-
+        console.log('resp status is not 200, User already exists');
+        dispatch(signupFailure(err));
+        dispatch(reset('SignupForm'));
         // If User is Authorized from server, save JWT token to localStorage,
         // dispatch success action and redirect to profile(dashboard) page
       } else {

@@ -80,19 +80,38 @@ const user = (state = {
   }
 };
 
-const products = (state = [], action) => {
+const products = (state = {
+  items: [],
+  filter: '',
+  detail: {}
+}, action) => {
   switch (action.type) {
     case types.UPDATE_PRODUCTS_STATE:
-    return action.updatedProductsState;
+    return {
+      ...state,
+      items: action.updatedProductsState
+    }
+    case types.UPDATE_PRODUCT_DETAIL:
+    return {
+      ...state,
+      detail: action.payload
+    }
     case types.REMOVELISTING_SUCCESS:
-    return state.filter((item) => {
+    let newItems = state.items.filter((item) => {
       return item._id !== action.itemId;
     });
-    case types.ADDLISTING_SUCCESS:
-    return [
+    return {
       ...state,
-      action.newItem
-    ];
+      items: newItems
+    }
+    case types.ADDLISTING_SUCCESS:
+    return {
+      ...state,
+      items: [
+        ...state,
+        action.newItem
+      ]
+    };
     default:
     return state;
   }

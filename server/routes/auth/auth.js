@@ -71,7 +71,7 @@ router.post('/signup', function(req, res){
           });
       } else {
         console.log('Account already exists');
-        res.send('Account already exists');
+        res.status(500).end();
       }
     })
     .catch(function(err){
