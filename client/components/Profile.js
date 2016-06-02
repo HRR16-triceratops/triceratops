@@ -11,7 +11,7 @@ class Profile extends Component {
 
   componentWillMount() {
     if(!this.props.auth.isAuthenticated) {
-      browserHistory.push('/login');
+      this.props.redirectToLogin();
     }
   }
 

@@ -109,12 +109,13 @@ const ui = (state = {
   }
 };
 
-const products = (state = [], action) => {
+const products = (state = {list: [], query: ''}, action) => {
   switch (action.type) {
   case types.SEARCH:
-    return state.filter(item => {
-      return item.indexOf(action.payload) !== -1;
-    });
+    return {
+      ...state,
+      query: action.payload
+    }
   default:
     return state;
   }

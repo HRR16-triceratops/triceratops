@@ -1,7 +1,7 @@
 import * as types from '../constants/ActionTypes';
 import helper from '../services/helper';
-import { browserHistory } from 'react-router';
 import {reset} from 'redux-form';
+import { push } from 'react-router-redux';
 
 //////////////////////////////////////////////////////////////
 // Synchronous Action Creators
@@ -117,6 +117,9 @@ export const verifyFailure = (err) => {
   };
 };
 
+/**
+ *  @param {Object} query - contains query string inside search property
+ */
 export const search = (query) => {
   return {
     type: types.SEARCH,
@@ -146,7 +149,7 @@ export const attemptLogin = (userData) => {
         } else {
           window.localStorage.setItem('jwtToken', data.token);
           dispatch(loginSuccess(data.user, data.token));
-          browserHistory.push('/profile');
+          dispatch(push('/profile'));
         }
       })
 
@@ -177,7 +180,7 @@ export const attemptSignup = (userData) => {
         } else {
           window.localStorage.setItem('jwtToken', data.token);
           dispatch(signupSuccess(data.user, data.token));
-          browserHistory.push('/profile');
+          dispatch(push('/profile'));
         }
       })
 
