@@ -8,6 +8,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     redirectToLogin: () => {
       dispatch(push('/login'));
+    },
+    fetchUpdatedProducts: () => {
+      dispatch(actions.fetchUpdatedProducts());
     }
   };
 };
@@ -15,7 +18,8 @@ const mapDispatchToProps = (dispatch) => {
 function mapStateToProps(state, ownProps) {
   return {
     user: state.user,
-    auth: state.auth
+    auth: state.auth,
+    products: state.products
   };
 }
 

@@ -9,11 +9,6 @@ const mapDispatchToProps = (dispatch) => {
     makeLoginRequest: (userData) => {
       dispatch(actions.attemptLogin(userData));
     },
-    resetMe: () =>{
-      //sign up is not reused, so we dont need to resetUserFields
-      //in our case, it will remove authenticated users
-       // dispatch(resetUserFields());
-    },
     loginWithFB: (resp) => {
       console.log(resp);
       if(resp.id && resp.accessToken) {
@@ -23,10 +18,10 @@ const mapDispatchToProps = (dispatch) => {
         dispatch(actions.attemptSocialLogin({
           username: username,
           displayName: displayName,
+          email: email,
 
           // It should be changed!
-          password: 'null',
-          email: email
+          password: 'null'
         }));
       }
     }
