@@ -76,6 +76,8 @@ ProductSchema.methods = {
       };
       return this;
     } else {
+      console.log("rentalUpdate method on Model is dealing with a username set in obj, i.e a removal request!");
+      console.log('but currently only throws error?'); 
       throw err;
     }
   }

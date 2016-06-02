@@ -13,13 +13,13 @@ const SingleListingItemSimple = (props) => {
           avatar="http://lorempixel.com/100/100/nature/"
         /><CardMedia
           overlay={<CardTitle title={props.item.title} subtitle="" />}
-        ><img src={props.item.img} />
+        ><img src={props.item.imgURL} />
         </CardMedia>
         <CardText>
           {props.item.description}
         </CardText>
         <CardActions>
-          <Link to={"/listings/" + props.item.id}><FlatButton label="Show Details" /></Link>
+          <Link to={"/listings/" + props.item._id}><FlatButton label="Show Details" /></Link>
         </CardActions>
       </Card>
 		</div>

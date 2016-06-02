@@ -89,39 +89,13 @@ const user = (state = {
     }
 };
 
-// remember to replace products back with empty array for initial state value
-const fakeProductsList = [{
-    id: 510,
-    type: 'chair',
-    title: 'Amazing chair',
-    description: 'Beautifully handcrafted chair',
-    price: 10,
-    locationInfo: 'Australia',
-    author: 'RogRog'
-}, {
-    id: 512,
-    type: 'table',
-    title: 'Amazing table',
-    description: 'Wonderful handwoven table',
-    price: 40,
-    locationInfo: 'Melbourne',
-    author: 'M172'
-}, {
-    id: 514,
-    type: 'table',
-    title: 'Amazing table',
-    description: 'Wonderful handwoven table',
-    price: 40,
-    locationInfo: 'Melbourne',
-    author: 'RogRog'
-}];
-
-// const products = (state = [], action) => {
-const products = (state = fakeProductsList, action) => {
+const products = (state = [], action) => {
     switch (action.type) {
+        case types.UPDATE_PRODUCTS_STATE:
+            return action.updatedProductsState; 
         case types.REMOVELISTING_SUCCESS:
             return state.filter((item) => {
-                return item.id !== action.itemId;
+                return item._id !== action.itemId;
             });
         case types.ADDLISTING_SUCCESS:
             return [
@@ -133,7 +107,7 @@ const products = (state = fakeProductsList, action) => {
     }
 };
 
-// state that's specific to a component should still be stored in redux store,
+// state that's specific to a component, still stored in redux store,
 // but simply namespaced to ui.(component).(state)
 const ui = (state = {
     isAuthenticating: false,
@@ -154,11 +128,13 @@ const ui = (state = {
         fields: {
             type: '',
             title: '',
+            imgURL: '',
+            summary: '',
             description: '',
             price: '',
             locationInfo: '',
-            from: '',
-            to: ''
+            to: '',
+            from: ''
         },
         isAttemptingToAdd: false
     }
@@ -180,11 +156,13 @@ const ui = (state = {
                     fields: {
                         type: '',
                         title: '',
+                        imgURL: '',
+                        summary: '',
                         description: '',
                         price: '',
                         locationInfo: '',
-                        from: '',
-                        to: ''
+                        to: '',
+                        from: ''
                     },
                     isAttemptingToAdd: false
                 }
@@ -193,15 +171,7 @@ const ui = (state = {
             return {
                 ...state,
                 AddNewListingForm: {
-                    fields: {
-                        type: '',
-                        title: '',
-                        description: '',
-                        price: '',
-                        locationInfo: '',
-                        from: '',
-                        to: ''
-                    },
+                    ...state.AddNewListingForm,
                     isAttemptingToAdd: false
                 }
             };

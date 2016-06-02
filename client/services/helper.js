@@ -7,20 +7,6 @@ import axios from 'axios';
  */
 var localStorageToken = window.localStorage.getItem('jwtToken') ? window.localStorage.getItem('jwtToken') : 'default';
 
-// util.postLoginRequestToServer = (username, password, callback) => {
-//   // do I even need window.location.hostname ? or is it .host? 
-//   return axios.post(window.location.host + '/login', {
-//     username: username,
-//     password: password
-//   })
-//   .then((response)=>{
-//     callback(null, response); 
-//   })
-//   .catch((err)=>{
-//     callback(err); 
-//   });
-// }; 
-
 /**
  *  Post helper function for making api calls to server
  *  @expected arguments - Url, data (i.e. object of user data or product data)

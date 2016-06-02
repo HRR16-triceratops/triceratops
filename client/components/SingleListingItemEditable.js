@@ -12,7 +12,7 @@ const SingleListingItemEditable = (props) => {
 			<SingleListingItemSimple item={item} />
 			{isItemPendingRemoval ? <div>Item is Pending Removal...</div> : null}
 			<noscript><button>Edit</button></noscript>
-			<button onClick={()=>{dispatch(removeRentedItem(item.id))}}>Remove</button>
+			<button onClick={()=>{dispatch(removeRentedItem(item))}}>Remove</button>
 		</div>
 		); 
 };

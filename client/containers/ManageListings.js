@@ -3,14 +3,18 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import SingleListingItemEditable from '../components/SingleListingItemEditable';
 import AddNewListingForm from '../components/AddNewListingForm'; 
-import { toggleViewManageListings, toggleViewAddNewListingForm } from '../actions/index'; 
+import { toggleViewManageListings, toggleViewAddNewListingForm, fetchUpdatedProducts } from '../actions/index'; 
 
-// So disgusting~
 // Refactor so that this container doesn't even render a single raw html elemnt like div.
 // outsource all view space to presentational components. 
 class ManageListings extends Component {
     constructor(props) {
         super(props);
+    }
+
+    componentDidMount(){
+        // ajax requests
+        this.props.dispatch(fetchUpdatedProducts()); 
     }
 
     render() {
@@ -21,10 +25,10 @@ class ManageListings extends Component {
 
         return (
             <div>
-                <pre>State UI tree: {JSON.stringify(this.props.ui, null , 2)}</pre>
 				<h3>ManageListings Component here!</h3>
-
                 <button onClick={()=>{
+                    // // fetch newState data 
+                    // dispatch(fetchManageListingsState()); 
                     // toggles view of form! 
                     dispatch(toggleViewAddNewListingForm()); 
                 }}>
@@ -35,7 +39,6 @@ class ManageListings extends Component {
                         fields={fields} 
                         isAttemptingToAdd={isAttemptingToAdd}
                         dispatch={dispatch.bind(this)}
-
                     /> : null}
 
 				<button onClick={()=>{
@@ -49,7 +52,7 @@ class ManageListings extends Component {
 						key={ind}
 						item={item}
 						dispatch={dispatch.bind(this)}
-                        isItemPendingRemoval={ListingsPendingRemoval.hasOwnProperty(item.id)}
+                        isItemPendingRemoval={ListingsPendingRemoval.hasOwnProperty(item._id)}
 						/>;
 				}): null}
 			</div>

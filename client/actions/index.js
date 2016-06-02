@@ -3,15 +3,37 @@ import { browserHistory } from 'react-router';
 import { reset } from 'redux-form';
 import helper from '../services/helper';
 
+// Should probably implement products listings state update on each user interaction  
+export const fetchUpdatedProducts = () => {
+    return dispatch => {
+        const url = '/products'; 
+         helper.getHelper(url)
+            .then(resp => {
+              var updatedState = resp.data;
+                if (resp.status == 200) {
+                    dispatch(updateProductsState(updatedState));
+                }
+            })
+            .catch(err => {
+                console.error(err);
+            });
+    };
+};
+
+const updateProductsState = (updatedState) => {
+  return {
+    type: types.UPDATE_PRODUCTS_STATE,
+    updatedProductsState: updatedState
+  }
+};
+
 const addListingRequest = () => {
-    console.log('inside action creator - addListingRequest');
     return {
         type: types.ADDLISTING_REQUEST
     };
 };
 
 const addListingSuccess = (newItem) => {
-    // remmeber in UI state, to clear all fields once successful! 
     return {
         type: types.ADDLISTING_SUCCESS,
         newItem: newItem
@@ -24,59 +46,40 @@ const addListingFailure = () => {
     };
 };
 
-export const addNewListing = () => {
-    // remember author (no id required, assigned by Mongo); 
-    return (dispatch, getState) => {
-        dispatch(addListingRequest());
-        // assume that author in newProduct points to a user.id, rather than user name string.
-        // has to be logged in to even be able to get this far, so assume id can be got. 
-        let author = getState().user.id;
-        // grab current ui-form-data state and author state (above)
-        // let newProductData = {
-        //     ...getState().ui.AddNewListingForm.fields,
-        //     author: author
-        // };
-        // //assume succesful
-        // let newItemReturnedFromServer = {
-        //    id: 88291,
-        //     type: 'couch',
-        //     title: 'best couch',
-        //     description: 'description of best couch!',
-        //     price: 150,
-        //     locationInfo: 'australia',
-        //     author: 'RogRog'
-        // };
-        // // mock API delay
-        // setTimeout(()=>{
-        //  // inside success handler/then/callback
-        //   dispatch(addListingSuccess(newItemReturnedFromServer));
-        //   // mock failure 
-        //    dispatch(addListingFailure()); // should only mutate state-ui
-        // },3000);
-        console.log('author inside addNewListing thunk is: ' + author);
 
-        let mockNewProduct = {
-            type: 'couch',
-            title: 'best couch',
-            description: 'description of best couch!',
-            price: 150,
-            locationInfo: 'australia',
-            author: 'RogRog'
+export const addNewListing = (fields) => {
+    return (dispatch, getState) => {
+        // parse form data for submission
+        let newProductListing = {
+            ...fields,
+            author: getState().user.username,
+            schedule: [{ to: fields.to, from: fields.from }]
         };
-        // make API call to server
-        return helper.postHelper('/products', mockNewProduct)
-            .then((response) => {
-                console.log('===================================');
-                console.log('response received from server!');
-                console.log(response);
-                console.log('===================================');
+        delete newProductListing.to;
+        delete newProductListing.from;
+
+        dispatch(addListingRequest());
+        let url = '/products';
+        helper.postHelper(url, newProductListing)
+            .then(resp => {
+                console.log("inside addNewListing thunk success handler!");
+                let newItem = resp.data;
+                
                 dispatch(addListingSuccess(newItem));
+                if (resp.status != 200) {
+                    dispatch(addListingSuccess(newItem));
+                } else {
+                    dispatch(addListingFailure());
+                }
             })
-            .catch((err) => {
-                console.log("trying to add product, but failed! catch handler in promise!");
+            .catch(err => {
+                console.error(err);
+                console.log("inside addNewListing thunk catch handler!");
+                dispatch(addListingFailure());
             });
     };
-};
+
+}
 
 export const updateFormField = (fieldKey, fieldValue) => {
     return {
@@ -85,28 +88,6 @@ export const updateFormField = (fieldKey, fieldValue) => {
         fieldValue: fieldValue
     }
 }
-
-// action creators
-const loginRequest = () => {
-    return {
-        type: types.LOGIN_REQUEST
-    };
-};
-
-const loginFailure = () => {
-    return {
-        type: types.LOGIN_FAILURE
-    };
-}
-
-const loginSuccess = (payloadObj) => {
-    return {
-        type: types.LOGIN_SUCCESS,
-        payload: {
-            ...payloadObj
-        }
-    }
-};
 
 export const toggleViewManageListings = () => {
     return {
@@ -141,21 +122,30 @@ const removeListingFailure = (itemId) => {
     };
 };
 
-// thunks
-export const removeRentedItem = (itemId) => {
-    return (dispatch) => {
-        // notify state that listing removal is pending
-        dispatch(removeListingRequest(itemId));
-        // api put call to remove item. Mock it for now.
-        setTimeout(() => {
-            // mock success response, which confirms that server-state/db updated with removal.
-            // now simply update local state (no need to call down whole data, but probably best
-            // when considering multiple users, good time to rehydrate local state tree)
-            dispatch(removeListingSuccess(itemId));
-        }, 3000);
-        // failure mimics removeListingSuccess in UI reducer (to stop spinner), but does not get 
-        // handled at all by products reducer (because actual products state should not change on
-        //  failure);
+export const removeRentedItem = (item) => {
+    return (dispatch, getState) => {
+        dispatch(removeListingRequest(item._id));
+        let dataToSend = {
+            username: item.author
+        };
+        let url = 'products/rent/' + item._id;
+        // Not sure if current server route is correctly set up to handle. 
+        // Route needs to accept a product ID for removal, and remove on that basis. 
+        helper.putHelper(url, dataToSend)
+            .then(resp => {
+                let data = resp.data;
+                // assume success.
+                dispatch(removeListingSuccess(item._id));
+                // if (resp.status != 200) {
+                //     dispatch(removeListingFailure(item._id));
+                // } else {
+                //     dispatch(removeListingSuccess(item._id));
+                // }
+            })
+            .catch(err => {
+                console.error(err);
+                dispatch(removeListingFailure(item._id));
+            });
     };
 }
 

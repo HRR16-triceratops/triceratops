@@ -14,9 +14,8 @@ const AddNewListingForm = (props) => {
   			(e)=>{
   				console.log('submit button pressed!');
   				e.preventDefault();
-  				dispatch(addNewListing()); 
+  				dispatch(addNewListing(fields)); 
   			}}>
-  		<pre>{JSON.stringify(fields, null, 2)}</pre>
   		<h3>AddNewListingForm Component here!</h3>
   		{isAttemptingToAdd ? <p>Adding new listing, please wait...</p> : null}
   		{Object.keys(fields).map((fieldKey, ind)=>{

@@ -24,13 +24,8 @@ router.get('/', function(req, res){
  *  @expected Header with Req - { "Authorization": "Bearer <JWT_TOKEN>"}
  *  @return {Object} - contains every data including timestamps, ObjectId, isActivated
  */
- // take out: middleware!  expressJwt({secret: secret})
-// router.post('/', expressJwt({secret: secret}) ,function(req, res){
-router.post('/', function(req, res){
-  console.log("=======PUT products/post is being handled! ==========")
+router.post('/', expressJwt({secret: secret}), function(req, res){
   var prod = req.body;
-  console.log(req.body.type); 
-  console.log('======================');
   var newProduct = new Product({
     type: prod.type,
     title: prod.title,
