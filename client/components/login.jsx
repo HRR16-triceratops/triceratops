@@ -4,6 +4,7 @@ import * as actions from '../actions/index.js';
 import { Link } from 'react-router';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import FlatButton from 'material-ui/FlatButton';
+import FacebookLogin from 'react-facebook-login';
 
 console.log('Login page loaded!');
 
@@ -44,6 +45,11 @@ export default class LoginComponent extends Component {
               </Link>
             </fieldset>
           </form>
+          <FacebookLogin
+          appId="1734027273476564"
+          autoLoad={false}
+          callback={this.props.loginWithFB}
+          />
         </div>
       </div>
     );

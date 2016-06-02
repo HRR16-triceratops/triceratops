@@ -13,6 +13,19 @@ const mapDispatchToProps = (dispatch) => {
       //sign up is not reused, so we dont need to resetUserFields
       //in our case, it will remove authenticated users
        // dispatch(resetUserFields());
+    },
+    loginWithFB: (resp) => {
+      console.log(resp);
+      let username = 'facebook:' + resp.id;
+      let displayName = resp.name;
+      dispatch(actions.attemptSocialLogin({
+        username: username,
+        displayName: displayName,
+
+        // It should be changed!
+        password: 'null',
+        email: 'null'
+      }));
     }
   };
 };

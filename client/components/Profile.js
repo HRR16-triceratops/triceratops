@@ -19,7 +19,7 @@ class Profile extends Component {
     return (
         <div>
           <div>Profile component here</div>
-          <p>Username : {this.props.user.username}</p>
+          <p>Username : {this.props.user.displayName}</p>
           <p>Email : {this.props.user.email}</p>
           <button><Link to="/manage">Manage your Listings</Link></button>
           {/*<ul>
