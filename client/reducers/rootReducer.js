@@ -40,16 +40,12 @@ const auth = (state = {
             return state;
     }
 };
-
-// user reducer
-// remember to remove fake username for lols
-// NEEDS ID PROPERTY! 
 const user = (state = {
-    id: 982380,
-    username: 'RogRog',
-    displayName: null,
-    email: null,
-    rentedItem: []
+    // id: 982380,
+    // username: 'RogRog',
+    // displayName: null,
+    // email: null,
+    // rentedItem: []
 }, action) => {
     switch (action.type) {
         case types.LOGIN_SUCCESS:
