@@ -2,7 +2,7 @@ import React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import SingleListingItemEditable from '../components/SingleListingItemEditable';
-import AddNewListingForm from '../components/AddNewListingForm';
+import AddNewListingForm from './NewListingContainer';
 import { toggleViewManageListings, toggleViewAddNewListingForm, fetchUpdatedProducts } from '../actions/index';
 
 // Refactor so that this container doesn't even render a single raw html elemnt like div.
@@ -19,7 +19,7 @@ class ManageListings extends Component {
 
   render() {
     const { viewManagedListing, viewAddNewListingForm } = this.props.ui.ManageListings;
-    const { fields, isAttemptingToAdd } = this.props.ui.AddNewListingForm;
+    const isAttemptingToAdd = this.props.ui.isAttemptingToAdd;
     const { ListingsPendingRemoval } = this.props.ui.SingleListingItemEditable;
     const { dispatch, rentedItems } = this.props;
 
@@ -36,9 +36,7 @@ class ManageListings extends Component {
         </button>
         {viewAddNewListingForm ?
           <AddNewListingForm
-            fields={fields}
             isAttemptingToAdd={isAttemptingToAdd}
-            dispatch={dispatch.bind(this)}
           /> : null}
 
           <button onClick={()=>{
@@ -62,7 +60,7 @@ class ManageListings extends Component {
 
 const mapStateToStore = (state) => {
   return {
-    rentedItems: state.products.filter((item) => {
+    rentedItems: state.products.items.filter((item) => {
       // assuming unique usernames
       return item.author === state.user.username;
     }),

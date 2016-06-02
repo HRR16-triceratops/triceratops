@@ -134,67 +134,24 @@ const ui = (state = {
       */
     }
   },
-  AddNewListingForm: {
-    fields: {
-      type: '',
-      title: '',
-      imgURL: '',
-      summary: '',
-      description: '',
-      price: '',
-      locationInfo: '',
-      to: '',
-      from: ''
-    },
-    isAttemptingToAdd: false
-  }
+  isAttemptingToAdd: false
 }, action) => {
   switch (action.type) {
     case types.ADDLISTING_REQUEST:
     return {
       ...state,
-      AddNewListingForm: {
-        ...state.AddNewListingForm,
-        isAttemptingToAdd: true
-      }
+      isAttemptingToAdd: true
     };
     // Refactor out duplication of two below, same ui result.
     case types.ADDLISTING_SUCCESS:
     return {
       ...state,
-      AddNewListingForm: {
-        fields: {
-          type: '',
-          title: '',
-          imgURL: '',
-          summary: '',
-          description: '',
-          price: '',
-          locationInfo: '',
-          to: '',
-          from: ''
-        },
-        isAttemptingToAdd: false
-      }
+      isAttemptingToAdd: false
     };
     case types.ADDLISTING_FAILURE:
     return {
       ...state,
-      AddNewListingForm: {
-        ...state.AddNewListingForm,
-        isAttemptingToAdd: false
-      }
-    };
-
-    case types.UI_UPDATE_FORMFIELD:
-    var newFields = {...state.AddNewListingForm.fields };
-    newFields[action.fieldKey] = action.fieldValue;
-    return {
-      ...state,
-      AddNewListingForm: {
-        ...state.AddNewListingForm,
-        fields: newFields
-      }
+      isAttemptingToAdd: false
     };
     case types.REMOVELISTING_REQUEST:
     return {
