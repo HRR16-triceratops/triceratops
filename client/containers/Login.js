@@ -16,7 +16,7 @@ const mapDispatchToProps = (dispatch) => {
     },
     loginWithFB: (resp) => {
       console.log(resp);
-      if(resp.status !== undefined) {
+      if(resp.id && resp.accessToken) {
         let username = 'facebook:' + resp.id;
         let displayName = resp.name;
         dispatch(actions.attemptSocialLogin({
