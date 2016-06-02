@@ -15,14 +15,14 @@ module.exports = {
   },
 
   devtool: '#source-map',
-  
+
   module: {
     loaders: [
-      { 
+      {
         // runs all jsx through babel
         test: /\.jsx?$/,
         exclude: /(node_modules)/,
-        loaders: ['babel-loader']     
+        loaders: ['babel-loader']
       },
       { test: /\.css$/, loader: "style-loader!css-loader" },
       { test: /\.png$/, loader: "url-loader?limit=100000" },

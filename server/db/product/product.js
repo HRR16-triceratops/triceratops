@@ -58,17 +58,17 @@ var ProductSchema = new Schema({
 ProductSchema.methods = {
 
   /**
-   * toggleActivation() =>
-   *  @return {object} - model instance of Product with toggled 'isActivated' key.
-   *                     simply chain .save() to save it to DB
-   */
+  * toggleActivation() =>
+  *  @return {object} - model instance of Product with toggled 'isActivated' key.
+  *                     simply chain .save() to save it to DB
+  */
   toggleActivation: function toggleActivation () {
     this.isActivated = !this.isActivated;
     return this;
   },
 
   rentalUpdate: function rentalUpdate (update) {
-      if (update.username !== undefined){
+    if (update.username !== undefined){
       this.rentSchedule[0] = {
         username: update.username,
         from: "available",
@@ -76,6 +76,8 @@ ProductSchema.methods = {
       };
       return this;
     } else {
+      console.log("rentalUpdate method on Model is dealing with a username set in obj, i.e a removal request!");
+      console.log('but currently only throws error?');
       throw err;
     }
   }

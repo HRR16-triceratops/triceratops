@@ -5,7 +5,6 @@ var utils = require('../../utils/utils.js');
 var jwt = require('jsonwebtoken');
 var secret = process.env.JWT_SECRET || 'sleepingpuppies';
 
-
 /**
  *  Request Handler for POST Method
  *  @expected data with Req - Login credentials (username, password)
