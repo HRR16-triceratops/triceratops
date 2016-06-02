@@ -95,7 +95,3 @@ function mapStateToProps(state, ownProps) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
-// Root.propTypes = {
-//   store: PropTypes.object.isRequired,
-//   history: PropTypes.object.isRequired
-// };
