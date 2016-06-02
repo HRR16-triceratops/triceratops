@@ -25,9 +25,7 @@ class ItemDetailComponent extends Component {
   }
 
   componentWillMount(){
-    console.log('make AJAX request here using props.params.itemId!');
     this.props.fetchUpdatedProducts(this.props.params.itemId);
-    console.log(this.props.params);
   }
 
   render(){
@@ -45,9 +43,7 @@ class ItemDetailComponent extends Component {
             <p><b>Details: </b>{item.description}</p>
             <h3>${item.price}.00</h3>
             <DatePicker style={{width:'60%',float:'left'}} hintText="Pick a date..." />
-
-              <RaisedButton label="Rent" style={{float:'right'}}/>
-
+            <RaisedButton label="Rent" style={{float:'right'}}/>
           </div>
         </div>
       </div>

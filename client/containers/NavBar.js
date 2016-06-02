@@ -50,16 +50,16 @@ class NavBar extends Component {
           </Link>
           <ul className="nav navbar-nav">
             <li className="nav-item">
-              <Link to="/listings"><FlatButton label="Share"/></Link>
+              <Link to="/listings"><FlatButton label="Sharing"/></Link>
             </li>
             <li className="nav-item">
               <Link to="/create"><FlatButton label="Create"/></Link>
             </li>
             <li className="nav-item">
-              <Link to="/profile"><FlatButton label="Profile"/></Link>
+            <Link to="/manage"><FlatButton label="Dashboard"/></Link>
             </li>
             <li className="nav-item">
-              <Link to="/manage"><FlatButton label="Manage"/></Link>
+              <Link to="/profile"><FlatButton label="Profile"/></Link>
             </li>
             <li>
               <SearchContainer />

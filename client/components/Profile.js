@@ -3,7 +3,7 @@ import { Component } from 'react';
 import { Link } from 'react-router';
 import { browserHistory } from 'react-router';
 
-class Profile extends Component {
+class ProfileComponent extends Component {
 
   constructor(props){
     super(props);
@@ -50,4 +50,4 @@ class Profile extends Component {
   }
 }
 
-export default Profile;
+export default ProfileComponent;

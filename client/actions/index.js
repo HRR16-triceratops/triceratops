@@ -6,8 +6,7 @@ import { reset } from 'redux-form';
 // Should probably implement products listings state update on each user interaction
 export const fetchUpdatedProducts = (id = '') => {
   return dispatch => {
-    id = '/' + id;
-    const url = '/products' + id;
+    const url = '/products/' + id;
     helper.getHelper(url)
     .then(resp => {
       var updatedState = resp.data;
@@ -70,31 +69,15 @@ export const addNewListing = (fields) => {
     let url = '/products';
     helper.postHelper(url, newProductListing)
     .then(resp => {
-      console.log("inside addNewListing thunk success handler!");
       let newItem = resp.data;
-
       dispatch(addListingSuccess(newItem));
-
-      // Should check!
-      if (resp.status != 200) {
-        dispatch(addListingSuccess(newItem));
-      } else {
-        dispatch(addListingFailure());
-      }
     })
     .catch(err => {
       console.error(err);
       console.log("inside addNewListing thunk catch handler!");
       dispatch(addListingFailure());
+      dispatch(reset('NewListingForm'));
     });
-  };
-};
-
-export const updateFormField = (fieldKey, fieldValue) => {
-  return {
-    type: types.UI_UPDATE_FORMFIELD,
-    fieldKey: fieldKey,
-    fieldValue: fieldValue
   };
 };
 

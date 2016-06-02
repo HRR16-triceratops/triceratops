@@ -1,12 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import * as actions from '../actions/index.js';
 import { Link } from 'react-router';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import FlatButton from 'material-ui/FlatButton';
 import FacebookLogin from 'react-facebook-login';
-
-console.log('Login page loaded!');
 
 export default class LoginComponent extends Component {
   static get childContextTypes() {
@@ -19,6 +15,7 @@ export default class LoginComponent extends Component {
 
   render() {
     const {fields: {username, password}, handleSubmit} = this.props;
+    console.log({...username});
     return (
       <div>
         <div class="well bs-component">
