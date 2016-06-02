@@ -117,6 +117,13 @@ export const verifyFailure = (err) => {
   };
 };
 
+export const socialLogin = (userData) => {
+  return {
+    type: types.SOCIAL_LOGIN,
+    payload: userData
+  };
+};
+
 /**
  *  @param {Object} query - contains query string inside search property
  */
@@ -212,6 +219,19 @@ export const attemptVerify = (token) => {
       // If User is rejected from server, dispatch failure action
       .catch(err => {
         dispatch(verifyFailure(err));
+      });
+  };
+};
+
+export const attemptSocialLogin = (userData) => {
+  return (dispatch) => {
+    let url = '/auth/signup';
+    return helper.postHelper(url, userData)
+      .then(() => {
+        dispatch(attemptLogin(userData));
+      })
+      .catch(err => {
+        console.log(err);
       });
   };
 };

@@ -81,6 +81,7 @@ class NavBar extends Component {
 const mapDispatchToProps = (dispatch) => {
   return {
     logout: () => {
+      window.localStorage.setItem('jwtToken', '');
       dispatch(actions.logOut());
     }
   };
