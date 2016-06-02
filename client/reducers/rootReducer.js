@@ -248,22 +248,21 @@ const ui = (state = {
   };
 };
 
-const products = (state = {list: [], query: ''}, action) => {
-  switch (action.type) {
-    case types.SEARCH:
-    return {
-      ...state,
-      query: action.payload
-    }
-    default:
-    return state;
-  }
-};
+// const products = (state = {list: [], query: ''}, action) => {
+//   switch (action.type) {
+//     case types.SEARCH:
+//     return {
+//       ...state,
+//       query: action.payload
+//     }
+//     default:
+//     return state;
+//   }
+// };
 
 
 // need to add routing to handle route states syncing w/browser history ..
 const rootReducer = combineReducers({
-  <<<<<<< HEAD
   form: formReducer,
   auth,
   user,
