@@ -71,6 +71,7 @@ export const addNewListing = (fields) => {
     .then(resp => {
       let newItem = resp.data;
       dispatch(addListingSuccess(newItem));
+      dispatch(reset('NewListingForm'));
     })
     .catch(err => {
       console.error(err);
