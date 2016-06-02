@@ -40,11 +40,9 @@ const auth = (state = {
   }
 };
 const user = (state = {
-  // id: 982380,
-  // username: 'RogRog',
-  // displayName: null,
-  // email: null,
-  // rentedItem: []
+    username: null,
+    displayName: null,
+    email: null
 }, action) => {
   switch (action.type) {
     case types.LOGIN_SUCCESS:
@@ -81,21 +79,21 @@ const user = (state = {
 };
 
 const products = (state = [], action) => {
-  switch (action.type) {
-    case types.UPDATE_PRODUCTS_STATE:
-    return action.updatedProductsState;
-    case types.REMOVELISTING_SUCCESS:
-    return state.filter((item) => {
-      return item._id !== action.itemId;
-    });
-    case types.ADDLISTING_SUCCESS:
-    return [
-      ...state,
-      action.newItem
-    ];
-    default:
-    return state;
-  }
+    switch (action.type) {
+        case types.UPDATE_PRODUCTS_STATE:
+          return action.updatedProductsState;
+        case types.REMOVELISTING_SUCCESS:
+            return state.filter((item) => {
+                return item._id !== action.itemId;
+            });
+        case types.ADDLISTING_SUCCESS:
+            return [
+                ...state,
+                action.newItem
+            ];
+        default:
+            return state;
+    }
 };
 
 // state that's specific to a component, still stored in redux store,
@@ -247,19 +245,6 @@ const ui = (state = {
     return state;
   };
 };
-
-// const products = (state = {list: [], query: ''}, action) => {
-//   switch (action.type) {
-//     case types.SEARCH:
-//     return {
-//       ...state,
-//       query: action.payload
-//     }
-//     default:
-//     return state;
-//   }
-// };
-
 
 // need to add routing to handle route states syncing w/browser history ..
 const rootReducer = combineReducers({
