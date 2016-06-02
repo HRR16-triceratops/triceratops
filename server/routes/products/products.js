@@ -49,6 +49,8 @@ router.post('/', expressJwt({secret: secret}), function(req, res){
     price: prod.price,
     locationInfo: prod.locationInfo,
     author: prod.author,
+    availableFrom: prod.availableFrom,
+    availableTo: prod.availableTo,
     rentSchedule: [],
     isActivated: true
   });

@@ -7,15 +7,12 @@ import IconButton from 'material-ui/IconButton';
 import ActionHome from 'material-ui/svg-icons/action/home';
 
 export default class SearchCompoenet extends Component {
-  handler() {
-    console.log('hey');
-  }
 
   render() {
     const {fields: {search}, handleSubmit} = this.props;
     return (
       <form onSubmit={handleSubmit(this.props.search.bind(this))}>
-        <TextField className="navSearch" name="search" onChange={this.handler} hintText="Search..." {...search}/>
+        <TextField className="navSearch" name="search" hintText="Search..." {...search}/>
       </form>
     )
   }

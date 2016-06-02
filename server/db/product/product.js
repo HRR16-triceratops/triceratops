@@ -29,6 +29,14 @@ var ProductSchema = new Schema({
     type: Number,
     required: true
   },
+  availableFrom: {
+    type: String,
+    required: true
+  },
+  availableTo: {
+    type: String,
+    required: true
+  },
   locationInfo: Object,
   author: {
     type: String, // username
