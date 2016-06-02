@@ -109,6 +109,17 @@ const ui = (state = {
   }
 };
 
+const products = (state = [], action) => {
+  switch (action.type) {
+  case types.SEARCH:
+    return state.filter(item => {
+      return item.indexOf(action.payload) !== -1;
+    });
+  default:
+    return state;
+  }
+};
+
 
 // need to add routing to handle route states syncing w/browser history ..
 const rootReducer = combineReducers({
@@ -116,6 +127,7 @@ const rootReducer = combineReducers({
   auth,
   user,
   ui,
+  products,
   routing
 });
 

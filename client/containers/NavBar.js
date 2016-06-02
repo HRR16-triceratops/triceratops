@@ -8,6 +8,7 @@ import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 import IconButton from 'material-ui/IconButton';
 import ActionHome from 'material-ui/svg-icons/action/home';
+import SearchContainer from './SearchContainer.js';
 
 const styles = {
   mediumIcon: {
@@ -60,7 +61,7 @@ class NavBar extends Component {
               <Link to="/manage"><FlatButton label="Manage"/></Link>
             </li>
             <li>
-              <TextField className="navSearch" hintText="Search..." />
+              <SearchContainer />
             </li>
             <li className="nav-item">
               {!isAuthenticated &&

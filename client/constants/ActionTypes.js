@@ -7,5 +7,6 @@ export const SIGNUP_FAILURE = 'SIGNUP_FAILURE';
 export const VERIFY_USER = 'VERIFY_USER';
 export const VERIFY_SUCCESS = 'VERIFY_SUCCESS';
 export const VERIFY_FAILURE = 'VERIFY_FAILURE';
+export const SEARCH = 'SEARCH';
 // Assuming logout op is always successful.
 export const LOGOUT = 'LOGOUT';

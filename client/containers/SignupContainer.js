@@ -4,8 +4,6 @@ import * as actions from '../actions/index.js';
 import SignupComponent from '../components/signup.jsx';
 import { reduxForm } from 'redux-form';
 
-console.log('Signup page loaded!');
-
 const mapDispatchToProps = (dispatch) => {
   return {
     makeSignupRequest: (userData) => {
