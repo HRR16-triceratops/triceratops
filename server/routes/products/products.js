@@ -19,6 +19,20 @@ router.get('/', function(req, res){
 });
 
 /**
+ *  Request Handler for GET(read) Method
+ *  @expected data with Req - nothing
+ *  @return {Object} - Object of matching product
+ */
+router.get('/:id', function(req, res){
+  Product.findById(req.params.id).then(function (doc) {
+    res.send(doc);
+  }).catch(function (err) {
+    console.log(err);
+    res.status(404).send('DatabaseError');
+  });
+});
+
+/**
  *  Request Handler for POST(create) Method with JWT verification middleware
  *  @expected data with Req - Complete product data(type, title, imgURL (validated with mongoose-type-url) summary (200 char limit) description, price, locationInfo, author)
  *  @expected Header with Req - { "Authorization": "Bearer <JWT_TOKEN>"}
