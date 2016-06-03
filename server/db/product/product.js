@@ -85,7 +85,7 @@ ProductSchema.methods = {
       });
       return this;
     } else {
-      this.rentSchedule = this.rentSchedule.filter(schedule => {
+      this.rentSchedule = this.rentSchedule.filter(function(schedule) {
         return schedule._id.toString() !== update._id;
       });
       return this;
