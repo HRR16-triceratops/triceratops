@@ -33,9 +33,10 @@ const mapStateToStore = (state) => {
           return schedule.username === state.user.username;
         });
         filteredItem.forEach(item => {
-          curr.schedule = item;
-          result.push(curr);
-        })
+          var obj = Object.assign({}, curr);
+          obj.schedule = item;
+          result.push(obj);
+        });
         return curr;
       }, '')
       return result;
