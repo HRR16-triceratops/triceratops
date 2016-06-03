@@ -71,13 +71,14 @@ export const addNewListing = (fields) => {
     .then(resp => {
       let newItem = resp.data;
       dispatch(addListingSuccess(newItem));
-      dispatch(reset('NewListingForm'));
+      dispatch(toggleViewAddNewListingForm());
+      dispatch(push('/listings'));
     })
     .catch(err => {
       console.error(err);
       console.log("inside addNewListing thunk catch handler!");
       dispatch(addListingFailure());
-      dispatch(reset('NewListingForm'));
+      dispatch(push('/listings'));
     });
   };
 };
@@ -118,13 +119,10 @@ const removeListingFailure = (itemId) => {
 export const removeRentedItem = (item) => {
   return (dispatch, getState) => {
     dispatch(removeListingRequest(item._id));
-    let dataToSend = {
-      username: item.author
-    };
-    let url = 'products/rent/' + item._id;
+    let url = 'products/' + item._id;
     // Not sure if current server route is correctly set up to handle.
     // Route needs to accept a product ID for removal, and remove on that basis.
-    helper.putHelper(url, dataToSend)
+    helper.deleteHelper(url)
     .then(resp => {
       let data = resp.data;
       // assume success.

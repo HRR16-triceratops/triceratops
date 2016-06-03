@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 import SingleListingItemEditable from '../components/SingleListingItemEditable';
 import AddNewListingForm from './NewListingContainer';
 import { toggleViewManageListings, toggleViewAddNewListingForm, fetchUpdatedProducts } from '../actions/index';
+import { List, ListItem } from 'material-ui/List';
+import RaisedButton from 'material-ui/RaisedButton';
+import * as actions from '../actions/index.js';
 
 // Refactor so that this container doesn't even render a single raw html elemnt like div.
 // outsource all view space to presentational components.
@@ -14,22 +17,22 @@ class ManageListings extends Component {
 
   componentDidMount(){
     // ajax requests
-    this.props.dispatch(fetchUpdatedProducts());
+    this.props.fetchUpdatedProducts();
   }
 
   render() {
     const { viewManagedListing, viewAddNewListingForm } = this.props.ui.ManageListings;
     const isAttemptingToAdd = this.props.ui.isAttemptingToAdd;
     const { ListingsPendingRemoval } = this.props.ui.SingleListingItemEditable;
-    const { dispatch, rentedItems } = this.props;
+    const { dispatch, sharingItems } = this.props;
+    const handleClick = (item) => {
+      this.props.removeItem(item);
+    };
 
     return (
       <div>
         <h3>ManageListings Component here!</h3>
         <button onClick={()=>{
-          // // fetch newState data
-          // dispatch(fetchManageListingsState());
-          // toggles view of form!
           dispatch(toggleViewAddNewListingForm());
         }}>
         Create New Listing
@@ -38,29 +41,48 @@ class ManageListings extends Component {
           <AddNewListingForm
             isAttemptingToAdd={isAttemptingToAdd}
           /> : null}
-
-          <button onClick={()=>{
-            dispatch(toggleViewManageListings());
-          }}>
-          {viewManagedListing ? 'Hide' : 'Show'} Items being listed
-          </button>
-
-          {viewManagedListing ? rentedItems.map((item, ind)=>{
-            return <SingleListingItemEditable
-              key={ind}
-              item={item}
-              dispatch={dispatch.bind(this)}
-              isItemPendingRemoval={ListingsPendingRemoval.hasOwnProperty(item._id)}
-            />;
+        <p></p>
+        <button onClick={()=>{
+          this.props.toggleViewManageListings();
+        }}>
+        {viewManagedListing ? 'Hide' : 'Show'} Items being listed
+        </button>
+        <List>
+          {viewManagedListing ? sharingItems.map((item)=>{
+            return (
+              <div key={item._id}>
+                <ListItem
+                  primaryText={item.title + ' : ' + item.description}
+                  secondaryText={item.description}
+                />
+                <RaisedButton label="Remove" type="button" onClick={handleClick.bind(null, item)} />
+                {/*isItemPendingRemoval={ListingsPendingRemoval.hasOwnProperty(item._id)}*/}
+              </div>
+            )
           }): null}
+        </List>
       </div>
     );
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchUpdatedProducts: () => {
+      dispatch(actions.fetchUpdatedProducts());
+    },
+    removeItem: (item) => {
+      dispatch(actions.removeRentedItem(item));
+    },
+    toggleViewManageListings: () => {
+      dispatch(toggleViewManageListings());
+    }
+  };
+};
+
 const mapStateToStore = (state) => {
   return {
-    rentedItems: state.products.items.filter((item) => {
+    sharingItems: state.products.items.filter((item) => {
       // assuming unique usernames
       return item.author === state.user.username;
     }),
@@ -68,4 +90,4 @@ const mapStateToStore = (state) => {
   };
 };
 
-export default connect(mapStateToStore)(ManageListings);
+export default connect(mapStateToStore, mapDispatchToProps)(ManageListings);

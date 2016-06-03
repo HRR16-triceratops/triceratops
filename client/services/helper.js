@@ -58,8 +58,27 @@ var putHelper = function(url, data){
   });
 };
 
+/**
+ *  Delete helper function for making api calls to server to remove data in db
+ *  @expected arguments - Url (including id as parameter)
+ *  @return {Object} - removed item
+ */
+
+var deleteHelper = function(url){
+  return axios.delete(url, {
+    headers: {
+      Authorization: 'Bearer ' + localStorageToken
+    }
+  })
+  .then(function(res){
+    return res;
+  });
+};
+
+
 module.exports = {
   postHelper: postHelper,
   getHelper: getHelper,
-  putHelper: putHelper
+  putHelper: putHelper,
+  deleteHelper: deleteHelper
 };
