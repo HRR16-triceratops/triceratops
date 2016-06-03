@@ -33,7 +33,7 @@ class ManageListings extends Component {
       <div>
         <h3>ManageListings Component here!</h3>
         <button onClick={()=>{
-          dispatch(toggleViewAddNewListingForm());
+          this.props.toggleViewAddNewListingForm();
         }}>
         Create New Listing
         </button>
@@ -50,7 +50,7 @@ class ManageListings extends Component {
         <List>
           {viewManagedListing ? sharingItems.map((item)=>{
             return (
-              <div key={item._id}>
+              <div key={item._id} className="col-md-8">
                 <ListItem
                   primaryText={item.title + ' : ' + item.description}
                   secondaryText={item.description}
@@ -76,6 +76,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     toggleViewManageListings: () => {
       dispatch(toggleViewManageListings());
+    },
+    toggleViewAddNewListingForm: () => {
+      dispatch(toggleViewAddNewListingForm());
     }
   };
 };
