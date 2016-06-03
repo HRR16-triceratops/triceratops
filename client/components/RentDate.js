@@ -10,7 +10,7 @@ class RentDateComponent extends Component {
 
   attemptRentitem(data) {
     data.username = this.props.user.username;
-    this.props.attemptRentitem(data, this.props.item.item._id);
+    this.props.attemptRentitem(data, this.props.item._id);
   }
 
   render(){

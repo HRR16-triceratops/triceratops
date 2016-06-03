@@ -12,7 +12,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
 function mapStateToProps(state) {
   return {
-    item: state.products.detail,
+    item: state.products.detail.item,
     user: state.user,
 
     // Check occupied date from product detail

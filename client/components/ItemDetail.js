@@ -26,7 +26,7 @@ class ItemDetailComponent extends Component {
   }
 
   render(){
-    const item = this.props.item;
+    const { item, user }  = this.props;
     return (
       <div>
         <div className="productBanner">
@@ -39,7 +39,10 @@ class ItemDetailComponent extends Component {
             <h3>{item.title}</h3>
             <p><b>Details: </b>{item.description}</p>
             <h3>${item.price}.00</h3>
-            <RentDateComponenet />
+            {item.author !== user.username ?
+              <RentDateComponenet />
+              : null
+            }
           </div>
         </div>
       </div>

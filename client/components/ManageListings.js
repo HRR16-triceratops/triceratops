@@ -51,9 +51,9 @@ class ManageListingsComponent extends Component {
         <p></p>
         <h3>All the Items You shared!</h3>
         <List>
-          {sharingItems.map((item)=>{
+          {sharingItems.map((item, i)=>{
             return (
-              <div key={item._id}>
+              <div key={i}>
                 <ListItem
                   primaryText={item.title + ' : ' + item.description}
                   secondaryText={item.description}
@@ -67,9 +67,9 @@ class ManageListingsComponent extends Component {
         <p></p>
         <h3>Upcoming Rent!! Ready to go!</h3>
         <List>
-          {upcomingRent.map((item)=>{
+          {upcomingRent.map((item, i)=>{
             return (
-              <div key={item._id}>
+              <div key={i}>
                 <ListItem
                   primaryText={item.title + ' : ' + item.description}
                   secondaryText={item.schedule.date.substring(0, 10)}
