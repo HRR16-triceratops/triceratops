@@ -3,7 +3,7 @@
 
 body {
   font-family: 'Roboto', sans-serif;
-  background-color: #E0F7FA;
+  background-color: #F3F9FA;
 }
 
 #root {
@@ -38,13 +38,17 @@ body {
   padding-top: 67vh;
 }
 
+.editShares {
+  padding-top: 8vh;
+}
+
 @media (max-width: 600px){
   .jumbotron h1 {
     font-size: 8vh;
   }
 }
 
-.productBanner {
+.productBanner, .manageBanner {
   background-image: url('./sky.jpg');
   position:absolute;
   height: 69%;
@@ -53,16 +57,36 @@ body {
   padding-left: 8%;
 }
 
+.manageBanner{
+  background-image: url('./share.jpg');
+  z-index: -1;
+}
+.manage {
+  color: white;
+  padding-top:25px;
+}
+
 .productBanner h2 {color: #555;}
 .productBody { 
   padding-top: 5vh;
   padding-right: 10%;
 }
 .productBody p { font-size: 1.3em;}
-.productBody img {
-  margin-top: 30px;
+
+.navbar {
+  margin-bottom: 0px;
+}
+#root > div > div > nav > ul > li > a:hover, 
+#root > div > div > nav > ul > li > a:focus {
+  background-color: transparent;
+}
+
+.productCard {
   margin-bottom: 30px;
 }
-.rentButton {
 
+.addform {padding-bottom: 10px}
+.addForm li{
+  padding-right: 10px;
+  max-width:96%;
 }

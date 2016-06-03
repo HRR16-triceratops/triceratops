@@ -5,34 +5,41 @@ import { addNewListing } from '../actions/index';
 import TextField from 'material-ui/TextField';
 import DatePicker from 'material-ui/DatePicker';
 import RaisedButton from 'material-ui/RaisedButton';
+import {blueGrey500} from 'material-ui/styles/colors';
+
+const errorStyle = {
+    color: blueGrey500
+  };
 
 const NewListingComponenet = (props) => {
   const { fields, handleSubmit, resetForm, isAttemptingToAdd } = props;
   return (
     <div>
-      <form onSubmit={handleSubmit(props.addNewListing)}>
-      <h3>Share your Hot Tub!!</h3>
+      <form className='addForm' onSubmit={handleSubmit(props.addNewListing)}>
       {isAttemptingToAdd ? <p>Adding new listing, please wait...</p> : null}
-        <ul>
-          <li><TextField hintText={'Type'} {...fields.type}/></li>
-          <li><TextField hintText={'Title'} {...fields.title}/></li>
-          <li><TextField hintText={'Summary'} {...fields.summary}/></li>
-          <li><TextField hintText={'Description'} {...fields.description}/></li>
-          <li><TextField hintText={'Price'} {...fields.price}/></li>
+        <ul style={{listStyle:'none', background:'rgba(255,255,255,0.8)'}}>
+          <li><TextField hintStyle={errorStyle} hintText={'Type'} {...fields.type}/>
+          <TextField hintStyle={errorStyle} hintText={'Title'} {...fields.title}/></li>
+          <li><TextField hintStyle={errorStyle} fullWidth={true} hintText={'Summary'} {...fields.summary}/></li>
+          <li><TextField hintStyle={errorStyle} fullWidth={true} multiLine={true} rows={2} hintText={'Description'} {...fields.description}/></li>
+          <li><TextField hintStyle={errorStyle} hintText={'Price'} {...fields.price}/></li>
           <li><DatePicker
             autoOk={true}
+            hintStyle={errorStyle}
             hintText="Available From"
             onChange={(x, event) => fields.availableFrom.onChange(event)}
-          /></li>
-          <li><DatePicker
+          /><DatePicker
             autoOk={true}
+            hintStyle={errorStyle}
             hintText="Available To"
             onChange={(x, event) => fields.availableTo.onChange(event)}
           /></li>
-          <li><TextField hintText={'Image Url'} {...fields.imgURL}/></li>
-          <li><TextField hintText={'Location Info'} {...fields.locationInfo}/></li>
+          <li><TextField hintStyle={errorStyle} fullWidth={true} hintText={'Image Url'} {...fields.imgURL}/></li>
+        
+          <li><TextField hintStyle={errorStyle} hintText={'Location Info'} {...fields.locationInfo}/>
+            <RaisedButton backgroundColor='cyan50' primary={true} style={{float:'right'}} label="Share" type="submit"/>
+          </li>
         </ul>
-        <RaisedButton label="Post" type="submit"/>
       </form>
     </div>
     );
