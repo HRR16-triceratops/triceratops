@@ -78,14 +78,17 @@ ProductSchema.methods = {
   *                     simply chain .save() to save it to DB
   */
   rentalUpdate: function rentalUpdate (update) {
-    if (update.username !== undefined){
+    if (update._id === undefined){
       this.rentSchedule.push({
         username: update.username,
         date: update.date
       });
       return this;
     } else {
-      console.log('username invalid!');
+      this.rentSchedule = this.rentSchedule.filter(schedule => {
+        return schedule._id.toString() !== update._id;
+      });
+      return this;
     }
   }
 };

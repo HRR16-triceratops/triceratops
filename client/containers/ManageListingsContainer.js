@@ -11,6 +11,9 @@ const mapDispatchToProps = (dispatch) => {
     removeItem: (item) => {
       dispatch(actions.removeRentedItem(item));
     },
+    cancelItem: (item) => {
+      dispatch(actions.cancelRentedItem(item));
+    },
     toggleViewManageListings: () => {
       dispatch(toggleViewManageListings());
     },
