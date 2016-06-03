@@ -49,7 +49,7 @@ var ProductSchema = new Schema({
         required: true
       },
       date: {
-        type: String, // 'YYYY-MM-DD'
+        type: String,
         required: true
       }
     }
@@ -84,6 +84,8 @@ ProductSchema.methods = {
         date: update.date
       });
       return this;
+
+    // if _id property is provided, remove that schedule item from the list
     } else {
       this.rentSchedule = this.rentSchedule.filter(function(schedule) {
         return schedule._id.toString() !== update._id;

@@ -39,13 +39,7 @@ const auth = (state = {
     return state;
   }
 };
-const user = (state = {
-  // id: 982380,
-  // username: 'RogRog',
-  // displayName: null,
-  // email: null,
-  // rentedItem: []
-}, action) => {
+const user = (state = {}, action) => {
   switch (action.type) {
     case types.LOGIN_SUCCESS:
     return {
@@ -251,20 +245,6 @@ const ui = (state = {
   };
 };
 
-// const products = (state = {list: [], query: ''}, action) => {
-//   switch (action.type) {
-//     case types.SEARCH:
-//     return {
-//       ...state,
-//       query: action.payload
-//     }
-//     default:
-//     return state;
-//   }
-// };
-
-
-// need to add routing to handle route states syncing w/browser history ..
 const rootReducer = combineReducers({
   form: formReducer,
   auth,

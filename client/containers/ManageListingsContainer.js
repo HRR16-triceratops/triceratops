@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import { toggleViewManageListings, toggleViewAddNewListingForm, fetchUpdatedProducts } from '../actions/index';
 import * as actions from '../actions/index.js';
 import ManageListingsComponent from '../components/ManageListings.js';
 
@@ -15,10 +14,10 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(actions.cancelRentedItem(item));
     },
     toggleViewManageListings: () => {
-      dispatch(toggleViewManageListings());
+      dispatch(actions.toggleViewManageListings());
     },
     toggleViewAddNewListingForm: () => {
-      dispatch(toggleViewAddNewListingForm());
+      dispatch(actions.toggleViewAddNewListingForm());
     }
   };
 };
@@ -41,7 +40,7 @@ const mapStateToStore = (state) => {
           result.push(obj);
         });
         return curr;
-      }, '')
+      }, '');
       return result;
     },
     user: state.user,
