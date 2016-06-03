@@ -83,7 +83,7 @@ const user = (state = {
 const products = (state = {
   items: [],
   filter: '',
-  detail: {}
+  detail: {item: {}, disableDate: []}
 }, action) => {
   switch (action.type) {
     case types.UPDATE_PRODUCTS_STATE:
@@ -94,8 +94,27 @@ const products = (state = {
     case types.UPDATE_PRODUCT_DETAIL:
     return {
       ...state,
-      detail: action.payload
-    }
+      detail: {
+        item: action.payload,
+        disableDate: action.payload.rentSchedule.map(schedule => {
+          return schedule.date;
+        })
+      }
+    };
+    case types.RENT_SUCCESS:
+    return {
+      ...state,
+      detail: {
+        item: action.payload,
+        disableDate: action.payload.rentSchedule.map(schedule => {
+          return schedule.date;
+        })
+      }
+    };
+    case types.RENT_FAILURE:
+    return {
+      ...state
+    };
     case types.REMOVELISTING_SUCCESS:
     let newItems = state.items.filter((item) => {
       return item._id !== action.itemId;

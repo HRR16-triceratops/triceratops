@@ -48,12 +48,8 @@ var ProductSchema = new Schema({
         type: String, // username who rent this item
         required: true
       },
-      from: {
+      date: {
         type: String, // 'YYYY-MM-DD'
-        required: true
-      },
-      to: {
-        type: String,
         required: true
       }
     }
@@ -75,18 +71,21 @@ ProductSchema.methods = {
     return this;
   },
 
+  /**
+  * rentalUpdate(update) =>
+  *  @param update: {Object} - contain username, rent date
+  *  @return {object} - model instance of Product with updated rentSchedule.
+  *                     simply chain .save() to save it to DB
+  */
   rentalUpdate: function rentalUpdate (update) {
     if (update.username !== undefined){
-      this.rentSchedule[0] = {
+      this.rentSchedule.push({
         username: update.username,
-        from: "available",
-        to: "available"
-      };
+        date: update.date
+      });
       return this;
     } else {
-      console.log("rentalUpdate method on Model is dealing with a username set in obj, i.e a removal request!");
-      console.log('but currently only throws error?');
-      throw err;
+      console.log('username invalid!');
     }
   }
 };
