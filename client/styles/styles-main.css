@@ -19,6 +19,7 @@ body {
 
 .jumbotron {
   background-image: url('./hot-tub.jpg');
+  background-size: cover;
   position:absolute;
   height: 70%;
   left:0;
@@ -50,6 +51,7 @@ body {
 
 .productBanner, .manageBanner {
   background-image: url('./sky.jpg');
+  background-size: cover;
   position:absolute;
   height: 69%;
   left:0;
