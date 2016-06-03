@@ -2,7 +2,13 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import FlatButton from 'material-ui/FlatButton';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
 import FacebookLogin from 'react-facebook-login';
+
+const style = {
+  margin: 12,
+}
 
 export default class LoginComponent extends Component {
   static get childContextTypes() {
@@ -12,6 +18,8 @@ export default class LoginComponent extends Component {
   getChildContext(){
     return {  muiTheme: getMuiTheme()};
   }
+
+
 
   render() {
     const {fields: {username, password}, handleSubmit} = this.props;
@@ -23,22 +31,18 @@ export default class LoginComponent extends Component {
             <fieldset>
               <legend>Login</legend>
               <div class="form-group">
-                <label for="inputUsername" class="col-md-2 control-label">Username</label>
-
                 <div class="col-md-10">
-                  <input type="text" class="form-control" id="inputUsername" placeholder="Username" {...username}/>
+                  <TextField type="text" className="loginInput" id="inputUsername" placeholder="Username" {...username}/>
                 </div>
               </div>
               <div class="form-group">
-                <label for="inputPassword" class="col-md-2 control-label">Password</label>
-
                 <div class="col-md-10">
-                  <input type="password" class="form-control" id="inputPassword" placeholder="Password" {...password}/>
+                  <TextField type="password" autocomplete="off" id="inputPassword" placeholder="Password" {...password}/>
                 </div>
               </div>
-              <button class="btn btn-success-outline" type="submit">Login</button>
+              <RaisedButton className="button" type="submit" label="Login" />
               <Link to="/signup">
-                <FlatButton label="Signup" />
+                <RaisedButton className="button" label="Signup" />
               </Link>
             </fieldset>
           </form>
@@ -48,6 +52,7 @@ export default class LoginComponent extends Component {
           callback={this.props.loginWithFB}
           scope="public_profile, email"
           fields="name, email"
+          cssClass="fb-button"
           />
         </div>
       </div>
