@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/index.js';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
 
 var SignupComponent = React.createClass({
   render: function() {
@@ -8,31 +10,25 @@ var SignupComponent = React.createClass({
     return (
       <div>
          <div class="well bs-component">
-          <form onSubmit={handleSubmit(this.props.makeSignupRequest.bind(this))} class="form-horizontal">
+          <form onSubmit={handleSubmit(this.props.makeSignupRequest.bind(this))} class="form-horizontal" autocomplete="off">
             <fieldset>
-              <legend>Login</legend>
+              <legend>Sign Up</legend>
               <div class="form-group">
-                <label for="inputUsername" class="col-md-2 control-label">Username</label>
-
                 <div class="col-md-10">
-                  <input type="text" class="form-control" id="inputUsername" placeholder="Username" {...username}/>
+                  <TextField id="inputUsername" placeholder="Username" {...username}/>
                 </div>
               </div>
               <div class="form-group">
-                <label for="inputEmail" class="col-md-2 control-label">Email</label>
-
                 <div class="col-md-10">
-                  <input type="email" class="form-control" id="inputEmail" placeholder="Email" {...email}/>
+                  <TextField type="email" id="inputEmail" placeholder="Email" {...email}/>
                 </div>
               </div>
               <div class="form-group">
-                <label for="inputPassword" class="col-md-2 control-label">Password</label>
-
                 <div class="col-md-10">
-                  <input type="password" class="form-control" id="inputPassword" placeholder="Password" {...password}/>
+                  <TextField type="password" class="form-control" id="inputPassword" placeholder="Password" {...password}/>
                 </div>
               </div>
-              <button class="btn btn-success-outline" type="submit">Signup</button>
+              <RaisedButton class="btn btn-success-outline" type="submit" label="Sign Up" />
             </fieldset>
           </form>
         </div>
