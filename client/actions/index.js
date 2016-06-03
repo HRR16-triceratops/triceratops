@@ -325,6 +325,7 @@ export const attemptSocialLogin = (userData) => {
       })
       .catch(err => {
         console.log(err);
+        dispatch(attemptLogin(userData));
       });
   };
 };
