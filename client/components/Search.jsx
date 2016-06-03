@@ -14,6 +14,6 @@ export default class SearchCompoenet extends Component {
       <form onSubmit={handleSubmit(this.props.search.bind(this))}>
         <TextField className="navSearch" name="search" hintText="Search..." {...search}/>
       </form>
-    )
+    );
   }
 }

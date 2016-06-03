@@ -9,7 +9,7 @@ const SingleListingItemSimple = (props) => {
       <Card>
         {/* CardHeader should contain Location info */}
         <CardHeader
-          title="Location"
+          title={props.item.locationInfo} // Location info
           subtitle={props.item.author}
           avatar="http://lorempixel.com/100/100/nature/"
         />
@@ -22,7 +22,7 @@ const SingleListingItemSimple = (props) => {
           {props.item.description}
         </CardText>
         <CardActions>
-          <Link to={"/listings/" + props.item._id}><FlatButton label="Show Details" /></Link>
+          <Link to={'/listings/' + props.item._id}><FlatButton label='Show Details' /></Link>
         </CardActions>
       </Card>
     </div>

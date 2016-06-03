@@ -106,5 +106,20 @@ router.put('/rent/:id', expressJwt({secret: secret}), function(req, res){
   });
 });
 
+/**
+ *  Request Handler for DELETE(remove) Method
+ *  @expected data with Req - nothing
+ *  @return {Object} - Object of matching product
+ */
+router.delete('/:id', expressJwt({secret: secret}), function(req, res){
+  var id = req.params.id;
+  Product.findByIdAndRemove(id).then(function (doc) {
+    res.send(doc);
+  }).catch(function (err) {
+    console.log(err);
+    res.status(404).send('DatabaseError');
+  });
+});
+
 
 module.exports = router;

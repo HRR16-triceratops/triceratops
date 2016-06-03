@@ -5,7 +5,6 @@ import { reduxForm } from 'redux-form';
 const mapDispatchToProps = (dispatch) => {
   return {
     addNewListing: (data) => {
-      console.log('this is data', data);
       dispatch(actions.addNewListing(data));
     }
   };
