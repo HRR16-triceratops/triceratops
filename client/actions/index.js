@@ -3,6 +3,10 @@ import helper from '../services/helper';
 import { push } from 'react-router-redux';
 import { reset } from 'redux-form';
 
+//////////////////////////////////////////////////////////////
+// Synchronous Action Creators
+//////////////////////////////////////////////////////////////
+
 const rentSuccess = (data) => {
   return {
     type: types.RENT_SUCCESS,
@@ -94,12 +98,6 @@ const removeListingFailure = (itemId) => {
     itemId: itemId
   };
 };
-
-
-
-//////////////////////////////////////////////////////////////
-// Synchronous Action Creators
-//////////////////////////////////////////////////////////////
 
 /**
 *  @param {Object} userData - Login credentials (username, password)
@@ -316,6 +314,9 @@ export const attemptVerify = (token) => {
   };
 };
 
+/**
+*  @param {Object} userData - User credentials (username, email)
+*/
 export const attemptSocialLogin = (userData) => {
   return (dispatch) => {
     let url = '/auth/signup';
@@ -330,16 +331,17 @@ export const attemptSocialLogin = (userData) => {
   };
 };
 
+/**
+*  @param {Object} fields - Data of new Posting
+*/
 export const addNewListing = (fields) => {
   return (dispatch, getState) => {
     // parse form data for submission
     let newProductListing = {
       ...fields,
       author: getState().user.username,
-      schedule: [{ to: fields.to, from: fields.from }]
+      rentSchedule: []
     };
-    delete newProductListing.to;
-    delete newProductListing.from;
 
     dispatch(addListingRequest());
     let url = '/products';
@@ -359,7 +361,9 @@ export const addNewListing = (fields) => {
   };
 };
 
-// Should probably implement products listings state update on each user interaction
+/**
+*  @param {String} id - ObjectId of detail item (if not provided, Fetch whole product list)
+*/
 export const fetchUpdatedProducts = (id = '') => {
   return dispatch => {
     const url = '/products/' + id;
@@ -367,6 +371,9 @@ export const fetchUpdatedProducts = (id = '') => {
     .then(resp => {
       var updatedState = resp.data;
       if (resp.status == 200) {
+
+        // Check if returned data is Array(whole list) or Object(Single specific item)
+        // Dispatch different action according to check result
         Array.isArray(updatedState) ? dispatch(updateProductsState(updatedState)) : dispatch(updateProductDetail(updatedState));
       }
     })
@@ -376,6 +383,10 @@ export const fetchUpdatedProducts = (id = '') => {
   };
 };
 
+/**
+*  @param {Object} date - contain { username, requeset date }
+*  @param {String} id - ObjectId of detail item
+*/
 export const attemptRentitem = (date, id) => {
   return dispatch => {
     const url = '/products/rent/' + id;
@@ -393,6 +404,9 @@ export const attemptRentitem = (date, id) => {
   };
 };
 
+/**
+*  @param {Object} item - Complete data set of specific product
+*/
 export const cancelRentedItem = (item) => {
   return (dispatch) => {
     const url = '/products/rent/' + item._id;
@@ -411,22 +425,16 @@ export const cancelRentedItem = (item) => {
   };
 };
 
+/**
+*  @param {Object} item - Complete data set of specific product
+*/
 export const removeRentedItem = (item) => {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     dispatch(removeListingRequest(item._id));
     let url = 'products/' + item._id;
-    // Not sure if current server route is correctly set up to handle.
-    // Route needs to accept a product ID for removal, and remove on that basis.
     helper.deleteHelper(url)
-    .then(resp => {
-      let data = resp.data;
-      // assume success.
+    .then(() => {
       dispatch(removeListingSuccess(item._id));
-      // if (resp.status != 200) {
-      //     dispatch(removeListingFailure(item._id));
-      // } else {
-      //     dispatch(removeListingSuccess(item._id));
-      // }
     })
     .catch(err => {
       console.error(err);
