@@ -26,6 +26,21 @@ const mapStateToStore = (state) => {
       // assuming unique usernames
       return item.author === state.user.username;
     }),
+    upcomingRent: () => {
+      let result = [];
+      state.products.items.reduce((prev, curr) => {
+        const filteredItem = curr.rentSchedule.filter(schedule => {
+          return schedule.username === state.user.username;
+        });
+        filteredItem.forEach(item => {
+          curr.schedule = item;
+          result.push(curr);
+        })
+        return curr;
+      }, '')
+      return result;
+    },
+    user: state.user,
     ui: state.ui
   };
 };

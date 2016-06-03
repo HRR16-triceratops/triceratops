@@ -4,6 +4,7 @@ import Paper from 'material-ui/Paper';
 import DatePicker from 'material-ui/DatePicker';
 import RaisedButton from 'material-ui/RaisedButton';
 import {connect} from 'react-redux';
+import RentDateComponenet from '../containers/RentDateContainer';
 
 const style = {
   height: 500,
@@ -14,10 +15,6 @@ const style = {
   overflow: 'hidden',
   position: 'relative'
 };
-
-// WARNING!
-// Move this, as this appears to be a Container.
-// Move to containers folder, update all pathnames/pointers
 
 class ItemDetailComponent extends Component {
   constructor(props){
@@ -42,8 +39,7 @@ class ItemDetailComponent extends Component {
             <h3>{item.title}</h3>
             <p><b>Details: </b>{item.description}</p>
             <h3>${item.price}.00</h3>
-            <DatePicker style={{width:'60%',float:'left'}} hintText="Pick a date..." />
-            <RaisedButton label="Rent" style={{float:'right'}}/>
+            <RentDateComponenet />
           </div>
         </div>
       </div>

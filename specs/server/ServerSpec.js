@@ -264,8 +264,7 @@ describe('', function() {
           rentSchedule: [
             {
               username: 'Phillip',
-              from: '2016-06-13',
-              to: '2016-06-15'
+              date: '2016-06-03T07:00:00.000Z'
             }
           ]
         }
@@ -294,7 +293,8 @@ describe('', function() {
         'followAllRedirects': true,
         'uri': 'http://localhost:' + port + '/products/rent/' + idOfSecondItem,
         'json': {
-          username: 'notPhillip'
+          username: 'notPhillip',
+          date: '2016-06-04T07:00:00.000Z'
         }
       };
       request(options1, function (err) {
@@ -306,9 +306,8 @@ describe('', function() {
           expect(body).to.have.lengthOf(2);
           expect(body[1]).to.have.property('author');
           expect(body[1].description).to.equal('Totally changed Description');
-          expect(body[1].rentSchedule[0].username).to.equal('notPhillip');
-          expect(body[1].rentSchedule[0].from).to.equal('available');
-          expect(body[1].rentSchedule[0].to).to.equal('available');
+          expect(body[1].rentSchedule[1].username).to.equal('notPhillip');
+          expect(body[1].rentSchedule[1].date).to.equal('2016-06-04T07:00:00.000Z');
           done();
         });
       });

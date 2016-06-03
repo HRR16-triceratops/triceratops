@@ -25,9 +25,15 @@ class ManageListingsComponent extends Component {
     const isAttemptingToAdd = this.props.ui.isAttemptingToAdd;
     const { ListingsPendingRemoval } = this.props.ui.SingleListingItemEditable;
     const { dispatch, sharingItems } = this.props;
+    const upcomingRent = this.props.upcomingRent();
+    console.log('upcoming rent', upcomingRent);
 
-    const handleClick = (item) => {
+    const handleRemove = (item) => {
       this.props.removeItem(item);
+    };
+
+    const handleCancel = (item) => {
+      console.log('cancel button clicked');
     };
 
     return (
@@ -43,24 +49,36 @@ class ManageListingsComponent extends Component {
             isAttemptingToAdd={isAttemptingToAdd}
           /> : null}
         <p></p>
-        <button onClick={()=>{
-          this.props.toggleViewManageListings();
-        }}>
-        {viewManagedListing ? 'Hide' : 'Show'} Items being listed
-        </button>
+        <h3>All the Items You shared!</h3>
         <List>
-          {viewManagedListing ? sharingItems.map((item)=>{
+          {sharingItems.map((item)=>{
             return (
-              <div key={item._id} className="col-md-8">
+              <div key={item._id}>
                 <ListItem
                   primaryText={item.title + ' : ' + item.description}
                   secondaryText={item.description}
                 />
-                <RaisedButton label="Remove" type="button" onClick={handleClick.bind(null, item)} />
+                <RaisedButton label="Remove" type="button" onClick={handleRemove.bind(null, item)} />
                 {/*isItemPendingRemoval={ListingsPendingRemoval.hasOwnProperty(item._id)}*/}
               </div>
             );
-          }): null}
+          })}
+        </List>
+        <p></p>
+        <h3>Upcoming Rent!! Ready to go!</h3>
+        <List>
+          {upcomingRent.map((item)=>{
+            return (
+              <div key={item._id}>
+                <ListItem
+                  primaryText={item.title + ' : ' + item.description}
+                  secondaryText={item.schedule.date.substring(0, 10)}
+                />
+                <RaisedButton label="Cancel" type="button" onClick={handleCancel.bind(null, item)} />
+                {/*isItemPendingRemoval={ListingsPendingRemoval.hasOwnProperty(item._id)}*/}
+              </div>
+            );
+          })}
         </List>
       </div>
     );
