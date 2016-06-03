@@ -53,17 +53,16 @@ class NavBar extends Component {
               <Link to="/listings"><FlatButton label="Sharing"/></Link>
             </li>
             <li className="nav-item">
-              <Link to="/create"><FlatButton label="Create"/></Link>
-            </li>
-            <li className="nav-item">
-            <Link to="/manage"><FlatButton label="Dashboard"/></Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/profile"><FlatButton label="Profile"/></Link>
+              <Link to="/manage"><FlatButton label="Dashboard"/></Link>
             </li>
             <li>
               <SearchContainer />
             </li>
+            {isAuthenticated &&
+              <li className="nav-item">
+                <Link to="/profile"><FlatButton label="Profile"/></Link>
+              </li>
+            }
             <li className="nav-item">
               {!isAuthenticated &&
                 <Link to="/login"><FlatButton label="Login"/></Link>

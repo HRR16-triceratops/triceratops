@@ -4,7 +4,7 @@ import CoreLayout from './components/CoreLayout';
 import NavBar from './containers/NavBar';
 // Containers are essentially representative of pages i.e. Page components
 import Listings from './containers/ListingsContainer';
-import ManageListings from './containers/ManageListings';
+import ManageListings from './containers/ManageListingsContainer';
 import Login from './containers/Login';
 import Signup from './containers/SignupContainer.js';
 import TestComponent from './components/TestComponent';
