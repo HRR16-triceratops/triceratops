@@ -84,7 +84,7 @@ router.put('/:id', expressJwt({secret: secret}), function(req, res){
  *  Request Handler for PUT(update rentSchedule) Method with JWT verification middleware
  *  @expected data with Req - 1. ObjectId as parameter(req.params.id)
  *                            2. If making new rental: { username, date } as body
- *                            3. If removing existing rental: { username } as body
+ *                            3. If removing existing rental: { _id, username, date } as body
  *  @expected Header with Req - { "Authorization": "Bearer <JWT_TOKEN>"}
  *  @return {Object} - contains all product data including updated rentSchedule
  */

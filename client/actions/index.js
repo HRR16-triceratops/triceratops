@@ -16,6 +16,19 @@ const rentFailure = () => {
   };
 };
 
+const cancelSuccess = (data) => {
+  return {
+    type: types.CANCEL_SUCCESS,
+    payload: data
+  };
+};
+
+const cancelFailure = () => {
+  return {
+    type: types.CANCEL_FAILURE
+  };
+};
+
 const updateProductsState = (updatedState) => {
   return {
     type: types.UPDATE_PRODUCTS_STATE,
@@ -82,29 +95,7 @@ const removeListingFailure = (itemId) => {
   };
 };
 
-export const removeRentedItem = (item) => {
-  return (dispatch, getState) => {
-    dispatch(removeListingRequest(item._id));
-    let url = 'products/' + item._id;
-    // Not sure if current server route is correctly set up to handle.
-    // Route needs to accept a product ID for removal, and remove on that basis.
-    helper.deleteHelper(url)
-    .then(resp => {
-      let data = resp.data;
-      // assume success.
-      dispatch(removeListingSuccess(item._id));
-      // if (resp.status != 200) {
-      //     dispatch(removeListingFailure(item._id));
-      // } else {
-      //     dispatch(removeListingSuccess(item._id));
-      // }
-    })
-    .catch(err => {
-      console.error(err);
-      dispatch(removeListingFailure(item._id));
-    });
-  };
-};
+
 
 //////////////////////////////////////////////////////////////
 // Synchronous Action Creators
@@ -397,6 +388,48 @@ export const attemptRentitem = (date, id) => {
     .catch(err => {
       console.error(err);
       dispatch(rentFailure());
+    });
+  };
+};
+
+export const cancelRentedItem = (item) => {
+  return (dispatch) => {
+    const url = '/products/rent/' + item._id;
+    helper.putHelper(url, item.schedule)
+    .then(resp => {
+      var updatedState = resp.data;
+      if (resp.status == 200) {
+        dispatch(cancelSuccess(updatedState));
+        dispatch(fetchUpdatedProducts());
+      }
+    })
+    .catch(err => {
+      console.error(err);
+      dispatch(cancelFailure());
+    });
+  };
+};
+
+export const removeRentedItem = (item) => {
+  return (dispatch, getState) => {
+    dispatch(removeListingRequest(item._id));
+    let url = 'products/' + item._id;
+    // Not sure if current server route is correctly set up to handle.
+    // Route needs to accept a product ID for removal, and remove on that basis.
+    helper.deleteHelper(url)
+    .then(resp => {
+      let data = resp.data;
+      // assume success.
+      dispatch(removeListingSuccess(item._id));
+      // if (resp.status != 200) {
+      //     dispatch(removeListingFailure(item._id));
+      // } else {
+      //     dispatch(removeListingSuccess(item._id));
+      // }
+    })
+    .catch(err => {
+      console.error(err);
+      dispatch(removeListingFailure(item._id));
     });
   };
 };

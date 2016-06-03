@@ -34,6 +34,7 @@ class ManageListingsComponent extends Component {
 
     const handleCancel = (item) => {
       console.log('cancel button clicked');
+      this.props.cancelItem(item);
     };
 
     return (

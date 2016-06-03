@@ -115,6 +115,14 @@ const products = (state = {
     return {
       ...state
     };
+    case types.CANCEL_SUCCESS:
+    return {
+      ...state
+    };
+    case types.CANCEL_FAILURE:
+    return {
+      ...state
+    };
     case types.REMOVELISTING_SUCCESS:
     let newItems = state.items.filter((item) => {
       return item._id !== action.itemId;
