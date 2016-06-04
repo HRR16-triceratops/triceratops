@@ -69,7 +69,7 @@ body {
 }
 
 .productBanner h2 {color: #555;}
-.productBody { 
+.productBody {
   padding-top: 5vh;
   padding-right: 10%;
 }
@@ -79,7 +79,7 @@ body {
 .navbar {
   margin-bottom: 0px;
 }
-#root > div > div > nav > ul > li > a:hover, 
+#root > div > div > nav > ul > li > a:hover,
 #root > div > div > nav > ul > li > a:focus {
   background-color: transparent;
 }
@@ -140,4 +140,16 @@ input:-webkit-autofill {
 
 .blurb {
   margin: 8px;
+}
+
+.profileHeader {
+  padding-left: 10px;
+}
+
+.profileCards {
+  margin-bottom: 20px;
+}
+
+.profileLineItems {
+  margin-top: -10px;
 }
