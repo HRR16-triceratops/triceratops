@@ -8,6 +8,7 @@ import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 import IconButton from 'material-ui/IconButton';
 import ActionHome from 'material-ui/svg-icons/action/home';
+import Face from 'material-ui/svg-icons/action/face';
 import SearchContainer from './SearchContainer.js';
 
 const styles = {
@@ -55,22 +56,29 @@ class NavBar extends Component {
             <li className="nav-item">
               <Link to="/manage"><FlatButton label="Dashboard"/></Link>
             </li>
+          </ul>
+          <ul className="nav navbar-nav navbar-right" >
             <li>
               <SearchContainer />
             </li>
-            {isAuthenticated &&
-              <li className="nav-item">
-                <Link to="/profile"><FlatButton label="Profile"/></Link>
-              </li>
-            }
-            <li className="nav-item">
+            <li className="nav-item navLogin">
               {!isAuthenticated &&
                 <Link to="/login"><FlatButton label="Login"/></Link>
               }
               {isAuthenticated &&
-                <FlatButton onClick={this.props.logout} label="Logout"/>
+                <FlatButton style={{marginTop:'14px'}} onClick={this.props.logout} label="Logout"/>
               }
             </li>
+            <Link to="/profile">
+              <IconButton
+                className='navatar'
+                iconStyle={styles.mediumIcon}
+                style={styles.medium}
+              >
+              <Face />
+              </IconButton>
+            </Link>
+
           </ul>
         </nav>
       </div>

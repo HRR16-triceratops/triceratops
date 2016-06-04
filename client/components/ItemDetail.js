@@ -32,7 +32,8 @@ class ItemDetailComponent extends Component {
         <div className="productBanner">
           <div className='productBody col-md-7'>
             <Paper zDepth={3}  style={style}>
-                <img src={item.imgURL} style={{width:'100%', height:'auto'}} />
+                <span style={{display:'inline-block', height:'100%', verticalAlign: 'middle'}}></span>
+                <img src={item.imgURL} style={{maxWidth:'500px', maxHeight:'500px'}} />
             </Paper>
           </div>
           <div className='productBody col-md-5'>

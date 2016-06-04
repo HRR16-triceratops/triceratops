@@ -19,6 +19,7 @@ body {
 
 .jumbotron {
   background-image: url('./hot-tub.jpg');
+  background-size: cover;
   position:absolute;
   height: 70%;
   left:0;
@@ -38,19 +39,33 @@ body {
   padding-top: 67vh;
 }
 
+.editShares {
+  padding-top: 8vh;
+}
+
 @media (max-width: 600px){
   .jumbotron h1 {
     font-size: 8vh;
   }
 }
 
-.productBanner {
+.productBanner, .manageBanner {
   background-image: url('./sky.jpg');
+  background-size: cover;
   position:absolute;
   height: 69%;
   left:0;
   right:0;
   padding-left: 8%;
+}
+
+.manageBanner{
+  background-image: url('./share.jpg');
+  z-index: -1;
+}
+.manage {
+  color: white;
+  padding-top:25px;
 }
 
 .productBanner h2 {color: #555;}
@@ -60,8 +75,16 @@ body {
 }
 
 .productBody p { font-size: 1.3em;}
-.productBody img {
-  margin-top: 30px;
+
+.navbar {
+  margin-bottom: 0px;
+}
+#root > div > div > nav > ul > li > a:hover, 
+#root > div > div > nav > ul > li > a:focus {
+  background-color: transparent;
+}
+
+.productCard {
   margin-bottom: 30px;
 }
 
@@ -107,4 +130,14 @@ body {
 
 input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0px 1000px #F3F9FA inset;
+}
+
+.addform {padding-bottom: 10px;}
+.addForm li{
+  padding-right: 10px;
+  max-width:96%;
+}
+
+.blurb {
+  margin: 8px;
 }
