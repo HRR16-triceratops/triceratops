@@ -6,6 +6,9 @@ import { reduxForm } from 'redux-form';
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    generalPopupClose: () => {
+      dispatch(actions.generalPopupClose());
+    },
     makeSignupRequest: (userData) => {
       dispatch(actions.attemptSignup(userData));
     },
@@ -20,7 +23,8 @@ const mapDispatchToProps = (dispatch) => {
 function mapStateToProps(state, ownProps) {
   return {
     user: state.user,
-    token: state.auth.token
+    token: state.auth.token,
+    ui: state.ui
   };
 }
 

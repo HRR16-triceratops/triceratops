@@ -5,6 +5,7 @@ import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import FacebookLogin from 'react-facebook-login';
+import Dialog from 'material-ui/Dialog';
 
 const style = {
   margin: 12,
@@ -22,7 +23,7 @@ export default class LoginComponent extends Component {
 
 
   render() {
-    const {fields: {username, password}, handleSubmit} = this.props;
+    const {fields: {username, password}, handleSubmit, ui, generalPopupClose } = this.props;
     console.log({...username});
     return (
       <div>
@@ -54,6 +55,20 @@ export default class LoginComponent extends Component {
           fields="name, email"
           cssClass="fb-button"
           />
+          <Dialog
+            actions={
+              <FlatButton
+                label="OK"
+                primary={true}
+                onClick={generalPopupClose}
+              />
+            }
+            modal={false}
+            open={ui.generalPopup.open}
+            onRequestClose={generalPopupClose}
+          >
+            {ui.generalPopup.content}
+          </Dialog>
         </div>
       </div>
     );

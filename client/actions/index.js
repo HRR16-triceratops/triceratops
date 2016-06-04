@@ -33,6 +33,13 @@ export const generalPopupClose = () => {
   };
 };
 
+export const generalPopupOpen = (content) => {
+  return {
+    type: types.GENERALPOPUP_OPEN,
+    payload: content
+  };
+};
+
 const rentSuccess = (data) => {
   return {
     type: types.RENT_SUCCESS,
@@ -288,6 +295,7 @@ export const attemptLogin = (userData) => {
       console.error(err);
       dispatch(loginFailure(err));
       dispatch(reset('LoginForm'));
+      dispatch(generalPopupOpen('Login Failed : Wrong Username or Password'));
     });
   };
 };
@@ -319,6 +327,7 @@ export const attemptSignup = (userData) => {
       console.error(err);
       dispatch(signupFailure(err));
       dispatch(reset('SignupForm'));
+      dispatch(generalPopupOpen('Signup Failed : Username Exists!'));
     });
   };
 };
@@ -431,6 +440,7 @@ export const cancelRentedItem = (item) => {
       var updatedState = resp.data;
       if (resp.status == 200) {
         dispatch(cancelSuccess(updatedState));
+        dispatch(cancelPopupClose());
         dispatch(fetchUpdatedProducts());
       }
     })
@@ -452,6 +462,7 @@ export const removeRentedItem = (item) => {
       let data = resp.data;
       // assume success.
       dispatch(removeListingSuccess(item._id));
+      dispatch(RemovePopupClose());
       // if (resp.status != 200) {
       //     dispatch(removeListingFailure(item._id));
       // } else {
