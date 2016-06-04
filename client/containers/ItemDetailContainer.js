@@ -12,8 +12,8 @@ const mapDispatchToProps = (dispatch) => {
     fetchUpdatedProducts: (id) => {
       dispatch(actions.fetchUpdatedProducts(id));
     },
-    generalPopupClose: () => {
-      dispatch(actions.generalPopupClose());
+    popupClose: () => {
+      dispatch(actions.popupClose());
     }
   };
 };

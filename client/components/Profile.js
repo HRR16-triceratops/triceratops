@@ -54,10 +54,10 @@ class ProfileComponent extends Component {
                 }).map(item => {
                   return (
                      <Link to={"/listings/" + item._id}>
-                            <ListItem 
+                            <ListItem
                               key={item._id}
                               primaryText={item.title}
-                              secondaryText={"$"+item.price + " - " + item.summary} 
+                              secondaryText={"$"+item.price + " - " + item.summary}
                             />
                      </Link>
                   )
@@ -66,7 +66,7 @@ class ProfileComponent extends Component {
             </List>
           </CardText>
           <CardActions expandable={true} style={{paddingTop: 0}}>
-            
+
             <Link style={{paddingTop: 0}}to="/manage">
               <FlatButton style={{paddingTop: 0}} label="Manage your listings" />
             </Link>
@@ -87,10 +87,10 @@ class ProfileComponent extends Component {
                 }).map(item => {
                   return (
                      <Link to={"/listings/" + item._id}>
-                            <ListItem 
+                            <ListItem
                               key={item._id}
                               primaryText={item.title}
-                              secondaryText={"$"+item.price + " - " + item.summary} 
+                              secondaryText={"$"+item.price + " - " + item.summary}
                             />
                      </Link>
                   )

@@ -3,40 +3,19 @@ import helper from '../services/helper';
 import { push } from 'react-router-redux';
 import { reset } from 'redux-form';
 
-export const cancelPopupOpen = () => {
+export const popupClose = () => {
   return {
-    type: types.CANCELPOPUP_OPEN
+    type: types.POPUP_CLOSE
   };
 };
 
-export const cancelPopupClose = () => {
+export const popupOpen = (content, keyword = 'general') => {
   return {
-    type: types.CANCELPOPUP_CLOSE
-  };
-};
-
-export const removePopupOpen = () => {
-  return {
-    type: types.REMOVEPOPUP_OPEN
-  };
-};
-
-export const removePopupClose = () => {
-  return {
-    type: types.REMOVEPOPUP_CLOSE
-  };
-};
-
-export const generalPopupClose = () => {
-  return {
-    type: types.GENERALPOPUP_CLOSE
-  };
-};
-
-export const generalPopupOpen = (content) => {
-  return {
-    type: types.GENERALPOPUP_OPEN,
-    payload: content
+    type: types.POPUP_OPEN,
+    payload: {
+      type: keyword,
+      content: content
+    }
   };
 };
 
@@ -279,23 +258,19 @@ export const attemptLogin = (userData) => {
     return helper.postHelper(url, userData)
     .then(resp => {
       let data = resp.data;
-      if(resp.status != 200) {
-        dispatch(loginFailure(resp.payload));
 
-        // If User is Authorized from server, save JWT token to localStorage,
-        // dispatch success action and redirect to profile(dashboard) page
-      } else {
-        window.localStorage.setItem('jwtToken', data.token);
-        dispatch(loginSuccess(data.user, data.token));
-        dispatch(push('/profile'));
-      }
+      // If User is Authorized from server, save JWT token to localStorage,
+      // dispatch success action and redirect to profile(dashboard) page
+      window.localStorage.setItem('jwtToken', data.token);
+      dispatch(loginSuccess(data.user, data.token));
+      dispatch(push('/profile'));
     })
     // If User is rejected from server, dispatch failure action and reset login Form
     .catch(err => {
       console.error(err);
       dispatch(loginFailure(err));
       dispatch(reset('LoginForm'));
-      dispatch(generalPopupOpen('Login Failed : Wrong Username or Password'));
+      dispatch(popupOpen('Login Failed : Wrong Username or Password'));
     });
   };
 };
@@ -310,24 +285,19 @@ export const attemptSignup = (userData) => {
     return helper.postHelper(url, userData)
     .then(resp => {
       let data = resp.data;
-      if(resp.status != 200) {
-        console.log('resp status is not 200, User already exists');
-        dispatch(signupFailure(err));
-        dispatch(reset('SignupForm'));
-        // If User is Authorized from server, save JWT token to localStorage,
-        // dispatch success action and redirect to profile(dashboard) page
-      } else {
-        window.localStorage.setItem('jwtToken', data.token);
-        dispatch(signupSuccess(data.user, data.token));
-        dispatch(push('/profile'));
-      }
+
+      // If User is Authorized from server, save JWT token to localStorage,
+      // dispatch success action and redirect to profile(dashboard) page
+      window.localStorage.setItem('jwtToken', data.token);
+      dispatch(signupSuccess(data.user, data.token));
+      dispatch(push('/profile'));
     })
     // If User is rejected from server, dispatch failure action and reset login Form
     .catch(err => {
       console.error(err);
       dispatch(signupFailure(err));
       dispatch(reset('SignupForm'));
-      dispatch(generalPopupOpen('Signup Failed : Username Exists!'));
+      dispatch(popupOpen('Signup Failed : Username Exists!'));
     });
   };
 };
@@ -391,7 +361,6 @@ export const addNewListing = (fields) => {
     })
     .catch(err => {
       console.error(err);
-      console.log("inside addNewListing thunk catch handler!");
       dispatch(addListingFailure());
       dispatch(push('/listings'));
     });
@@ -440,7 +409,7 @@ export const cancelRentedItem = (item) => {
       var updatedState = resp.data;
       if (resp.status == 200) {
         dispatch(cancelSuccess(updatedState));
-        dispatch(cancelPopupClose());
+        dispatch(popupClose());
         dispatch(fetchUpdatedProducts());
       }
     })
@@ -452,22 +421,15 @@ export const cancelRentedItem = (item) => {
 };
 
 export const removeRentedItem = (item) => {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     dispatch(removeListingRequest(item._id));
     let url = 'products/' + item._id;
     // Not sure if current server route is correctly set up to handle.
     // Route needs to accept a product ID for removal, and remove on that basis.
     helper.deleteHelper(url)
-    .then(resp => {
-      let data = resp.data;
-      // assume success.
+    .then(() => {
       dispatch(removeListingSuccess(item._id));
-      dispatch(RemovePopupClose());
-      // if (resp.status != 200) {
-      //     dispatch(removeListingFailure(item._id));
-      // } else {
-      //     dispatch(removeListingSuccess(item._id));
-      // }
+      dispatch(popupClose());
     })
     .catch(err => {
       console.error(err);

@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import { toggleViewManageListings, toggleViewAddNewListingForm, fetchUpdatedProducts } from '../actions/index';
 import * as actions from '../actions/index.js';
 import ManageListingsComponent from '../components/ManageListings.js';
 import { push } from 'react-router-redux';
@@ -15,26 +14,17 @@ const mapDispatchToProps = (dispatch) => {
     removeItem: (item) => {
       dispatch(actions.removeRentedItem(item));
     },
-    cancelPopupOpen: () => {
-      dispatch(actions.cancelPopupOpen());
+    popupOpen: (content, key) => {
+      dispatch(actions.popupOpen(content, key));
     },
-    cancelPopupClose: () => {
-      dispatch(actions.cancelPopupClose());
-    },
-    removePopupOpen: () => {
-      dispatch(actions.removePopupOpen());
-    },
-    removePopupClose: () => {
-      dispatch(actions.removePopupClose());
+    popupClose: () => {
+      dispatch(actions.popupClose());
     },
     cancelItem: (item) => {
       dispatch(actions.cancelRentedItem(item));
     },
-    toggleViewManageListings: () => {
-      dispatch(toggleViewManageListings());
-    },
     toggleViewAddNewListingForm: () => {
-      dispatch(toggleViewAddNewListingForm());
+      dispatch(actions.toggleViewAddNewListingForm());
     }
   };
 };

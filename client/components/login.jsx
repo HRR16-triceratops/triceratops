@@ -20,11 +20,8 @@ export default class LoginComponent extends Component {
     return {  muiTheme: getMuiTheme()};
   }
 
-
-
   render() {
     const {fields: {username, password}, handleSubmit, ui, generalPopupClose } = this.props;
-    console.log({...username});
     return (
       <div>
         <div class="well bs-component">

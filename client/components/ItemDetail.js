@@ -32,7 +32,7 @@ class ItemDetailComponent extends Component {
   }
 
   render(){
-    const { item, user, ui, generalPopupClose }  = this.props;
+    const { item, user, ui, popupClose }  = this.props;
     return (
       <div>
         <div className="productBanner">
@@ -55,14 +55,14 @@ class ItemDetailComponent extends Component {
                 <FlatButton
                   label="Ok"
                   primary={true}
-                  onClick={generalPopupClose}
+                  onClick={popupClose}
                 />
               }
               modal={false}
-              open={ui.generalPopup.open}
-              onRequestClose={generalPopupClose}
+              open={ui.popup.open}
+              onRequestClose={popupClose}
             >
-              {ui.generalPopup.content}
+              {ui.popup.content}
             </Dialog>
           </div>
         </div>

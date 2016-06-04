@@ -6,6 +6,7 @@
     "start": "node index.js",
     "postinstall": "npm install webpack -g && npm run deploybuild",
     "test": "./node_modules/.bin/mocha --reporter spec specs/server/ServerSpec.js;",
+    "clienttest": "./node_modules/.bin/mocha --compilers js:babel-register --recursive --reporter spec specs/client/ClientSpec.js",
     "go": "concurrently \"npm run build\" \"nodemon index.js\"",
     "devserver": "webpack-dev-server --content-base build/",
     "deploybuild": "webpack --progress --profile --colors --display-error-details --display-cached",
@@ -71,15 +72,18 @@
   },
   "devDependencies": {
     "babel-plugin-transform-object-rest-spread": "6.8.0",
+    "babel-register": "^6.9.0",
     "chai": "^3.5.0",
     "eslint": "^2.11.0",
     "eslint-plugin-react": "^5.1.1",
     "live-server": "1.0.0",
     "lodash": "4.13.1",
     "mocha": "^2.5.3",
+    "nock": "^8.0.0",
     "react-hot-loader": "^1.3.0",
     "reduce-reducers": "0.1.2",
     "redux-devtools": "^3.3.1",
+    "redux-mock-store": "^1.0.4",
     "request": "^2.72.0",
     "webpack-dev-server": "^1.14.1"
   }

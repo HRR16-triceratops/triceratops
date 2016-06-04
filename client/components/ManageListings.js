@@ -1,10 +1,8 @@
 import React from 'react';
 import { Component } from 'react';
 import { Link } from 'react-router';
-import { connect } from 'react-redux';
 import AddNewListingForm from '../containers/NewListingContainer';
 import { toggleViewManageListings, toggleViewAddNewListingForm, fetchUpdatedProducts } from '../actions/index';
-import { List, ListItem } from 'material-ui/List';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
@@ -27,8 +25,7 @@ class ManageListingsComponent extends Component {
 
   render() {
     const { viewAddNewListingForm } = this.props.ui.ManageListings;
-    const isAttemptingToAdd = this.props.ui.isAttemptingToAdd;
-    const { sharingItems, ui, cancelPopupOpen, cancelPopupClose, removePopupOpen, removePopupClose } = this.props;
+    const { sharingItems, ui, popupOpen, popupClose } = this.props;
     const upcomingRent = this.props.upcomingRent();
 
     const handleRemove = (item) => {
@@ -50,9 +47,8 @@ class ManageListingsComponent extends Component {
           }} />
 
         {viewAddNewListingForm ?
-          <AddNewListingForm
-            isAttemptingToAdd={isAttemptingToAdd}
-          /> : null}
+          <AddNewListingForm/> : null
+        }
         <hr />
         <h3>Your Shared Items</h3>
           <Table selectable={false}>
@@ -71,7 +67,8 @@ class ManageListingsComponent extends Component {
                 <TableRowColumn><Link to={'/listings/' + item._id}>{item.title}</Link></TableRowColumn>
                 <TableRowColumn>{item.summary}</TableRowColumn>
                 <TableRowColumn>{'$'+item.price + '.00'}</TableRowColumn>
-                <TableRowColumn><RaisedButton onClick={removePopupOpen} label="Remove Listing" secondary={true}/></TableRowColumn>
+                <TableRowColumn><RaisedButton onClick={() => popupOpen('Are you sure to Remove?', 'remove')} label="Remove Listing" secondary={true}/></TableRowColumn>
+                {ui.popup.type === 'remove' &&
                 <Dialog
                   actions={
                     <FlatButton
@@ -81,12 +78,12 @@ class ManageListingsComponent extends Component {
                     />
                   }
                   modal={false}
-                  open={ui.removePopup}
-                  onRequestClose={removePopupClose}
+                  open={ui.popup.open}
+                  onRequestClose={popupClose}
                 >
-                  Are you sure to Remove this Item?
+                  {ui.popup.content}
                 </Dialog>
-
+                }
               </TableRow>
             );
           })}
@@ -112,7 +109,8 @@ class ManageListingsComponent extends Component {
                 <TableRowColumn>{item.summary}</TableRowColumn>
                 <TableRowColumn>{'$'+item.price + '.00'}</TableRowColumn>
                 <TableRowColumn>{item.schedule.date.substring(0, 10)}</TableRowColumn>
-                <TableRowColumn><RaisedButton onClick={cancelPopupOpen} label="Cancel Rental" secondary={true}/></TableRowColumn>
+                <TableRowColumn><RaisedButton onClick={() => popupOpen('Are you sure to Cancel?', 'cancel')} label="Cancel Rental" secondary={true}/></TableRowColumn>
+                {ui.popup.type === 'cancel' &&
                 <Dialog
                   actions={
                     <FlatButton
@@ -122,12 +120,12 @@ class ManageListingsComponent extends Component {
                     />
                   }
                   modal={false}
-                  open={ui.cancelPopup}
-                  onRequestClose={cancelPopupClose}
+                  open={ui.popup.open}
+                  onRequestClose={popupClose}
                 >
-                  Are you sure to Cancel this Rental?
+                  {ui.popup.content}
                 </Dialog>
-
+                }
               </TableRow>
             );
           })}
