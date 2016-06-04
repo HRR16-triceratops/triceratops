@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import * as actions from '../actions/index.js';
@@ -9,7 +8,7 @@ import FlatButton from 'material-ui/FlatButton';
 import IconButton from 'material-ui/IconButton';
 import ActionHome from 'material-ui/svg-icons/action/home';
 import Face from 'material-ui/svg-icons/action/face';
-import SearchContainer from './SearchContainer.js';
+import SearchContainer from '../containers/SearchContainer.js';
 
 const styles = {
   mediumIcon: {
@@ -23,7 +22,7 @@ const styles = {
   }
 };
 
-class NavBar extends Component {
+export default class NavBar extends Component {
 
   static get childContextTypes() {
     return { muiTheme: React.PropTypes.object };
@@ -85,20 +84,3 @@ class NavBar extends Component {
     )
   }
 }
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    logout: () => {
-      window.localStorage.setItem('jwtToken', '');
-      dispatch(actions.logOut());
-    }
-  };
-};
-
-function mapStateToProps(state, ownProps) {
-  return {
-    auth: state.auth
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(NavBar);

@@ -6,11 +6,13 @@ console.log('Login page loaded!');
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    generalPopupClose: () => {
+      dispatch(actions.generalPopupClose());
+    },
     makeLoginRequest: (userData) => {
       dispatch(actions.attemptLogin(userData));
     },
     loginWithFB: (resp) => {
-      console.log(resp);
       if(resp.id && resp.accessToken) {
         let username = 'facebook:' + resp.id;
         let displayName = resp.name;
@@ -30,7 +32,8 @@ const mapDispatchToProps = (dispatch) => {
 
 function mapStateToProps(state, ownProps) {
   return {
-    user: state.user
+    user: state.user,
+    ui: state.ui
   };
 }
 

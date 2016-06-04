@@ -59,10 +59,10 @@ class ItemDetailComponent extends Component {
                 />
               }
               modal={false}
-              open={ui.generalPopup}
+              open={ui.generalPopup.open}
               onRequestClose={generalPopupClose}
             >
-              Rent Succes!
+              {ui.generalPopup.content}
             </Dialog>
           </div>
         </div>

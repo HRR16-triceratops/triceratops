@@ -3,10 +3,12 @@ import { connect } from 'react-redux';
 import * as actions from '../actions/index.js';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
 
 var SignupComponent = React.createClass({
   render: function() {
-    const {fields: {username, email, password}, handleSubmit} = this.props;
+    const {fields: {username, email, password}, handleSubmit, ui, generalPopupClose} = this.props;
     return (
       <div>
          <div class="well bs-component">
@@ -31,6 +33,20 @@ var SignupComponent = React.createClass({
               <RaisedButton class="btn btn-success-outline" type="submit" label="Sign Up" />
             </fieldset>
           </form>
+          <Dialog
+            actions={
+              <FlatButton
+                label="OK"
+                primary={true}
+                onClick={generalPopupClose}
+              />
+            }
+            modal={false}
+            open={ui.generalPopup.open}
+            onRequestClose={generalPopupClose}
+          >
+            {ui.generalPopup.content}
+          </Dialog>
         </div>
       </div>
     );
