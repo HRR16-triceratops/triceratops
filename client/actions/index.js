@@ -279,16 +279,12 @@ export const attemptLogin = (userData) => {
     return helper.postHelper(url, userData)
     .then(resp => {
       let data = resp.data;
-      if(resp.status != 200) {
-        dispatch(loginFailure(resp.payload));
 
-        // If User is Authorized from server, save JWT token to localStorage,
-        // dispatch success action and redirect to profile(dashboard) page
-      } else {
-        window.localStorage.setItem('jwtToken', data.token);
-        dispatch(loginSuccess(data.user, data.token));
-        dispatch(push('/profile'));
-      }
+      // If User is Authorized from server, save JWT token to localStorage,
+      // dispatch success action and redirect to profile(dashboard) page
+      window.localStorage.setItem('jwtToken', data.token);
+      dispatch(loginSuccess(data.user, data.token));
+      dispatch(push('/profile'));
     })
     // If User is rejected from server, dispatch failure action and reset login Form
     .catch(err => {
@@ -310,17 +306,12 @@ export const attemptSignup = (userData) => {
     return helper.postHelper(url, userData)
     .then(resp => {
       let data = resp.data;
-      if(resp.status != 200) {
-        console.log('resp status is not 200, User already exists');
-        dispatch(signupFailure(err));
-        dispatch(reset('SignupForm'));
-        // If User is Authorized from server, save JWT token to localStorage,
-        // dispatch success action and redirect to profile(dashboard) page
-      } else {
-        window.localStorage.setItem('jwtToken', data.token);
-        dispatch(signupSuccess(data.user, data.token));
-        dispatch(push('/profile'));
-      }
+
+      // If User is Authorized from server, save JWT token to localStorage,
+      // dispatch success action and redirect to profile(dashboard) page
+      window.localStorage.setItem('jwtToken', data.token);
+      dispatch(signupSuccess(data.user, data.token));
+      dispatch(push('/profile'));
     })
     // If User is rejected from server, dispatch failure action and reset login Form
     .catch(err => {
@@ -391,7 +382,6 @@ export const addNewListing = (fields) => {
     })
     .catch(err => {
       console.error(err);
-      console.log("inside addNewListing thunk catch handler!");
       dispatch(addListingFailure());
       dispatch(push('/listings'));
     });
@@ -452,22 +442,15 @@ export const cancelRentedItem = (item) => {
 };
 
 export const removeRentedItem = (item) => {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     dispatch(removeListingRequest(item._id));
     let url = 'products/' + item._id;
     // Not sure if current server route is correctly set up to handle.
     // Route needs to accept a product ID for removal, and remove on that basis.
     helper.deleteHelper(url)
-    .then(resp => {
-      let data = resp.data;
-      // assume success.
+    .then(() => {
       dispatch(removeListingSuccess(item._id));
-      dispatch(RemovePopupClose());
-      // if (resp.status != 200) {
-      //     dispatch(removeListingFailure(item._id));
-      // } else {
-      //     dispatch(removeListingSuccess(item._id));
-      // }
+      dispatch(removePopupClose());
     })
     .catch(err => {
       console.error(err);

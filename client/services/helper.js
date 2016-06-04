@@ -12,7 +12,6 @@ var localStorageToken = window.localStorage.getItem('jwtToken') ? window.localSt
  *  @expected arguments - Url, data (i.e. object of user data or product data)
  *  @return {Object}
  */
-
 var postHelper = function(url, data){
   return axios.post(url, data, {
     headers: {
@@ -29,7 +28,6 @@ var postHelper = function(url, data){
  *  @expected arguments - Url
  *  @return {Object}
  */
-
 var getHelper = function(url){
   return axios.get(url, {
     headers: {
@@ -46,7 +44,6 @@ var getHelper = function(url){
  *  @expected arguments - Url, data (i.e. object of user data or product data)
  *  @return {Object}
  */
-
 var putHelper = function(url, data){
   return axios.put(url, data, {
     headers: {
@@ -63,7 +60,6 @@ var putHelper = function(url, data){
  *  @expected arguments - Url (including id as parameter)
  *  @return {Object} - removed item
  */
-
 var deleteHelper = function(url){
   return axios.delete(url, {
     headers: {
@@ -74,7 +70,6 @@ var deleteHelper = function(url){
     return res;
   });
 };
-
 
 module.exports = {
   postHelper: postHelper,
