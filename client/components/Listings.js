@@ -8,7 +8,7 @@ class ListingsComponent extends Component {
     super(props);
   }
 
-  componentWillMount() {
+  componentWillMount(){
     this.props.fetchUpdatedProducts();
   }
 

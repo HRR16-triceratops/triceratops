@@ -6,7 +6,8 @@ import AddNewListingForm from '../containers/NewListingContainer';
 import { toggleViewManageListings, toggleViewAddNewListingForm, fetchUpdatedProducts } from '../actions/index';
 import { List, ListItem } from 'material-ui/List';
 import RaisedButton from 'material-ui/RaisedButton';
-import * as actions from '../actions/index.js';
+import FlatButton from 'material-ui/FlatButton';
+import Dialog from 'material-ui/Dialog';
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
 
 // Refactor so that this container doesn't even render a single raw html elemnt like div.
@@ -16,25 +17,25 @@ class ManageListingsComponent extends Component {
     super(props);
   }
 
-  componentDidMount(){
-    // ajax requests
-    this.props.fetchUpdatedProducts();
+  componentWillMount(){
+    if(!this.props.auth.isAuthenticated) {
+      return this.props.redirectToLogin();
+    } else {
+      this.props.fetchUpdatedProducts();
+    }
   }
 
   render() {
-    const { viewManagedListing, viewAddNewListingForm } = this.props.ui.ManageListings;
+    const { viewAddNewListingForm } = this.props.ui.ManageListings;
     const isAttemptingToAdd = this.props.ui.isAttemptingToAdd;
-    const { ListingsPendingRemoval } = this.props.ui.SingleListingItemEditable;
-    const { dispatch, sharingItems } = this.props;
+    const { sharingItems, ui, cancelPopupOpen, cancelPopupClose, removePopupOpen, removePopupClose } = this.props;
     const upcomingRent = this.props.upcomingRent();
-    console.log('upcoming rent', upcomingRent);
 
     const handleRemove = (item) => {
       this.props.removeItem(item);
     };
 
     const handleCancel = (item) => {
-      console.log('cancel button clicked');
       this.props.cancelItem(item);
     };
 
@@ -67,10 +68,25 @@ class ManageListingsComponent extends Component {
           {sharingItems.map((item, i)=>{
             return (
               <TableRow key={i}>
-                <TableRowColumn><Link to={"/listings/" + item._id}>{item.title}</Link></TableRowColumn>
+                <TableRowColumn><Link to={'/listings/' + item._id}>{item.title}</Link></TableRowColumn>
                 <TableRowColumn>{item.summary}</TableRowColumn>
                 <TableRowColumn>{'$'+item.price + '.00'}</TableRowColumn>
-                <TableRowColumn><RaisedButton onClick={handleRemove.bind(null, item)} label="Remove Listing" secondary={true}/></TableRowColumn>
+                <TableRowColumn><RaisedButton onClick={removePopupOpen} label="Remove Listing" secondary={true}/></TableRowColumn>
+                <Dialog
+                  actions={
+                    <FlatButton
+                      label="Confirm"
+                      primary={true}
+                      onClick={handleRemove.bind(null, item)}
+                    />
+                  }
+                  modal={false}
+                  open={ui.removePopup}
+                  onRequestClose={removePopupClose}
+                >
+                  Are you sure to Remove this Item?
+                </Dialog>
+
               </TableRow>
             );
           })}
@@ -92,11 +108,26 @@ class ManageListingsComponent extends Component {
           {upcomingRent.map((item, i)=>{
             return (
               <TableRow key={i}>
-                <TableRowColumn><Link to={"/listings/" + item._id}>{item.title}</Link></TableRowColumn>
+                <TableRowColumn><Link to={'/listings/' + item._id}>{item.title}</Link></TableRowColumn>
                 <TableRowColumn>{item.summary}</TableRowColumn>
                 <TableRowColumn>{'$'+item.price + '.00'}</TableRowColumn>
                 <TableRowColumn>{item.schedule.date.substring(0, 10)}</TableRowColumn>
-                <TableRowColumn><RaisedButton onClick={handleCancel.bind(null, item)} label="Cancel Rental" secondary={true}/></TableRowColumn>
+                <TableRowColumn><RaisedButton onClick={cancelPopupOpen} label="Cancel Rental" secondary={true}/></TableRowColumn>
+                <Dialog
+                  actions={
+                    <FlatButton
+                      label="Confirm"
+                      primary={true}
+                      onClick={handleCancel.bind(null, item)}
+                    />
+                  }
+                  modal={false}
+                  open={ui.cancelPopup}
+                  onRequestClose={cancelPopupClose}
+                >
+                  Are you sure to Cancel this Rental?
+                </Dialog>
+
               </TableRow>
             );
           })}
