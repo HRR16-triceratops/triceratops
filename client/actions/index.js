@@ -27,6 +27,12 @@ export const removePopupClose = () => {
   };
 };
 
+export const generalPopupClose = () => {
+  return {
+    type: types.GENERALPOPUP_CLOSE
+  };
+};
+
 const rentSuccess = (data) => {
   return {
     type: types.RENT_SUCCESS,
