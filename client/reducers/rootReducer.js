@@ -163,7 +163,8 @@ const ui = (state = {
   },
   isAttemptingToAdd: false,
   cancelPopup: false,
-  removePopup: false
+  removePopup: false,
+  generalPopup: false
 }, action) => {
   switch (action.type) {
     case types.ADDLISTING_REQUEST:
@@ -213,6 +214,17 @@ const ui = (state = {
       ...state,
       removePopup: false
     };
+    case types.RENT_SUCCESS:
+    return {
+      ...state,
+      generalPopup: true
+    };
+    case types.GENERALPOPUP_CLOSE:
+    return {
+      ...state,
+      generalPopup: false
+    };
+
     // update pending list for UI state tree
     case types.REMOVELISTING_SUCCESS:
     var updatedListingsPendingRemoval = Object.assign({}, state

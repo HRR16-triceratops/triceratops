@@ -11,6 +11,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     fetchUpdatedProducts: (id) => {
       dispatch(actions.fetchUpdatedProducts(id));
+    },
+    generalPopupClose: () => {
+      dispatch(actions.generalPopupClose());
     }
   };
 };
@@ -19,7 +22,8 @@ const mapStateToProps = function(state){
   return {
     item: state.products.detail.item,
     user: state.user,
-    auth: state.auth
+    auth: state.auth,
+    ui: state.ui
   };
 };
 

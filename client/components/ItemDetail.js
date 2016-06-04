@@ -5,6 +5,8 @@ import DatePicker from 'material-ui/DatePicker';
 import RaisedButton from 'material-ui/RaisedButton';
 import {connect} from 'react-redux';
 import RentDateComponenet from '../containers/RentDateContainer';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
 
 const style = {
   height: 500,
@@ -30,7 +32,7 @@ class ItemDetailComponent extends Component {
   }
 
   render(){
-    const { item, user }  = this.props;
+    const { item, user, ui, generalPopupClose }  = this.props;
     return (
       <div>
         <div className="productBanner">
@@ -48,6 +50,20 @@ class ItemDetailComponent extends Component {
               <RentDateComponenet />
               : null
             }
+            <Dialog
+              actions={
+                <FlatButton
+                  label="Ok"
+                  primary={true}
+                  onClick={generalPopupClose}
+                />
+              }
+              modal={false}
+              open={ui.generalPopup}
+              onRequestClose={generalPopupClose}
+            >
+              Rent Succes!
+            </Dialog>
           </div>
         </div>
       </div>
