@@ -27,6 +27,7 @@ class ListingsComponent extends Component {
       <div className="shares">
       {products.filter !== '' ?
         <AppBar
+          className="filterBar"
           title={<span>Filter by : {products.filter}</span>}
           iconElementLeft={<IconButton onClick={resetSearch}><NavigationClose /></IconButton>}
         />
