@@ -22,7 +22,11 @@ class ItemDetailComponent extends Component {
   }
 
   componentWillMount(){
-    this.props.fetchUpdatedProducts(this.props.params.itemId);
+    if(!this.props.auth.isAuthenticated) {
+      return this.props.redirectToLogin();
+    } else {
+      this.props.fetchUpdatedProducts(this.props.params.itemId);
+    }
   }
 
   render(){

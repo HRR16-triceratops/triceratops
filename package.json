@@ -8,7 +8,7 @@
     "test": "./node_modules/.bin/mocha --reporter spec specs/server/ServerSpec.js;",
     "go": "concurrently \"npm run build\" \"nodemon index.js\"",
     "devserver": "webpack-dev-server --content-base build/",
-    "deploybuild": "webpack --display-error-details --display-cached",
+    "deploybuild": "webpack --progress --profile --colors --display-error-details --display-cached",
     "build": "webpack --progress --profile --colors --display-error-details --display-cached -w"
   },
   "repository": {

@@ -1,9 +1,12 @@
+machine:
+  node:
+    version: 6.0.0
 deployment:
   staging:
     branch: staging
     heroku:
       appname: share-anything-staging
-  prod: 
+  prod:
     branch: master
     heroku:
       appname: share-anything

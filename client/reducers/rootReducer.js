@@ -161,7 +161,9 @@ const ui = (state = {
       */
     }
   },
-  isAttemptingToAdd: false
+  isAttemptingToAdd: false,
+  cancelPopup: false,
+  removePopup: false
 }, action) => {
   switch (action.type) {
     case types.ADDLISTING_REQUEST:
@@ -191,7 +193,26 @@ const ui = (state = {
         }
       }
     };
-
+    case types.CANCELPOPUP_OPEN:
+    return {
+      ...state,
+      cancelPopup: true
+    };
+    case types.CANCELPOPUP_CLOSE:
+    return {
+      ...state,
+      cancelPopup: false
+    };
+    case types.REMOVEPOPUP_OPEN:
+    return {
+      ...state,
+      removePopup: true
+    };
+    case types.REMOVEPOPUP_CLOSE:
+    return {
+      ...state,
+      removePopup: false
+    };
     // update pending list for UI state tree
     case types.REMOVELISTING_SUCCESS:
     var updatedListingsPendingRemoval = Object.assign({}, state
@@ -250,19 +271,6 @@ const ui = (state = {
     return state;
   };
 };
-
-// const products = (state = {list: [], query: ''}, action) => {
-//   switch (action.type) {
-//     case types.SEARCH:
-//     return {
-//       ...state,
-//       query: action.payload
-//     }
-//     default:
-//     return state;
-//   }
-// };
-
 
 // need to add routing to handle route states syncing w/browser history ..
 const rootReducer = combineReducers({

@@ -6,6 +6,9 @@ import { push } from 'react-router-redux';
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    redirectToLogin: () => {
+      dispatch(push('/login'));
+    },
     fetchUpdatedProducts: (id) => {
       dispatch(actions.fetchUpdatedProducts(id));
     }
@@ -15,7 +18,8 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = function(state){
   return {
     item: state.products.detail.item,
-    user: state.user
+    user: state.user,
+    auth: state.auth
   };
 };
 

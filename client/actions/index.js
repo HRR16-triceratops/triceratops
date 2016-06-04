@@ -3,6 +3,30 @@ import helper from '../services/helper';
 import { push } from 'react-router-redux';
 import { reset } from 'redux-form';
 
+export const cancelPopupOpen = () => {
+  return {
+    type: types.CANCELPOPUP_OPEN
+  };
+};
+
+export const cancelPopupClose = () => {
+  return {
+    type: types.CANCELPOPUP_CLOSE
+  };
+};
+
+export const removePopupOpen = () => {
+  return {
+    type: types.REMOVEPOPUP_OPEN
+  };
+};
+
+export const removePopupClose = () => {
+  return {
+    type: types.REMOVEPOPUP_CLOSE
+  };
+};
+
 const rentSuccess = (data) => {
   return {
     type: types.RENT_SUCCESS,
