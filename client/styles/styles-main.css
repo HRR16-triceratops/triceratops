@@ -108,3 +108,15 @@ body {
 input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0px 1000px #F3F9FA inset;
 }
+
+.profileHeader {
+  padding-left: 10px;
+}
+
+.profileCards {
+  margin-bottom: 20px;
+}
+
+.profileLineItems {
+  margin-top: -10px;
+}
