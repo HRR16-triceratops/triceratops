@@ -32,11 +32,11 @@ const SingleListingItemSimple = (props) => {
         </CardText>
         <CardActions>
           <Link to={"/listings/" + props.item._id}><FlatButton label="Show Details" /></Link>
-          {props.editing ? 
-          <FloatingActionButton secondary={true} 
+          {props.editing ?
+          <FloatingActionButton secondary={true}
             onClick={()=>{props.dispatch(removeRentedItem(props.item));}}
           >
-            {props.pending ? <CircularProgress /> : <ContentRemove style={style}/>}         
+            {props.pending ? <CircularProgress /> : <ContentRemove style={style}/>}
           </FloatingActionButton>
            : null}
         </CardActions>

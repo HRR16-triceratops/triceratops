@@ -2,7 +2,6 @@ import React from 'react';
 import { Component } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import SingleListingItemEditable from './SingleListingItemEditable';
 import AddNewListingForm from '../containers/NewListingContainer';
 import { toggleViewManageListings, toggleViewAddNewListingForm, fetchUpdatedProducts } from '../actions/index';
 import { List, ListItem } from 'material-ui/List';
