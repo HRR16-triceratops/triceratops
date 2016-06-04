@@ -59,6 +59,11 @@ export default (state = {
         action.newItem
       ]
     };
+    case types.SEARCH:
+    return {
+      ...state,
+      filter: action.payload
+    };
     default:
     return state;
   }
