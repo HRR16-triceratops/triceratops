@@ -7,11 +7,10 @@ export default (state = {
     viewAddNewListingForm: false
   },
   isAttemptingToAdd: false,
-  cancelPopup: false,
-  removePopup: false,
-  generalPopup: {
+  popup: {
     content: '',
-    open: false
+    open: false,
+    type: ''
   }
 }, action) => {
   switch (action.type) {
@@ -25,48 +24,30 @@ export default (state = {
       ...state,
       isAttemptingToAdd: false
     };
-    case types.CANCELPOPUP_OPEN:
-    return {
-      ...state,
-      cancelPopup: true
-    };
-    case types.CANCELPOPUP_CLOSE:
-    return {
-      ...state,
-      cancelPopup: false
-    };
-    case types.REMOVEPOPUP_OPEN:
-    return {
-      ...state,
-      removePopup: true
-    };
-    case types.REMOVEPOPUP_CLOSE:
-    return {
-      ...state,
-      removePopup: false
-    };
     case types.RENT_SUCCESS:
     return {
       ...state,
-      generalPopup: {
+      popup: {
         content: 'Rent Success',
         open: true
       }
     };
-    case types.GENERALPOPUP_CLOSE:
+    case types.POPUP_CLOSE:
     return {
       ...state,
-      generalPopup: {
+      popup: {
         content: '',
-        open: false
+        open: false,
+        type: ''
       }
     };
-    case types.GENERALPOPUP_OPEN:
+    case types.POPUP_OPEN:
     return {
       ...state,
-      generalPopup: {
-        content: action.payload,
-        open: true
+      popup: {
+        content: action.payload.content,
+        open: true,
+        type: action.payload.type
       }
     };
     // update pending list for UI state tree

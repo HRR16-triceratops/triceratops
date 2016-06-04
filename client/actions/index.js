@@ -3,40 +3,19 @@ import helper from '../services/helper';
 import { push } from 'react-router-redux';
 import { reset } from 'redux-form';
 
-export const cancelPopupOpen = () => {
+export const popupClose = () => {
   return {
-    type: types.CANCELPOPUP_OPEN
+    type: types.POPUP_CLOSE
   };
 };
 
-export const cancelPopupClose = () => {
+export const popupOpen = (content, keyword = 'general') => {
   return {
-    type: types.CANCELPOPUP_CLOSE
-  };
-};
-
-export const removePopupOpen = () => {
-  return {
-    type: types.REMOVEPOPUP_OPEN
-  };
-};
-
-export const removePopupClose = () => {
-  return {
-    type: types.REMOVEPOPUP_CLOSE
-  };
-};
-
-export const generalPopupClose = () => {
-  return {
-    type: types.GENERALPOPUP_CLOSE
-  };
-};
-
-export const generalPopupOpen = (content) => {
-  return {
-    type: types.GENERALPOPUP_OPEN,
-    payload: content
+    type: types.POPUP_OPEN,
+    payload: {
+      type: keyword,
+      content: content
+    }
   };
 };
 
@@ -291,7 +270,7 @@ export const attemptLogin = (userData) => {
       console.error(err);
       dispatch(loginFailure(err));
       dispatch(reset('LoginForm'));
-      dispatch(generalPopupOpen('Login Failed : Wrong Username or Password'));
+      dispatch(popupOpen('Login Failed : Wrong Username or Password'));
     });
   };
 };
@@ -318,7 +297,7 @@ export const attemptSignup = (userData) => {
       console.error(err);
       dispatch(signupFailure(err));
       dispatch(reset('SignupForm'));
-      dispatch(generalPopupOpen('Signup Failed : Username Exists!'));
+      dispatch(popupOpen('Signup Failed : Username Exists!'));
     });
   };
 };
@@ -430,7 +409,7 @@ export const cancelRentedItem = (item) => {
       var updatedState = resp.data;
       if (resp.status == 200) {
         dispatch(cancelSuccess(updatedState));
-        dispatch(cancelPopupClose());
+        dispatch(popupClose());
         dispatch(fetchUpdatedProducts());
       }
     })
@@ -450,7 +429,7 @@ export const removeRentedItem = (item) => {
     helper.deleteHelper(url)
     .then(() => {
       dispatch(removeListingSuccess(item._id));
-      dispatch(removePopupClose());
+      dispatch(popupClose());
     })
     .catch(err => {
       console.error(err);
