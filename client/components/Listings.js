@@ -1,6 +1,9 @@
 import React from 'react';
 import { Component } from 'react';
 import SingleListingItemSimple from '../components/SingleListingItemSimple';
+import AppBar from 'material-ui/AppBar';
+import IconButton from 'material-ui/IconButton';
+import NavigationClose from 'material-ui/svg-icons/navigation/close';
 
 class ListingsComponent extends Component {
 
@@ -13,7 +16,8 @@ class ListingsComponent extends Component {
   }
 
   render () {
-    const { products } = this.props;
+    const { products, resetSearch } = this.props;
+
     return (
       <div>
       <div className="jumbotron">
@@ -21,7 +25,19 @@ class ListingsComponent extends Component {
       <h1 className="subHeader col-md-offset-1">Anything</h1>
       </div>
       <div className="shares">
-      {products.items.map((item)=>{
+      {products.filter !== '' ?
+        <AppBar
+          className="filterBar"
+          title={<span>Filter by : {products.filter}</span>}
+          iconElementLeft={<IconButton onClick={resetSearch}><NavigationClose /></IconButton>}
+        />
+      : null }
+      {products.items.filter((item) => {
+        if(item.title.concat(item.summary, item.description).toLowerCase().indexOf(products.filter.toLowerCase()) !== -1) {
+          return true;
+        }
+        return false;
+      }).map((item)=>{
         return <SingleListingItemSimple key={item._id} item={item}/>
       })}
       </div>

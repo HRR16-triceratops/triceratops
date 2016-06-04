@@ -1,13 +1,15 @@
 import * as actions from '../actions/index.js';
 import SearchComponent from '../components/Search.jsx';
 import { push } from 'react-router-redux';
-import { reduxForm } from 'redux-form';
+import { reduxForm, reset } from 'redux-form';
 
 const mapDispatchToProps = (dispatch) => {
   return {
     search: (query) => {
       console.log('send query!', query);
       dispatch(actions.search(query));
+      dispatch(reset('SearchForm'));
+      dispatch(push('/listings'));
     }
   };
 };

@@ -153,3 +153,7 @@ input:-webkit-autofill {
 .profileLineItems {
   margin-top: -10px;
 }
+
+.filterBar {
+  margin-bottom: 20px;
+}
