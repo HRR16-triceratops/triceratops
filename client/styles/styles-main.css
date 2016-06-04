@@ -130,9 +130,14 @@ body {
 
 input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0px 1000px #F3F9FA inset;
+}
 
-.addform {padding-bottom: 10px}
+.addform {padding-bottom: 10px;}
 .addForm li{
   padding-right: 10px;
   max-width:96%;
+}
+
+.blurb {
+  margin: 8px;
 }
