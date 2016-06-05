@@ -1,21 +1,31 @@
-import React, { Component, PropTypes } from 'react';
-import { Map, Marker, TileLayer } from 'react-leaflet';
+import React, {PropTypes, Component} from 'react';
+import Marker from './Marker.js';
 
-export default class SimpleExample extends React.Component {
+import GoogleMap from 'google-map-react';
+
+export default class SimpleMapPage extends Component {
+  static defaultProps = {
+    center: {lat: 59.938043, lng: 30.337157},
+    zoom: 9
+  };
+
   constructor(props) {
     super(props);
   }
 
   render() {
     return (
-      <Map center={this.props.pos ? this.props.pos : {lat: 50, lng: 40}} zoom={13}>
-        <TileLayer
-          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-          url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
-        />
-        <Marker position={this.props.pos ? this.props.pos : {lat: 50, lng: 40}} draggable={this.props.draggable}>
-        </Marker>
-      </Map>
+       <GoogleMap
+         bootstrapURLKeys={{
+           key: 'AIzaSyCOQHHGcQGGgCWJPvOaMmy61P_1rXQgo7k',
+           language: 'en',
+         }}
+        center={this.props.center}
+        defaultZoom={this.props.zoom}
+        onChange={(x,y,lat,lng,e) => console.log(x)}
+        >
+        <Marker lat={this.props.center.lat} lng={this.props.center.lng} text={'A'} />
+      </GoogleMap>
     );
   }
 }

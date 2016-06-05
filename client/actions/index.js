@@ -3,9 +3,9 @@ import helper from '../services/helper';
 import { push } from 'react-router-redux';
 import { reset } from 'redux-form';
 
-export const setLocation = (pos) => {
+export const mapUpdate = (pos) => {
   return {
-    type: types.SETLOCATION,
+    type: types.MAPUPDATE,
     payload: pos
   };
 };

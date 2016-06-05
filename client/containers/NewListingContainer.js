@@ -6,13 +6,17 @@ const mapDispatchToProps = (dispatch) => {
   return {
     addNewListing: (data) => {
       dispatch(actions.addNewListing(data));
+    },
+    mapUpdate: (pos) => {
+      dispatch(actions.mapUpdate(pos));
     }
   };
 };
 
 function mapStateToProps(state, ownProps) {
   return {
-    user: state.user
+    user: state.user,
+    ui: state.ui
   };
 }
 

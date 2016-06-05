@@ -18,12 +18,12 @@ export default (state = {
   }
 }, action) => {
   switch (action.type) {
-    case types.SETLOCATION:
+    case types.MAPUPDATE:
     return {
       ...state,
       location: {
-        lat: action.payload.latitude,
-        lng: action.payload.longitude
+        lat: action.payload.lat,
+        lng: action.payload.lng
       }
     };
     case types.ADDLISTING_SUCCESS:

@@ -6,13 +6,15 @@ import TextField from 'material-ui/TextField';
 import DatePicker from 'material-ui/DatePicker';
 import RaisedButton from 'material-ui/RaisedButton';
 import {blueGrey500} from 'material-ui/styles/colors';
+import MapComponenet from './Map.js';
+import MapSearchBoxComponenet from './MapSearchBox.js';
 
 const errorStyle = {
     color: blueGrey500
   };
 
 const NewListingComponenet = (props) => {
-  const { fields, handleSubmit, resetForm, isAttemptingToAdd } = props;
+  const { fields, handleSubmit, resetForm, isAttemptingToAdd, mapUpdate, ui } = props;
   return (
     <div>
       <form className='addForm' onSubmit={handleSubmit(props.addNewListing)}>
@@ -41,6 +43,10 @@ const NewListingComponenet = (props) => {
           </li>
         </ul>
       </form>
+      <div id="map-container">
+      <MapComponenet center={ui.location}/>
+      </div>
+      <MapSearchBoxComponenet placeholder={'Search!'} onPlacesChanged={mapUpdate}/>
     </div>
     );
 };

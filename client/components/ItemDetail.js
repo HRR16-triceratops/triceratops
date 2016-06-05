@@ -8,6 +8,7 @@ import RentDateComponenet from '../containers/RentDateContainer';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import MapComponenet from './Map.js';
+import MapSearchBoxComponenet from './MapSearchBox.js';
 
 const style = {
   height: 500,
@@ -52,6 +53,10 @@ class ItemDetailComponent extends Component {
               <RentDateComponenet />
               : null
             }
+            <p></p>
+            <div id="map-container">
+              <MapComponenet />
+            </div>
             <Dialog
               actions={
                 <FlatButton
@@ -66,7 +71,6 @@ class ItemDetailComponent extends Component {
             >
               {ui.popup.content}
             </Dialog>
-            <MapComponenet pos={item.locationInfo} draggable={false}/>
           </div>
         </div>
       </div>

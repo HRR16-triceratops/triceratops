@@ -158,7 +158,12 @@ input:-webkit-autofill {
   margin-bottom: 20px;
 }
 
-.leaflet-container {
-  height: 250px;
-  width: 330px;
+#map-container {
+  margin-top: 60px;
+  width: 300px;
+  height: 300px;
+}
+
+.search-input {
+  color: black;
 }

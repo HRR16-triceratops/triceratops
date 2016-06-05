@@ -38,3 +38,4 @@ export const LOGOUT = 'LOGOUT';
 export const SEARCH = 'SEARCH';
 
 export const SETLOCATION = 'SETLOCATION';
+export const MAPUPDATE = 'MAPUPDATE';
