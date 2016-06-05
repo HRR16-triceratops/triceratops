@@ -6,7 +6,6 @@ import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import { List, ListItem } from 'material-ui/List';
 import FlatButton from 'material-ui/FlatButton';
 
-
 class ProfileComponent extends Component {
 
   constructor(props){

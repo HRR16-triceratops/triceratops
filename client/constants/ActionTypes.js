@@ -36,3 +36,5 @@ export const SOCIAL_LOGIN = 'SOCIAL_LOGIN';
 export const LOGOUT = 'LOGOUT';
 
 export const SEARCH = 'SEARCH';
+
+export const SETLOCATION = 'SETLOCATION';

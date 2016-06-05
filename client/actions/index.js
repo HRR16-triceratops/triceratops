@@ -3,6 +3,13 @@ import helper from '../services/helper';
 import { push } from 'react-router-redux';
 import { reset } from 'redux-form';
 
+export const setLocation = (pos) => {
+  return {
+    type: types.SETLOCATION,
+    payload: pos
+  };
+};
+
 export const popupClose = () => {
   return {
     type: types.POPUP_CLOSE

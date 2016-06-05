@@ -11,9 +11,21 @@ export default (state = {
     content: '',
     open: false,
     type: ''
+  },
+  location: {
+    lat: 27.28,
+    lng: 153.1
   }
 }, action) => {
   switch (action.type) {
+    case types.SETLOCATION:
+    return {
+      ...state,
+      location: {
+        lat: action.payload.latitude,
+        lng: action.payload.longitude
+      }
+    };
     case types.ADDLISTING_SUCCESS:
     return {
       ...state,

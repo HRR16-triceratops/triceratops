@@ -35,7 +35,7 @@ const NewListingComponenet = (props) => {
             onChange={(x, event) => fields.availableTo.onChange(event)}
           /></li>
           <li><TextField hintStyle={errorStyle} fullWidth={true} hintText={'Image Url'} {...fields.imgURL}/></li>
-        
+
           <li><TextField hintStyle={errorStyle} hintText={'Location Info'} {...fields.locationInfo}/>
             <RaisedButton backgroundColor='cyan50' primary={true} style={{float:'right'}} label="Share" type="submit"/>
           </li>

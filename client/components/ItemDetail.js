@@ -7,6 +7,7 @@ import {connect} from 'react-redux';
 import RentDateComponenet from '../containers/RentDateContainer';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
+import MapComponenet from './Map.js';
 
 const style = {
   height: 500,
@@ -29,6 +30,7 @@ class ItemDetailComponent extends Component {
     } else {
       this.props.fetchUpdatedProducts(this.props.params.itemId);
     }
+    this.props.setLocation();
   }
 
   render(){
@@ -64,6 +66,7 @@ class ItemDetailComponent extends Component {
             >
               {ui.popup.content}
             </Dialog>
+            <MapComponenet pos={item.locationInfo} draggable={false}/>
           </div>
         </div>
       </div>
