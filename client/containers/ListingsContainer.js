@@ -1,9 +1,6 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/index.js';
 import ListingsComponent from '../components/Listings.js';
-import { push } from 'react-router-redux';
-import { reset } from 'redux-form';
 
 const mapDispatchToProps = (dispatch) => {
   return {
