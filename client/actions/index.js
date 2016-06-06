@@ -370,7 +370,7 @@ export const commentRequest = () => {
 export const commentFailure = () => {
   return {
     type: 'COMMENT_FAILURE'
-    // maybe needs ID of comment? 
+    // maybe needs ID of comment?
   };
 }
 
@@ -378,35 +378,35 @@ export const commentSuccess = (updatedCommentsForProduct) => {
   return {
     type: 'COMMENT_SUCCESS',
     updatedComments: updatedCommentsForProduct
-  }; 
+  };
 }
 
 export const addNewComment = (author, date, content, productId) => {
   return (dispatch) => {
-    // dispatch(commentRequest()); 
+    // dispatch(commentRequest());
 
     const url = '/products/comments/' + productId;
     const newComment = {
       author: author,
       date: date,
       content: content
-    }; 
+    };
     helper.putHelper(url, newComment)
     .then(resp => {
       var updatedCommentsForProduct = resp.data;
       if (resp.status == 200) {
-        // dispatch(commentSuccess()); // commentSuccess in reducer does nothing for now. 
+        // dispatch(commentSuccess()); // commentSuccess in reducer does nothing for now.
         dispatch(fetchUpdatedProducts(productId));
         dispatch(fetchUpdatedProducts());
-        // assume refresh redux-router magic ? ask sb. 
+        // assume refresh redux-router magic ? ask sb.
         // dispatch(push('listings/' + productId));
       }
     })
     .catch(err => {
       console.error(err);
       dispatch(commentFailure());
-      // is below neccessary? 
-      // dispatch(push('/listings/' + productId)); 
+      // is below neccessary?
+      // dispatch(push('/listings/' + productId));
     });
   }
 }
@@ -452,7 +452,7 @@ export const fetchUpdatedProducts = (id = '') => {
     .then(resp => {
       var updatedState = resp.data;
       if (resp.status == 200) {
-        Array.isArray(updatedState) ? dispatch(updateProductsState(updatedState)) : dispatch(updateProductDetail(updatedState));
+        Array.isArray(updatedState) ? dispatch(updateProductsState(updatedState.reverse())) : dispatch(updateProductDetail(updatedState));
       }
     })
     .catch(err => {

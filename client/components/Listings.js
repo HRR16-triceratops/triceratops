@@ -17,7 +17,6 @@ class ListingsComponent extends Component {
 
   render () {
     const { products, resetSearch } = this.props;
-
     return (
       <div>
       <div className="jumbotron">
@@ -32,7 +31,7 @@ class ListingsComponent extends Component {
           iconElementLeft={<IconButton onClick={resetSearch}><NavigationClose /></IconButton>}
         />
       : null }
-      {products.items.reverse().filter((item) => {
+      {products.items.filter((item) => {
         if(item.title.concat(item.summary, item.description).toLowerCase().indexOf(products.filter.toLowerCase()) !== -1) {
           return true;
         }
