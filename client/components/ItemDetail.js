@@ -8,7 +8,7 @@ import RentDateComponenet from '../containers/RentDateContainer';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import MapComponenet from './Map.js';
-
+import CommentList from './CommentList'; 
 
 class ItemDetailComponent extends Component {
   constructor(props){
@@ -24,7 +24,7 @@ class ItemDetailComponent extends Component {
   }
 
   render(){
-    const { item, user, ui, popupClose, setMapCenter }  = this.props;
+    const { item, user, ui, popupClose, setMapCenter, postComment }  = this.props;
     console.log('item', item);
     return (
       <div>
@@ -69,9 +69,10 @@ class ItemDetailComponent extends Component {
               onRequestClose={popupClose}
             >
               {ui.popup.content}
-            </Dialog>
+            </Dialog>  
           </div>
         </div>
+        <CommentList item={item} user={user} postComment={postComment} productId={this.props.params.itemId}/>
       </div>
     );
   }

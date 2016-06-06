@@ -25,6 +25,13 @@ var ProductSchema = new Schema({
     type: String,
     required: true
   },
+  comments: [
+    {
+      author: String,
+      content: String,
+      date: Date
+    }
+  ],
   price: {
     type: Number,
     required: true
@@ -102,6 +109,21 @@ ProductSchema.methods = {
       });
       return this;
     }
+  },
+
+  /**
+  * addComment(update) =>
+  *  @param update: {Object} - contain author, content, and date
+  *  @return {object} - model instance of Product with updated rentSchedule.
+  *                     simply chain .save() to save it to DB
+  */
+  addComment: function addComment (update) {
+    this.comments.push({
+      author: update.author,
+      date: update.date,
+      content: update.content
+    });
+    return this;
   }
 };
 
