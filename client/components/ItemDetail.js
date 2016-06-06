@@ -8,7 +8,6 @@ import RentDateComponenet from '../containers/RentDateContainer';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import MapComponenet from './Map.js';
-import MapSearchBoxComponenet from './MapSearchBox.js';
 
 const style = {
   height: 500,
@@ -31,11 +30,11 @@ class ItemDetailComponent extends Component {
     } else {
       this.props.fetchUpdatedProducts(this.props.params.itemId);
     }
-    this.props.setLocation();
   }
 
   render(){
-    const { item, user, ui, popupClose }  = this.props;
+    const { item, user, ui, popupClose, setMapCenter }  = this.props;
+    console.log('item', item);
     return (
       <div>
         <div className="productBanner">
@@ -55,7 +54,16 @@ class ItemDetailComponent extends Component {
             }
             <p></p>
             <div id="map-container">
-              <MapComponenet />
+            {item.locationInfo ?
+              <MapComponenet
+                center={item.locationInfo.marker}
+                draggable={false}
+                setMapCenter={setMapCenter}
+                setMarkerCenter={() => {}}
+                findGeolcation={false}
+                searchBox={false}
+              /> : null
+            }
             </div>
             <Dialog
               actions={

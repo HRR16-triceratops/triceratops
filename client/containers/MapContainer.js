@@ -9,6 +9,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     resetSearch: () => {
       dispatch(actions.search({search: ''}));
+    },
+    setMapCenter: (center) => {
+      dispatch(actions.setMapCenter(center));
     }
   };
 };

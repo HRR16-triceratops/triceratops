@@ -39,3 +39,5 @@ export const SEARCH = 'SEARCH';
 
 export const SETLOCATION = 'SETLOCATION';
 export const MAPUPDATE = 'MAPUPDATE';
+export const SETMAPCENTER = 'SETMAPCENTER';
+export const SETMARKERCENTER = 'SETMARKERCENTER';

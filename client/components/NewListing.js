@@ -7,17 +7,16 @@ import DatePicker from 'material-ui/DatePicker';
 import RaisedButton from 'material-ui/RaisedButton';
 import {blueGrey500} from 'material-ui/styles/colors';
 import MapComponenet from './Map.js';
-import MapSearchBoxComponenet from './MapSearchBox.js';
 
 const errorStyle = {
     color: blueGrey500
   };
 
 const NewListingComponenet = (props) => {
-  const { fields, handleSubmit, resetForm, isAttemptingToAdd, mapUpdate, ui } = props;
+  const { fields, handleSubmit, resetForm, isAttemptingToAdd, mapUpdate, ui, setMapCenter, setMarkerCenter } = props;
   return (
     <div>
-      <form className='addForm' onSubmit={handleSubmit(props.addNewListing)}>
+      <form className='addForm'>
       {isAttemptingToAdd ? <p>Adding new listing, please wait...</p> : null}
         <ul style={{listStyle:'none', background:'rgba(255,255,255,0.8)'}}>
           <li><TextField hintStyle={errorStyle} hintText={'Type'} {...fields.type}/>
@@ -38,15 +37,21 @@ const NewListingComponenet = (props) => {
           /></li>
           <li><TextField hintStyle={errorStyle} fullWidth={true} hintText={'Image Url'} {...fields.imgURL}/></li>
 
-          <li><TextField hintStyle={errorStyle} hintText={'Location Info'} {...fields.locationInfo}/>
-            <RaisedButton backgroundColor='cyan50' primary={true} style={{float:'right'}} label="Share" type="submit"/>
+          <li><TextField hintStyle={errorStyle} hintText={'Address'} {...fields.locationInfo}/>
+          <div id="map-container">
+          <MapComponenet
+            center={ui.location}
+            draggable={true}
+            setMapCenter={setMapCenter}
+            setMarkerCenter={setMarkerCenter}
+            findGeolcation={true}
+            searchBox={true}
+          />
+          </div>
+            <RaisedButton backgroundColor='cyan50' primary={true} style={{float:'right'}} label="Share" onClick={handleSubmit(props.addNewListing)} type="button"/>
           </li>
         </ul>
       </form>
-      <div id="map-container">
-      <MapComponenet center={ui.location}/>
-      </div>
-      <MapSearchBoxComponenet placeholder={'Search!'} onPlacesChanged={mapUpdate}/>
     </div>
     );
 };

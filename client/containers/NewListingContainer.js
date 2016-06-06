@@ -9,6 +9,12 @@ const mapDispatchToProps = (dispatch) => {
     },
     mapUpdate: (pos) => {
       dispatch(actions.mapUpdate(pos));
+    },
+    setMapCenter: (center) => {
+      dispatch(actions.setMapCenter(center));
+    },
+    setMarkerCenter: (center) => {
+      dispatch(actions.setMarkerCenter(center));
     }
   };
 };

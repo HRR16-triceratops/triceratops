@@ -15,10 +15,8 @@ const mapDispatchToProps = (dispatch) => {
     popupClose: () => {
       dispatch(actions.popupClose());
     },
-    setLocation: () => {
-      helper.geoFindMe((pos) => {
-        dispatch(actions.setLocation(pos.coords));
-      });
+    setMapCenter: (center) => {
+      dispatch(actions.setMapCenter(center));
     }
   };
 };

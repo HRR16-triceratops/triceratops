@@ -18,12 +18,23 @@ export default (state = {
   }
 }, action) => {
   switch (action.type) {
-    case types.MAPUPDATE:
+    case types.SETMAPCENTER:
     return {
       ...state,
       location: {
         lat: action.payload.lat,
         lng: action.payload.lng
+      }
+    };
+    case types.SETMARKERCENTER:
+    return {
+      ...state,
+      location: {
+        ...state.location,
+        marker: {
+          lat: action.payload.lat,
+          lng: action.payload.lng
+        }
       }
     };
     case types.ADDLISTING_SUCCESS:
