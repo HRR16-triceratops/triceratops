@@ -101,7 +101,7 @@ body {
   margin-bottom: 10px;
 }
 
-@import url(http://fonts.googleapis.com/css?family=Merriweather+Sans);
+@import url(https://fonts.googleapis.com/css?family=Merriweather+Sans);
 
 .fb-button {
     padding-right: 45px;
@@ -125,7 +125,7 @@ body {
     text-shadow: rgba(0, 0, 0, .5) -1px -1px 0;
     border-color: #2d5073;
     background-color: #3b5998;
-    background-image: url(http://icons.iconarchive.com/icons/danleech/simple/512/facebook-icon.png);
+    background-image: url(https://icons.iconarchive.com/icons/danleech/simple/512/facebook-icon.png);
 }
 
 input:-webkit-autofill {
