@@ -3,6 +3,28 @@ import helper from '../services/helper';
 import { push } from 'react-router-redux';
 import { reset } from 'redux-form';
 
+
+export const setMarkerCenter = (pos) => {
+  return {
+    type: types.SETMARKERCENTER,
+    payload: pos
+  };
+};
+
+export const setMapCenter = (pos) => {
+  return {
+    type: types.SETMAPCENTER,
+    payload: pos
+  };
+};
+
+export const mapUpdate = (pos) => {
+  return {
+    type: types.MAPUPDATE,
+    payload: pos
+  };
+};
+
 export const popupClose = () => {
   return {
     type: types.POPUP_CLOSE
@@ -345,10 +367,14 @@ export const addNewListing = (fields) => {
     let newProductListing = {
       ...fields,
       author: getState().user.username,
-      schedule: [{ to: fields.to, from: fields.from }]
+      locationInfo: {
+        address: fields.locationInfo,
+        marker: {
+          lat: getState().ui.location.marker.lat,
+          lng: getState().ui.location.marker.lng
+        }
+      }
     };
-    delete newProductListing.to;
-    delete newProductListing.from;
 
     dispatch(addListingRequest());
     let url = '/products';

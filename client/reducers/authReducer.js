@@ -1,11 +1,13 @@
 import * as types from '../constants/ActionTypes';
 
+/**
+ *  Reducers related to User Authentication
+ */
 export default (state = {
-  isAuthenticated: false,
-  token: null
+  isAuthenticated: false, // Client will check a user if authorized or not with this state
+  token: null             // Communicate with Server with token state
 }, action) => {
   switch (action.type) {
-    // assumes that JWT token is held in action.payload.
     case types.LOGIN_SUCCESS:
     return {
       ...state,

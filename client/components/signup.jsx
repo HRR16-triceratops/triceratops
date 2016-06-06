@@ -8,7 +8,7 @@ import FlatButton from 'material-ui/FlatButton';
 
 var SignupComponent = React.createClass({
   render: function() {
-    const {fields: {username, email, password}, handleSubmit, ui, generalPopupClose} = this.props;
+    const {fields: {username, email, password}, handleSubmit, ui, popupClose} = this.props;
     return (
       <div>
          <div class="well bs-component">
@@ -38,14 +38,14 @@ var SignupComponent = React.createClass({
               <FlatButton
                 label="OK"
                 primary={true}
-                onClick={generalPopupClose}
+                onClick={popupClose}
               />
             }
             modal={false}
-            open={ui.generalPopup.open}
-            onRequestClose={generalPopupClose}
+            open={ui.popup.open}
+            onRequestClose={popupClose}
           >
-            {ui.generalPopup.content}
+            {ui.popup.content}
           </Dialog>
         </div>
       </div>

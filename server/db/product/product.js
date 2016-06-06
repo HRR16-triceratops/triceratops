@@ -37,7 +37,19 @@ var ProductSchema = new Schema({
     type: String,
     required: true
   },
-  locationInfo: Object,
+  locationInfo: {
+    address: String,
+    marker: {
+      lat: {
+        type: Number,
+        require: true
+      },
+      lng: {
+        type: Number,
+        required: true
+      }
+    }
+  },
   author: {
     type: String, // username
     required: true

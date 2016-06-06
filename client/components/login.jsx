@@ -7,10 +7,6 @@ import RaisedButton from 'material-ui/RaisedButton';
 import FacebookLogin from 'react-facebook-login';
 import Dialog from 'material-ui/Dialog';
 
-const style = {
-  margin: 12,
-}
-
 export default class LoginComponent extends Component {
   static get childContextTypes() {
     return { muiTheme: React.PropTypes.object };
@@ -21,7 +17,7 @@ export default class LoginComponent extends Component {
   }
 
   render() {
-    const {fields: {username, password}, handleSubmit, ui, generalPopupClose } = this.props;
+    const {fields: {username, password}, handleSubmit, ui, popupClose } = this.props;
     return (
       <div>
         <div class="well bs-component">
@@ -57,14 +53,14 @@ export default class LoginComponent extends Component {
               <FlatButton
                 label="OK"
                 primary={true}
-                onClick={generalPopupClose}
+                onClick={popupClose}
               />
             }
             modal={false}
-            open={ui.generalPopup.open}
-            onRequestClose={generalPopupClose}
+            open={ui.popup.open}
+            onRequestClose={popupClose}
           >
-            {ui.generalPopup.content}
+            {ui.popup.content}
           </Dialog>
         </div>
       </div>
