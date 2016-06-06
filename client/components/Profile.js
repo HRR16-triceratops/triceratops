@@ -23,7 +23,7 @@ class ProfileComponent extends Component {
 
   render(){
 
-  const { user } = this.props;
+  const { user, products } = this.props;
 
     return (
       <div>
@@ -33,42 +33,33 @@ class ProfileComponent extends Component {
           subtitle={"Edit email, password..."}
           displayName={user.username}
           email={user.email}
+          linkTo={'/'}
           buttonLabel={"Edit Profile"}
         />
-
-        <Card className="profileCards">
-          <CardHeader
-            title="Your Listings"
-            subtitle="View and manage your listings"
-            actAsExpander={true}
-            showExpandableButton={true}
-          />
-          <CardText expandable={true} style={{paddingTop: 0, paddingBottom: 0}}>
-            <List style={{paddingTop: 0}}>
-              {
-                this.props.products.items.filter(item => {
-                  return item.author === this.props.user.username;
-                }).map(item => {
-                  return (
-                     <Link to={"/listings/" + item._id}>
-                            <ListItem
-                              key={item._id}
-                              primaryText={item.title}
-                              secondaryText={"$"+item.price + " - " + item.summary}
-                            />
-                     </Link>
-                  )
-                })
-              }
-            </List>
-          </CardText>
-          <CardActions expandable={true} style={{paddingTop: 0}}>
-
-            <Link style={{paddingTop: 0}}to="/manage">
-              <FlatButton style={{paddingTop: 0}} label="Manage your listings" />
-            </Link>
-          </CardActions>
-        </Card>
+        <ProfileCard 
+          expanded={false} 
+          title={"Your Listings"} 
+          subtitle={"View and manage your listings"}
+          displayName={user.username}
+          email={user.email}
+          linkTo={'/manage'}
+          buttonLabel={"Manage your listings"}
+          listItems={
+            products.items.filter(item => {
+              return item.author === user.username;
+            }).map(item => {
+              return (
+                 <Link to={"/listings/" + item._id}>
+                        <ListItem
+                          key={item._id}
+                          primaryText={item.title}
+                          secondaryText={"$"+item.price + " - " + item.summary}
+                        />
+                 </Link>
+              )
+            })
+          }
+        />
         <Card className="profileCards">
           <CardHeader
             title="Upcoming Rentals"

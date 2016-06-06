@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
+import { List, ListItem } from 'material-ui/List';
 import FlatButton from 'material-ui/FlatButton';
 
 const ProfileCard = (props) => {
@@ -14,11 +15,16 @@ const ProfileCard = (props) => {
         showExpandableButton={true}
       />
       <CardText expandable={true} style={{paddingTop: 0, paddingBottom: 0}}>
-        <p><strong>Username:</strong> {props.displayName}</p>
-        <p><strong>Email:</strong> {props.email}</p>
+        <List style={{paddingTop: 0}}>
+          {
+            props.listItems
+          }
+        </List>
       </CardText>
       <CardActions expandable={true} style={{paddingTop: 0}}>
-        <FlatButton label={props.buttonLabel} />
+        <Link style={{paddingTop: 0}} to={props.linkTo}>
+          <FlatButton style={{paddingTop: 0}} label={props.buttonLabel} />
+        </Link>
       </CardActions>
     </Card>
   );
