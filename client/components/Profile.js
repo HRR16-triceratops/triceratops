@@ -5,6 +5,7 @@ import { browserHistory } from 'react-router';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import { List, ListItem } from 'material-ui/List';
 import FlatButton from 'material-ui/FlatButton';
+import ProfileCard from './ProfileCard.js';
 
 class ProfileComponent extends Component {
 
@@ -21,23 +22,20 @@ class ProfileComponent extends Component {
   }
 
   render(){
+
+  const { user } = this.props;
+
     return (
       <div>
-        <Card className="profileCards" initiallyExpanded={true}>
-          <CardHeader
-            title="Profile"
-            subtitle="Edit email, password ..."
-            actAsExpander={true}
-            showExpandableButton={true}
-          />
-          <CardText expandable={true} style={{paddingTop: 0, paddingBottom: 0}}>
-            <p><strong>Username:</strong> {this.props.user.displayName}</p>
-            <p><strong>Email:</strong> {this.props.user.email}</p>
-          </CardText>
-          <CardActions expandable={true} style={{paddingTop: 0}}>
-            <FlatButton label="Edit Profile" />
-          </CardActions>
-        </Card>
+        <ProfileCard 
+          expanded={true} 
+          title={"Profile"} 
+          subtitle={"Edit email, password..."}
+          displayName={user.username}
+          email={user.email}
+          buttonLabel={"Edit Profile"}
+        />
+
         <Card className="profileCards">
           <CardHeader
             title="Your Listings"
