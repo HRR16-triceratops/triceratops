@@ -41,7 +41,7 @@ class ManageListingsComponent extends Component {
         <div className="manageBanner" />
           <h1>Share Anything</h1>
           <h3>Why not earn some extra cash and help someone out by sharing your stuff!</h3>
-          <RaisedButton label="Create New Listing" style={{margin:'8px 5px 0 0'}}
+          <RaisedButton label="Create New Listing" className="createListing"
           onClick={()=>{
             this.props.toggleViewAddNewListingForm();
           }} />
