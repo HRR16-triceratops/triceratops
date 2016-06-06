@@ -4,8 +4,8 @@ import { reduxForm } from 'redux-form';
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    generalPopupClose: () => {
-      dispatch(actions.generalPopupClose());
+    popupClose: () => {
+      dispatch(actions.popupClose());
     },
     makeSignupRequest: (userData) => {
       dispatch(actions.attemptSignup(userData));

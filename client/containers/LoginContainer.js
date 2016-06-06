@@ -6,8 +6,8 @@ console.log('Login page loaded!');
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    generalPopupClose: () => {
-      dispatch(actions.generalPopupClose());
+    popupClose: () => {
+      dispatch(actions.popupClose());
     },
     makeLoginRequest: (userData) => {
       dispatch(actions.attemptLogin(userData));

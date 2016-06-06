@@ -34,6 +34,7 @@ export default class Map extends Component {
       lat: markerCenter.lat(),
       lng: markerCenter.lng()
     };
+    this.props.setMapCenter(center);
     this.props.setMarkerCenter(center);
   }
 
@@ -82,7 +83,7 @@ export default class Map extends Component {
             }
               <Marker
                 ref={node => this.marker = node}
-                position={this.props.center}
+                position={this.props.center.marker}
                 draggable={this.props.draggable}
                 onDragend={this.handleDragEnd.bind(this)}
               />
