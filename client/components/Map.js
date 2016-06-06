@@ -83,7 +83,7 @@ export default class Map extends Component {
             }
               <Marker
                 ref={node => this.marker = node}
-                position={this.props.center.marker}
+                position={this.props.draggable ? this.props.center.marker : this.props.center}
                 draggable={this.props.draggable}
                 onDragend={this.handleDragEnd.bind(this)}
               />
