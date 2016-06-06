@@ -1,5 +1,8 @@
 import * as types from '../constants/ActionTypes';
 
+/**
+ *  Reducer related to User information
+ */
 export default (state = {}, action) => {
   switch (action.type) {
     case types.LOGIN_SUCCESS:
