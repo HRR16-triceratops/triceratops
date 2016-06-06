@@ -76,6 +76,26 @@ body {
 
 .productBody p { font-size: 1.3em;}
 
+.productImage {
+  height: 500px;
+  width: 500px;
+  margin: 20px;
+  text-align: center;
+  display: inline-block;
+  overflow: hidden;
+  position: relative;
+}
+
+.productImage span {
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+
+.productImage img {
+  max-width: 500px;
+  max-height: 500px;
+}
 .navbar {
   margin-bottom: 0px;
 }

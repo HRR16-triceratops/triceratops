@@ -9,15 +9,6 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import MapComponenet from './Map.js';
 
-const style = {
-  height: 500,
-  width: 500,
-  margin: 20,
-  textAlign: 'center',
-  display: 'inline-block',
-  overflow: 'hidden',
-  position: 'relative'
-};
 
 class ItemDetailComponent extends Component {
   constructor(props){
@@ -39,9 +30,9 @@ class ItemDetailComponent extends Component {
       <div>
         <div className="productBanner">
           <div className='productBody col-md-7'>
-            <Paper zDepth={3}  style={style}>
-                <span style={{display:'inline-block', height:'100%', verticalAlign: 'middle'}}></span>
-                <img src={item.imgURL} style={{maxWidth:'500px', maxHeight:'500px'}} />
+            <Paper zDepth={3}  className='productImage'>
+                <span></span>
+                <img src={item.imgURL} />
             </Paper>
           </div>
           <div className='productBody col-md-5'>
