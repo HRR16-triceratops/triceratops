@@ -128,10 +128,6 @@ router.put('/rent/:id', expressJwt({secret: secret}), function(req, res){
  *  @return {Object} - contains all comments for given product id.
  */
 router.put('/comments/:id', expressJwt({secret: secret}), function(req, res){
-  // console.log('=====================');
-  // console.log(req.params.id)
-  // console.log(req.body)
-  // console.log('=====================');
   var id = req.params.id;
   var update = req.body;
   Product.findById(id).then(function(found){

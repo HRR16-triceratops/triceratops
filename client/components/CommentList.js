@@ -4,12 +4,6 @@ import Comment from './Comment';
 import BuildComment from './BuildComment'; 
 
 class CommentList extends Component {
-  // mock props
-  // const mockProps = [
-  //     { date: new Date(2016, 4, 5), content: 'this is a message', author: 'john' },
-  //     { date: new Date(2016, 4, 3), content: 'this is another message', author: 'roger' },
-  //     { date: new Date(2016, 2, 1), content: 'this is a third message', author: 'nick' }
-  // ];
   constructor(props){
     super(props);
     this.state = {
@@ -21,7 +15,7 @@ class CommentList extends Component {
       if (typeof comments === 'undefined' || comments.length === 0) {
           return <h3>Add Comments!</h3>
       }
-      return comments.map((comment, ind) => {
+      return comments.reverse().map((comment, ind) => {
           return <Comment key={ind} comment={comment}/>
       })
   }
