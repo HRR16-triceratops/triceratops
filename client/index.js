@@ -6,7 +6,6 @@ import Root from './containers/RootContainer.js';
 import configureStore from './store/configureStore';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import 'bootstrap/dist/css/bootstrap.css';
-import 'leaflet/dist/leaflet.css';
 
 require ("./styles/styles-main.css");
 
