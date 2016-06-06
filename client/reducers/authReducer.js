@@ -1,7 +1,7 @@
 import * as types from '../constants/ActionTypes';
 
 /**
- *  Reducers related to User Authentication
+ *  Reducer related to User Authentication
  */
 export default (state = {
   isAuthenticated: false, // Client will check a user if authorized or not with this state

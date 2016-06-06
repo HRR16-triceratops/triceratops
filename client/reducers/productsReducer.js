@@ -1,7 +1,7 @@
 import * as types from '../constants/ActionTypes';
 
 /**
- *  Reducers related to User Authentication
+ *  Reducer related to Products
  */
 export default (state = {
   items: [],        // State for every Products
