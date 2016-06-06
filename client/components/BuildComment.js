@@ -33,12 +33,13 @@ class BuildComment extends Component {
         <TextField
           floatingLabelText="Comment"
           multiLine={true}
-          rows={2}
+          rows={1}
           value={this.state.text} 
           onChange={this.handleTextChange.bind(this)} 
         />
-        <RaisedButton type="submit" label="Comment" />
         <br />
+        <RaisedButton className="commentButton" type="submit" label="Comment" />
+        <hr />
         </form>
       </div>
     ); 

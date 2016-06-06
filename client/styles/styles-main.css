@@ -31,6 +31,14 @@ body {
   font-family: 'Megrim', cursive;
 }
 
+.comments {
+  padding-top: 69vh;
+}
+
+.commentButton {
+  margin-left: 150px;
+}
+
 .jumbotron h1 {
   font-size: 13vh;
 }

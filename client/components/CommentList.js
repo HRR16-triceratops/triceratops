@@ -36,7 +36,7 @@ class CommentList extends Component {
   render(){
     const { user, postComment, item} = this.props; 
     return(
-      <div>
+      <div className="comments">
         <h2>Comments:</h2>
         <BuildComment user={user} postComment={postComment} productId={this.props.productId}/>
         {this.state.commentsLoading ? this.renderLoadingSpinner(): this.renderComments(user, item.comments)}
