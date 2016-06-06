@@ -1,5 +1,10 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500);
 @import url(https://fonts.googleapis.com/css?family=Megrim);
+@import url(https://fonts.googleapis.com/css?family=Merriweather+Sans);
+
+/******************
+Homepage/Navigation
+******************/
 
 body {
   font-family: 'Roboto', sans-serif;
@@ -12,11 +17,6 @@ body {
   margin: auto;
 }
 
-.navSearch {
-  margin-top: 7px;
-  padding-left: 7px;
-}
-
 .jumbotron {
   background-image: url('./hot-tub.jpg');
   background-size: cover;
@@ -27,6 +27,13 @@ body {
   color: white;
   padding-left: 8%;
 }
+
+@media (max-width: 600px){
+  .jumbotron h1 {
+    font-size: 8vh;
+  }
+}
+
 .subHeader{
   font-family: 'Megrim', cursive;
 }
@@ -35,12 +42,28 @@ body {
   font-size: 13vh;
 }
 
+
+
 .shares {
   padding-top: 67vh;
 }
 
-.editShares {
-  padding-top: 8vh;
+
+/******************
+Navigation
+******************/
+
+.navSearch {
+  margin-top: 7px;
+  padding-left: 7px;
+}
+
+.navbar {
+  margin-bottom: 0px;
+}
+#root > div > div > nav > ul > li > a:hover,
+#root > div > div > nav > ul > li > a:focus {
+  background-color: transparent;
 }
 
 @media (max-width: 600px){
@@ -48,6 +71,76 @@ body {
     font-size: 8vh;
   }
 }
+
+
+/******************
+Profile
+******************/
+
+.profileHeader {
+  padding-left: 10px;
+}
+
+.profileCards {
+  margin-bottom: 20px;
+}
+
+.profileLineItems {
+  margin-top: -10px;
+}
+
+
+/******************
+Signup/Login
+******************/
+
+.button {
+  margin-top: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  padding-left: 5px;
+  padding-right: 4px;
+}
+
+.fb-button {
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+
+.fb-button {
+    padding-right: 45px;
+    height: 35px;
+    background: none;
+    border: none;
+    display: block;
+    background-size: 35px 35px;
+    background-position: right center;
+    background-repeat: no-repeat;
+    border-radius: 2px;
+    color: white;
+    font-family:"Merriweather Sans", sans-serif;
+    font-size: 14px;
+    margin-bottom: 15px;
+    width: 205px;
+    border-bottom: 2px solid transparent;
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+    box-shadow: 0 4px 2px -2px gray;
+    text-shadow: rgba(0, 0, 0, .5) -1px -1px 0;
+    border-color: #2d5073;
+    background-color: #3b5998;
+    background-image: url(https://icons.iconarchive.com/icons/danleech/simple/512/facebook-icon.png);
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #F3F9FA inset;
+}
+
+
+/******************
+Product Detail/Manage Listings
+******************/
 
 .productBanner, .manageBanner {
   background-image: url('./sky.jpg');
@@ -96,82 +189,16 @@ body {
   max-width: 500px;
   max-height: 500px;
 }
-.navbar {
-  margin-bottom: 0px;
-}
-#root > div > div > nav > ul > li > a:hover,
-#root > div > div > nav > ul > li > a:focus {
-  background-color: transparent;
-}
+
 
 .productCard {
   margin-bottom: 30px;
-}
-
-.button {
-  margin-top: 10px;
-  margin-right: 10px;
-  margin-bottom: 10px;
-  padding-left: 5px;
-  padding-right: 4px;
-}
-
-.fb-button {
-  margin-right: 10px;
-  margin-bottom: 10px;
-}
-
-@import url(https://fonts.googleapis.com/css?family=Merriweather+Sans);
-
-.fb-button {
-    padding-right: 45px;
-    height: 35px;
-    background: none;
-    border: none;
-    display: block;
-    background-size: 35px 35px;
-    background-position: right center;
-    background-repeat: no-repeat;
-    border-radius: 2px;
-    color: white;
-    font-family:"Merriweather Sans", sans-serif;
-    font-size: 14px;
-    margin-bottom: 15px;
-    width: 205px;
-    border-bottom: 2px solid transparent;
-    border-left: 1px solid transparent;
-    border-right: 1px solid transparent;
-    box-shadow: 0 4px 2px -2px gray;
-    text-shadow: rgba(0, 0, 0, .5) -1px -1px 0;
-    border-color: #2d5073;
-    background-color: #3b5998;
-    background-image: url(https://icons.iconarchive.com/icons/danleech/simple/512/facebook-icon.png);
-}
-
-input:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0px 1000px #F3F9FA inset;
 }
 
 .addform {padding-bottom: 10px;}
 .addForm li{
   padding-right: 10px;
   max-width:96%;
-}
-
-.blurb {
-  margin: 8px;
-}
-
-.profileHeader {
-  padding-left: 10px;
-}
-
-.profileCards {
-  margin-bottom: 20px;
-}
-
-.profileLineItems {
-  margin-top: -10px;
 }
 
 .filterBar {
