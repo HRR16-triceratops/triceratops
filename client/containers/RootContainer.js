@@ -5,7 +5,6 @@ import RootComponent from '../components/Root.js';
 const mapDispatchToProps = (dispatch) => {
   return {
     attemptVerify: () => {
-      console.log('work');
       let token = window.localStorage.getItem('jwtToken');
 
       // If there is no token, do nothing

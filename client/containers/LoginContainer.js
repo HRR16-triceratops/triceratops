@@ -2,8 +2,6 @@ import * as actions from '../actions/index.js';
 import LoginComponent from '../components/login.jsx';
 import { reduxForm } from 'redux-form';
 
-console.log('Login page loaded!');
-
 const mapDispatchToProps = (dispatch) => {
   return {
     popupClose: () => {
