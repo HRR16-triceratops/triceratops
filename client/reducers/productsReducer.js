@@ -16,7 +16,7 @@ export default (state = {
     return {
       ...state,
       items: action.updatedProductsState
-    }
+    };
     case types.UPDATE_PRODUCT_DETAIL:
     return {
       ...state,

@@ -38,9 +38,8 @@ class ItemDetailComponent extends Component {
             <h3>{item.title}</h3>
             <p><b>Details: </b>{item.description}</p>
             <h3>${item.price}.00</h3>
-            {item.author.username !== user.username ?
+            {item.author && item.author.username !== user.username &&
               <RentDateComponenet />
-              : null
             }
             <p></p>
             <div id="map-container">

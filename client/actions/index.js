@@ -435,6 +435,8 @@ export const addNewListing = (fields) => {
     helper.postHelper(url, newProductListing)
     .then(resp => {
       let newItem = resp.data;
+      console.log(newProductListing);
+      console.log(newItem);
       dispatch(addListingSuccess(newItem));
       dispatch(toggleViewAddNewListingForm());
       dispatch(push('/listings'));
