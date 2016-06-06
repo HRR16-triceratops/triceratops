@@ -32,7 +32,7 @@ class ListingsComponent extends Component {
           iconElementLeft={<IconButton onClick={resetSearch}><NavigationClose /></IconButton>}
         />
       : null }
-      {products.items.filter((item) => {
+      {products.items.reverse().filter((item) => {
         if(item.title.concat(item.summary, item.description).toLowerCase().indexOf(products.filter.toLowerCase()) !== -1) {
           return true;
         }
