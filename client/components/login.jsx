@@ -7,10 +7,6 @@ import RaisedButton from 'material-ui/RaisedButton';
 import FacebookLogin from 'react-facebook-login';
 import Dialog from 'material-ui/Dialog';
 
-const style = {
-  margin: 12,
-}
-
 export default class LoginComponent extends Component {
   static get childContextTypes() {
     return { muiTheme: React.PropTypes.object };
