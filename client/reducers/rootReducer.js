@@ -7,8 +7,12 @@ import user from './userReducer.js';
 import products from './productsReducer.js';
 import ui from './uiReducer.js';
 
+/**
+ *  Root Reducer that combines every Reducers
+ *  About Reducer in Redux : http://redux.js.org/docs/basics/Reducers.html
+ */
 const rootReducer = combineReducers({
-  form: formReducer,
+  form: formReducer, // Reducer provided by 'redux-form' module
   auth,
   user,
   ui,
