@@ -1,38 +1,73 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Router, Route, IndexRoute, Link, History } from "react-router";
+import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import FlatButton from 'material-ui/FlatButton';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
+import FacebookLogin from 'react-facebook-login';
+import Dialog from 'material-ui/Dialog';
 
-console.log('Login page loaded!');
+const style = {
+  margin: 12,
+}
 
-var LoginComponent = React.createClass({
-        render: function() {
-          return (
-            <div>
-               <div class="well bs-component">
-                <form class="form-horizontal">
-                  <fieldset>
-                    <legend>Signin</legend>
-                    <div class="form-group">
-                      <label for="inputEmail" class="col-md-2 control-label">Email</label>
+export default class LoginComponent extends Component {
+  static get childContextTypes() {
+    return { muiTheme: React.PropTypes.object };
+  }
 
-                      <div class="col-md-10">
-                        <input type="email" class="form-control" id="inputEmail" placeholder="Email" />
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label for="inputPassword" class="col-md-2 control-label">Password</label>
+  getChildContext(){
+    return {  muiTheme: getMuiTheme()};
+  }
 
-                      <div class="col-md-10">
-                        <input type="password" class="form-control" id="inputPassword" placeholder="Password" />
-                      </div>
-                    </div>
-                    <button class="btn btn-success-outline" type="submit">Login</button>
-                  </fieldset>
-                </form>
+  render() {
+    const {fields: {username, password}, handleSubmit, ui, generalPopupClose } = this.props;
+    return (
+      <div>
+        <div class="well bs-component">
+          <form onSubmit={handleSubmit(this.props.makeLoginRequest.bind(this))} class="form-horizontal">
+            <fieldset>
+              <legend>Login</legend>
+              <div class="form-group">
+                <div class="col-md-10">
+                  <TextField type="text" className="loginInput" id="inputUsername" placeholder="Username" {...username}/>
+                </div>
               </div>
-            </div>
-          );
-        }
-      });
-
-export default LoginComponent;
+              <div class="form-group">
+                <div class="col-md-10">
+                  <TextField type="password" autocomplete="off" id="inputPassword" placeholder="Password" {...password}/>
+                </div>
+              </div>
+              <RaisedButton className="button" type="submit" label="Login" />
+              <Link to="/signup">
+                <RaisedButton className="button" label="Signup" />
+              </Link>
+            </fieldset>
+          </form>
+          <FacebookLogin
+          appId="1734027273476564"
+          autoLoad={false}
+          callback={this.props.loginWithFB}
+          scope="public_profile, email"
+          fields="name, email"
+          cssClass="fb-button"
+          />
+          <Dialog
+            actions={
+              <FlatButton
+                label="OK"
+                primary={true}
+                onClick={generalPopupClose}
+              />
+            }
+            modal={false}
+            open={ui.generalPopup.open}
+            onRequestClose={generalPopupClose}
+          >
+            {ui.generalPopup.content}
+          </Dialog>
+        </div>
+      </div>
+    );
+  }
+}

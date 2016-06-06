@@ -111,9 +111,13 @@ describe('', function() {
         'json': {
           type: 'tool',
           title: 'Testing tool',
+          imgURL: 'https://01.img.society6.com/society6/img/J0f8mnNFknGCucYPzgxLReNrhEk/w_550,h_550/rectangular-pillows/small/front/~artwork/s6-0003/asset_13/302698_1OzFCGmfSi/~~/triceratops-qv5-rectangular-pillows.jpg',
+          summary: 'summary',
           description: 'description',
+          availableFrom: '2016-06-02T07:00:00.000Z',
+          availableTo: '2016-06-32T07:00:00.000Z',
           price: 15,
-          author: 'author'
+          author: 'Phillip'
         }
       };
       request(options2, function (err, res) {
@@ -134,9 +138,13 @@ describe('', function() {
         'json': {
           type: 'tool',
           title: 'Testing tool',
+          imgURL: 'https://01.img.society6.com/society6/img/J0f8mnNFknGCucYPzgxLReNrhEk/w_550,h_550/rectangular-pillows/small/front/~artwork/s6-0003/asset_13/302698_1OzFCGmfSi/~~/triceratops-qv5-rectangular-pillows.jpg',
+          summary: 'summary',
           description: 'description',
+          availableFrom: '2016-06-02T07:00:00.000Z',
+          availableTo: '2016-06-32T07:00:00.000Z',
           price: 15,
-          author: 'author'
+          author: 'Phillip'
         }
       };
       request(options3, function (err, res) {
@@ -172,9 +180,13 @@ describe('', function() {
         new Product({
           type: 'tool',
           title: 'Testing tool',
+          imgURL: 'https://01.img.society6.com/society6/img/J0f8mnNFknGCucYPzgxLReNrhEk/w_550,h_550/rectangular-pillows/small/front/~artwork/s6-0003/asset_13/302698_1OzFCGmfSi/~~/triceratops-qv5-rectangular-pillows.jpg',
+          summary: 'summary',
           description: 'description',
           price: 15,
-          author: 'author',
+          availableFrom: '2016-06-02T07:00:00.000Z',
+          availableTo: '2016-06-32T07:00:00.000Z',
+          author: 'Phillip',
           isActivated: true
         }).save().then(function(){
           done();
@@ -208,7 +220,11 @@ describe('', function() {
         'json': {
           type: 'tool',
           title: 'new Testing tool',
+          imgURL: 'http://rlv.zcache.com/triceratops_dinosaur_accent_pillow-r1453815fd3314238bdb228f7c5a07367_z6i0e_512.jpg?rlvnet=1',
+          summary: 'new summary',
           description: 'new description',
+          availableFrom: '2016-06-02T07:00:00.000Z',
+          availableTo: '2016-06-32T07:00:00.000Z',
           price: 150,
           author: 'Phillip'
         }
@@ -238,9 +254,19 @@ describe('', function() {
         'json': {
           type: 'tool',
           title: 'Totally changed title',
+          imgURL: 'https://01.img.society6.com/society6/img/7SOHrbrMK1DCZslctHiIIMICPLw/w_550,h_550/rectangular-pillows/small/front/~artwork/s6-0033/a/15468785_15199668/~~/triceratops-triangles-rectangular-pillows.jpg',
+          summary: 'Totally changed summary',
           description: 'Totally changed Description',
+          availableFrom: '2016-06-02T07:00:00.000Z',
+          availableTo: '2016-06-32T07:00:00.000Z',
           price: 150,
-          author: 'Phillip'
+          author: 'Phillip',
+          rentSchedule: [
+            {
+              username: 'Phillip',
+              date: '2016-06-03T07:00:00.000Z'
+            }
+          ]
         }
       };
       request(options1, function (err) {
@@ -252,9 +278,40 @@ describe('', function() {
           expect(body).to.have.lengthOf(2);
           expect(body[1]).to.have.property('author');
           expect(body[1].description).to.equal('Totally changed Description');
+          expect(body[1].rentSchedule[0].username).to.equal('Phillip');
           done();
         });
       });
     });
+
+    it('Be Able to Update Products Rental Schedule By Only Sending the productId and rentSchedule Object', function (done) {
+      var options1 = {
+        'method': 'PUT',
+        'headers': {
+          'Authorization': 'Bearer ' + tokenOfPhillip
+        },
+        'followAllRedirects': true,
+        'uri': 'http://localhost:' + port + '/products/rent/' + idOfSecondItem,
+        'json': {
+          username: 'notPhillip',
+          date: '2016-06-04T07:00:00.000Z'
+        }
+      };
+      request(options1, function (err) {
+        if(err) return done(err);
+        request(options, function (err, res) {
+          if(err) return done(err);
+          var body = JSON.parse(res.body);
+          expect(res.statusCode).to.equal(200);
+          expect(body).to.have.lengthOf(2);
+          expect(body[1]).to.have.property('author');
+          expect(body[1].description).to.equal('Totally changed Description');
+          expect(body[1].rentSchedule[1].username).to.equal('notPhillip');
+          expect(body[1].rentSchedule[1].date).to.equal('2016-06-04T07:00:00.000Z');
+          done();
+        });
+      });
+    });
+
   });
 });
