@@ -361,11 +361,62 @@ export const attemptSocialLogin = (userData) => {
   };
 };
 
+export const commentRequest = () => {
+  return {
+    type: 'COMMENT_REQUEST'
+  };
+}
+
+export const commentFailure = () => {
+  return {
+    type: 'COMMENT_FAILURE'
+    // maybe needs ID of comment? 
+  };
+}
+
+export const commentSuccess = (updatedCommentsForProduct) => {
+  return {
+    type: 'COMMENT_SUCCESS',
+    updatedComments: updatedCommentsForProduct
+  }; 
+}
+
+export const addNewComment = (author, date, content, productId) => {
+  return (dispatch) => {
+    // dispatch(commentRequest()); 
+
+    const url = '/products/comments/' + productId;
+    const newComment = {
+      author: author,
+      date: date,
+      content: content
+    }; 
+    helper.putHelper(url, newComment)
+    .then(resp => {
+      var updatedCommentsForProduct = resp.data;
+      if (resp.status == 200) {
+        // dispatch(commentSuccess()); // commentSuccess in reducer does nothing for now. 
+        dispatch(fetchUpdatedProducts(productId));
+        dispatch(fetchUpdatedProducts());
+        // assume refresh redux-router magic ? ask sb. 
+        // dispatch(push('listings/' + productId));
+      }
+    })
+    .catch(err => {
+      console.error(err);
+      dispatch(commentFailure());
+      // is below neccessary? 
+      // dispatch(push('/listings/' + productId)); 
+    });
+  }
+}
+
 export const addNewListing = (fields) => {
   return (dispatch, getState) => {
     // parse form data for submission
     let newProductListing = {
       ...fields,
+      comments: [],
       author: getState().user.username,
       locationInfo: {
         address: fields.locationInfo,

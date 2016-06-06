@@ -9,7 +9,6 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import MapComponenet from './Map.js';
 
-
 class ItemDetailComponent extends Component {
   constructor(props){
     super(props);
@@ -24,7 +23,7 @@ class ItemDetailComponent extends Component {
   }
 
   render(){
-    const { item, user, ui, popupClose, setMapCenter }  = this.props;
+    const { item, user, ui, popupClose, setMapCenter, postComment }  = this.props;
     console.log('item', item);
     return (
       <div>
@@ -70,8 +69,10 @@ class ItemDetailComponent extends Component {
             >
               {ui.popup.content}
             </Dialog>
+            
           </div>
         </div>
+        <CommentList className="comments" item={item} user={user} postComment={postComment} productId={this.props.params.itemId}/>
       </div>
     );
   }

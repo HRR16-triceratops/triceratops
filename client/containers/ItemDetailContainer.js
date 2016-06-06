@@ -17,6 +17,11 @@ const mapDispatchToProps = (dispatch) => {
     },
     setMapCenter: (center) => {
       dispatch(actions.setMapCenter(center));
+    },
+    // have to build out action and update reducers, ... 
+    postComment: (author, date, content, productId) => {
+      dispatch(actions.addNewComment(author, date, content, productId));
+      // console.log('id is: ' + author + ' and date is ' + date + ' and content is' + content + ' and productid is' + productId);
     }
   };
 };
