@@ -22,6 +22,7 @@ export default (state = {
     return {
       ...state,
       location: {
+        ...state.location,
         lat: action.payload.lat,
         lng: action.payload.lng
       }
