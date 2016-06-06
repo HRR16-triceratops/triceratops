@@ -33,7 +33,7 @@ const mapStateToStore = (state) => {
   return {
     sharingItems: state.products.items.filter((item) => {
       // assuming unique usernames
-      return item.author === state.user.username;
+      return item.author.username === state.user.username;
     }),
     upcomingRent: () => {
       let result = [];

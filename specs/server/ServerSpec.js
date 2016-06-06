@@ -117,7 +117,10 @@ describe('', function() {
           availableFrom: '2016-06-02T07:00:00.000Z',
           availableTo: '2016-06-32T07:00:00.000Z',
           price: 15,
-          author: 'Phillip',
+          author: {
+            username: 'Phillip',
+            displayName: 'Phillip'
+          },
           locationInfo: {
             address: 'SF',
             marker: {
@@ -151,7 +154,10 @@ describe('', function() {
           availableFrom: '2016-06-02T07:00:00.000Z',
           availableTo: '2016-06-32T07:00:00.000Z',
           price: 15,
-          author: 'Phillip',
+          author: {
+            username: 'Phillip',
+            displayName: 'Phillip'
+          },
           locationInfo: {
             address: 'SF',
             marker: {
@@ -200,7 +206,10 @@ describe('', function() {
           price: 15,
           availableFrom: '2016-06-02T07:00:00.000Z',
           availableTo: '2016-06-32T07:00:00.000Z',
-          author: 'Phillip',
+          author: {
+            username: 'Phillip',
+            displayName: 'Phillip'
+          },
           locationInfo: {
             address: 'SF',
             marker: {
@@ -247,7 +256,10 @@ describe('', function() {
           availableFrom: '2016-06-02T07:00:00.000Z',
           availableTo: '2016-06-32T07:00:00.000Z',
           price: 150,
-          author: 'Phillip',
+          author: {
+            username: 'Phillip',
+            displayName: 'Phillip'
+          },
           locationInfo: {
             address: 'SF',
             marker: {
@@ -288,7 +300,10 @@ describe('', function() {
           availableFrom: '2016-06-02T07:00:00.000Z',
           availableTo: '2016-06-32T07:00:00.000Z',
           price: 150,
-          author: 'Phillip',
+          author: {
+            username: 'Phillip',
+            displayName: 'Phillip'
+          },
           rentSchedule: [
             {
               username: 'Phillip',

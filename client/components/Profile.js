@@ -49,7 +49,7 @@ class ProfileComponent extends Component {
             <List style={{paddingTop: 0}}>
               {
                 this.props.products.items.filter(item => {
-                  return item.author === this.props.user.username;
+                  return item.author.username === this.props.user.username;
                 }).map(item => {
                   return (
                      <Link to={"/listings/" + item._id}>
