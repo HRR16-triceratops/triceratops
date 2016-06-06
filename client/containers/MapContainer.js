@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import * as actions from '../actions/index.js';
-import ListingsComponent from '../components/Listings.js';
+import MapComponent from '../components/Map.js';
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -9,6 +9,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     resetSearch: () => {
       dispatch(actions.search({search: ''}));
+    },
+    setMapCenter: (center) => {
+      dispatch(actions.setMapCenter(center));
     }
   };
 };
@@ -20,4 +23,4 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ListingsComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(MapComponent);

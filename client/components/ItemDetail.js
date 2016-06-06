@@ -7,6 +7,7 @@ import {connect} from 'react-redux';
 import RentDateComponenet from '../containers/RentDateContainer';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
+import MapComponenet from './Map.js';
 
 const style = {
   height: 500,
@@ -32,7 +33,8 @@ class ItemDetailComponent extends Component {
   }
 
   render(){
-    const { item, user, ui, popupClose }  = this.props;
+    const { item, user, ui, popupClose, setMapCenter }  = this.props;
+    console.log('item', item);
     return (
       <div>
         <div className="productBanner">
@@ -50,6 +52,19 @@ class ItemDetailComponent extends Component {
               <RentDateComponenet />
               : null
             }
+            <p></p>
+            <div id="map-container">
+            {item.locationInfo ?
+              <MapComponenet
+                center={item.locationInfo.marker}
+                draggable={false}
+                setMapCenter={setMapCenter}
+                setMarkerCenter={() => {}}
+                findGeolcation={false}
+                searchBox={false}
+              /> : null
+            }
+            </div>
             <Dialog
               actions={
                 <FlatButton

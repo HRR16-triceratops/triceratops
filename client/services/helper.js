@@ -71,9 +71,28 @@ var deleteHelper = function(url){
   });
 };
 
+const geoFindMe = (cb) => {
+  if(navigator.geolocation) {
+    return navigator.geolocation.getCurrentPosition(cb, error, geoOptions);
+  } else {
+    alert("Geolocation services are not supported by your web browser.");
+  }
+}
+
+function error(error) {
+  alert("Unable to retrieve your location due to " + error.code + ": " + error.message);
+}
+
+var geoOptions = {
+  enableHighAccuracy: true,
+  maximumAge: 30000,
+  timeout: 27000
+};
+
 module.exports = {
   postHelper: postHelper,
   getHelper: getHelper,
   putHelper: putHelper,
-  deleteHelper: deleteHelper
+  deleteHelper: deleteHelper,
+  geoFindMe: geoFindMe
 };

@@ -11,9 +11,32 @@ export default (state = {
     content: '',
     open: false,
     type: ''
+  },
+  location: {
+    lat: 27.28,
+    lng: 153.1
   }
 }, action) => {
   switch (action.type) {
+    case types.SETMAPCENTER:
+    return {
+      ...state,
+      location: {
+        lat: action.payload.lat,
+        lng: action.payload.lng
+      }
+    };
+    case types.SETMARKERCENTER:
+    return {
+      ...state,
+      location: {
+        ...state.location,
+        marker: {
+          lat: action.payload.lat,
+          lng: action.payload.lng
+        }
+      }
+    };
     case types.ADDLISTING_SUCCESS:
     return {
       ...state,
