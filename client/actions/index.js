@@ -417,7 +417,10 @@ export const addNewListing = (fields) => {
     let newProductListing = {
       ...fields,
       comments: [],
-      author: getState().user.username,
+      author: {
+        username: getState().user.username,
+        displayName: getState().user.displayName
+      },
       locationInfo: {
         address: fields.locationInfo,
         marker: {

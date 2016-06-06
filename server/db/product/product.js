@@ -58,8 +58,14 @@ var ProductSchema = new Schema({
     }
   },
   author: {
-    type: String, // username
-    required: true
+    username: {
+      type: String, // username
+      required: true
+    },
+    displayName: {
+      type: String,
+      required: true
+    }
   },
   rentSchedule: [ // store multiple rentSchedule
     {
