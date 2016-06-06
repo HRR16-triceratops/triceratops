@@ -14,7 +14,7 @@ export default class Map extends Component {
     // Add a marker for each place returned from search bar
     places.forEach(function (place) {
       markers.push({
-        position: place.geometry.location,
+        position: place.geometry.location
       });
     });
 
@@ -46,6 +46,7 @@ export default class Map extends Component {
           lng: data.coords.longitude
         };
         this.props.setMapCenter(center);
+        this.props.setMarkerCenter(center);
       });
     }
   }
@@ -78,7 +79,7 @@ export default class Map extends Component {
                 controlPosition={google.maps.ControlPosition.TOP_LEFT}
                 onPlacesChanged={this.handlePlacesChanged.bind(this)}
                 classes="map-searchbox"
-                placeholer="heyhey"
+                placeholder="Search"
               />
             }
               <Marker

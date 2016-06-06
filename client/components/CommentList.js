@@ -1,7 +1,7 @@
 import React from 'react';
 import { Component } from 'react';
-import Comment from './Comment'; 
-import BuildComment from './BuildComment'; 
+import Comment from './Comment';
+import BuildComment from './BuildComment';
 
 class CommentList extends Component {
   constructor(props){
@@ -12,23 +12,23 @@ class CommentList extends Component {
   }
 
   renderComments(user, comments) {
-      if (typeof comments === 'undefined' || comments.length === 0) {
-          return <h3>Add Comments!</h3>
-      }
-      return comments.reverse().map((comment, ind) => {
-          return <Comment key={ind} comment={comment}/>
-      })
+    if (typeof comments === 'undefined' || comments.length === 0) {
+      return <h3>Add Comments!</h3>;
+    }
+    return comments.map((comment, ind) => {
+      return <Comment key={ind} comment={comment}/>;
+    });
   }
 
 
   renderLoadingSpinner(){
-     return (
-        <div>Loading...</div>
-      )
+    return (
+      <div>Loading...</div>
+    );
   }
 
   render(){
-    const { user, postComment, item} = this.props; 
+    const { user, postComment, item} = this.props;
     return(
       <div className="comments">
         <h2>Comments:</h2>
@@ -39,4 +39,4 @@ class CommentList extends Component {
   }
 };
 
-export default CommentList; 
+export default CommentList;

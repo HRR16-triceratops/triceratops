@@ -33,7 +33,7 @@ router.get('/:id', function(req, res){
 });
 
 /**
- *  Request Handler for GET(read) Method
+ *  Request Handler for GET(read) Method to get comment of specific product
  *  @expected data with Req - nothing
  *  @return [{Object}, {Object}] - Array of comment objects for this product
  */
@@ -146,7 +146,7 @@ router.put('/comments/:id', expressJwt({secret: secret}), function(req, res){
 });
 
 /**
- *  Request Handler for DELETE(remove) Method
+ *  Request Handler for DELETE(remove) Method to delete specific item
  *  @expected data with Req - nothing
  *  @return {Object} - Object of matching product
  */
