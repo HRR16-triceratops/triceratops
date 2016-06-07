@@ -17,8 +17,10 @@ const SingleListingItemSimple = (props) => {
       <Card>
         {/* CardHeader should contain Location info */}
         <CardHeader
-          title={props.item.locationInfo.city} // Location info
-          subtitle={props.item.author.displayName}
+          title={props.item.author.displayName}
+          subtitle={props.item.locationInfo.address.length > 10 ?
+            props.item.locationInfo.address.substr(0,10)+'...' :
+            props.item.locationInfo.address} // Location info
           avatar="http://lorempixel.com/100/100/nature/"
         />
         <CardMedia
