@@ -36,10 +36,6 @@ class ProfileComponent extends Component {
           cardType={'listings'}
           user={user}
           products={products}
-          expanded={false} 
-          linkTo={'/manage'}
-          buttonLabel={"Manage your listings"}
-
         />
         <ProfileCard 
           cardType="rentals"
