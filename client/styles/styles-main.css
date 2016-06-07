@@ -214,7 +214,6 @@ Product Detail/Manage Listings
 }
 
 #map-container {
-  margin-top: 60px;
   width: 300px;
   height: 300px;
 }
@@ -231,10 +230,15 @@ Product Detail/Manage Listings
   outline: none;
   padding: 0 12px;
   textOverflow: ellipses;
-  width: 400px;
+  width: 150px;
   color: black;
+  top: 10px !important;
 }
 
 .createListing {
   margin: 8px 5px 0px 0px;
+}
+
+.map-wrapper {
+  padding-top: 30px;
 }

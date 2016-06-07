@@ -3,7 +3,11 @@ import helper from '../services/helper';
 import { push } from 'react-router-redux';
 import { reset } from 'redux-form';
 
+//////////////////////////////////////////////////////////////
+// Synchronous Action Creators
+//////////////////////////////////////////////////////////////
 
+// Map actions
 export const setMarkerCenter = (pos) => {
   return {
     type: types.SETMARKERCENTER,
@@ -25,6 +29,7 @@ export const mapUpdate = (pos) => {
   };
 };
 
+// popup actions
 export const popupClose = () => {
   return {
     type: types.POPUP_CLOSE
@@ -41,6 +46,7 @@ export const popupOpen = (content, keyword = 'general') => {
   };
 };
 
+// product actions
 const rentSuccess = (data) => {
   return {
     type: types.RENT_SUCCESS,
@@ -133,12 +139,7 @@ const removeListingFailure = (itemId) => {
   };
 };
 
-
-
-//////////////////////////////////////////////////////////////
-// Synchronous Action Creators
-//////////////////////////////////////////////////////////////
-
+// User actions
 /**
 *  @param {Object} userData - Login credentials (username, password)
 */
@@ -266,6 +267,28 @@ export const search = (query) => {
   };
 };
 
+// Comment actions
+export const commentRequest = () => {
+  return {
+    type: 'COMMENT_REQUEST'
+  };
+};
+
+export const commentFailure = () => {
+  return {
+    type: 'COMMENT_FAILURE'
+    // maybe needs ID of comment?
+  };
+};
+
+export const commentSuccess = (updatedCommentsForProduct) => {
+  return {
+    type: 'COMMENT_SUCCESS',
+    updatedComments: updatedCommentsForProduct
+  };
+};
+
+
 //////////////////////////////////////////////////////////////
 // Asynchronous Action Creator combination
 //////////////////////////////////////////////////////////////
@@ -361,25 +384,7 @@ export const attemptSocialLogin = (userData) => {
   };
 };
 
-export const commentRequest = () => {
-  return {
-    type: 'COMMENT_REQUEST'
-  };
-}
 
-export const commentFailure = () => {
-  return {
-    type: 'COMMENT_FAILURE'
-    // maybe needs ID of comment?
-  };
-}
-
-export const commentSuccess = (updatedCommentsForProduct) => {
-  return {
-    type: 'COMMENT_SUCCESS',
-    updatedComments: updatedCommentsForProduct
-  };
-}
 
 export const addNewComment = (author, date, content, productId) => {
   return (dispatch) => {

@@ -79,7 +79,7 @@ export default class Map extends Component {
                 controlPosition={google.maps.ControlPosition.TOP_LEFT}
                 onPlacesChanged={this.handlePlacesChanged.bind(this)}
                 classes="map-searchbox"
-                placeholder="Search"
+                placeholder="Search and Pin!"
               />
             }
               <Marker

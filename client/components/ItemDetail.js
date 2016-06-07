@@ -41,19 +41,7 @@ class ItemDetailComponent extends Component {
             {item.author && item.author.username !== user.username &&
               <RentDateComponenet />
             }
-            <p></p>
-            <div id="map-container">
-            {item.locationInfo ?
-              <MapComponenet
-                center={item.locationInfo.marker}
-                draggable={false}
-                setMapCenter={setMapCenter}
-                setMarkerCenter={() => {}}
-                findGeolcation={false}
-                searchBox={false}
-              /> : null
-            }
-            </div>
+
             <Dialog
               actions={
                 <FlatButton
@@ -68,6 +56,20 @@ class ItemDetailComponent extends Component {
             >
               {ui.popup.content}
             </Dialog>
+          </div>
+          <div className='productBody col-md-5 map-wrapper'>
+            <div id="map-container">
+            {item.locationInfo ?
+              <MapComponenet
+                center={item.locationInfo.marker}
+                draggable={false}
+                setMapCenter={setMapCenter}
+                setMarkerCenter={() => {}}
+                findGeolcation={false}
+                searchBox={false}
+              /> : null
+            }
+            </div>
           </div>
         </div>
         <CommentList item={item} user={user} postComment={postComment} productId={this.props.params.itemId}/>
