@@ -49,13 +49,14 @@ export default class ProfileCard extends Component{
                 return item.author === this.props.user.username;
               }).map(item => {
                 return (
+
                   <Link to={"/listings/" + item._id}>
-                          <ListItem
-                            key={item._id}
-                            primaryText={item.title}
-                            secondaryText={"$"+item.price + " - " + item.summary}
-                          />
-                   </Link>
+                    <ListItem
+                      key={item._id}
+                      primaryText={item.title}
+                      secondaryText={"$"+item.price + " - " + item.summary}
+                    />
+                  </Link>
                 )
               })
             }
@@ -87,13 +88,13 @@ export default class ProfileCard extends Component{
                 return item.rentSchedule.length === 0 ? false : item.rentSchedule[0].username === this.props.user.username;
               }).map(item => {
                 return (
-                   <Link to={"/listings/" + item._id}>
-                          <ListItem
-                            key={item._id}
-                            primaryText={item.title}
-                            secondaryText={"$"+item.price + " - " + item.summary}
-                          />
-                   </Link>
+                  <Link to={"/listings/" + item._id}>
+                    <ListItem
+                      key={item._id}
+                      primaryText={item.title}
+                      secondaryText={"$"+item.price + " - " + item.summary}
+                    />
+                  </Link>
                 )
               })
             }
