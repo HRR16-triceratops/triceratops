@@ -7,16 +7,8 @@ import {connect} from 'react-redux';
 import RentDateComponenet from '../containers/RentDateContainer';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
-
-const style = {
-  height: 500,
-  width: 500,
-  margin: 20,
-  textAlign: 'center',
-  display: 'inline-block',
-  overflow: 'hidden',
-  position: 'relative'
-};
+import MapComponenet from './Map.js';
+import CommentList from './CommentList';
 
 class ItemDetailComponent extends Component {
   constructor(props){
@@ -32,24 +24,24 @@ class ItemDetailComponent extends Component {
   }
 
   render(){
-    const { item, user, ui, popupClose }  = this.props;
+    const { item, user, ui, popupClose, setMapCenter, postComment }  = this.props;
     return (
       <div>
         <div className="productBanner">
           <div className='productBody col-md-7'>
-            <Paper zDepth={3}  style={style}>
-                <span style={{display:'inline-block', height:'100%', verticalAlign: 'middle'}}></span>
-                <img src={item.imgURL} style={{maxWidth:'500px', maxHeight:'500px'}} />
+            <Paper zDepth={3}  className='productImage'>
+                <span></span>
+                <img src={item.imgURL} />
             </Paper>
           </div>
           <div className='productBody col-md-5'>
             <h3>{item.title}</h3>
             <p><b>Details: </b>{item.description}</p>
             <h3>${item.price}.00</h3>
-            {item.author !== user.username ?
+            {item.author && item.author.username !== user.username &&
               <RentDateComponenet />
-              : null
             }
+
             <Dialog
               actions={
                 <FlatButton
@@ -65,7 +57,22 @@ class ItemDetailComponent extends Component {
               {ui.popup.content}
             </Dialog>
           </div>
+          <div className='productBody col-md-5 map-wrapper'>
+            <div id="map-container">
+            {item.locationInfo ?
+              <MapComponenet
+                center={item.locationInfo.marker}
+                draggable={false}
+                setMapCenter={setMapCenter}
+                setMarkerCenter={() => {}}
+                findGeolcation={false}
+                searchBox={false}
+              /> : null
+            }
+            </div>
+          </div>
         </div>
+        <CommentList item={item} user={user} postComment={postComment} productId={this.props.params.itemId}/>
       </div>
     );
   }

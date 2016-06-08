@@ -1,19 +1,46 @@
 import * as types from '../constants/ActionTypes';
 
+/**
+ *  Reducer related to UI
+ */
 export default (state = {
-  isAuthenticating: false,
   ManageListings: {
-    viewManagedListing: false,
-    viewAddNewListingForm: false
+    viewAddNewListingForm: false // State to toggle 'CREATE NEW LISTING' form
   },
-  isAttemptingToAdd: false,
-  popup: {
-    content: '',
-    open: false,
-    type: ''
+  isAttemptingToAdd: false,      // Utilize it for Spinner
+  popup: {                       // State for Popup
+    content: '',                 // Actual Comment on Popup
+    open: false,                 // Toggle Popup
+    type: ''                     // Indicate Popup type('remove', 'cancel', '') *'' means general popup
+  },
+  location: {                    // Location for Google map(Being used only for Posting new item)
+    lat: 27.28,
+    lng: 153.1
   }
 }, action) => {
   switch (action.type) {
+    case types.SETMAPCENTER:
+    return {
+      ...state,
+      location: {
+        ...state.location,
+        lat: action.payload.lat,
+        lng: action.payload.lng
+      }
+    };
+
+    // Set Marker on Map
+    case types.SETMARKERCENTER:
+    return {
+      ...state,
+      location: {
+        ...state.location,
+        marker: {
+          lat: action.payload.lat,
+          lng: action.payload.lng
+        }
+      }
+    };
     case types.ADDLISTING_SUCCESS:
     return {
       ...state,
@@ -50,20 +77,11 @@ export default (state = {
         type: action.payload.type
       }
     };
-    // update pending list for UI state tree
-    case types.UI_TOGGLE_VIEW_MANAGEDLISTING:
-    return {
-      ...state,
-      ManageListings: {
-        ...state.ManageListings,
-        viewManagedListing: !state.ManageListings.viewManagedListing
-      }
-    };
+
     case types.UI_TOGGLE_VIEW_ADDNEWLISTINGFORM:
     return {
       ...state,
       ManageListings: {
-        ...state.ManageListings,
         viewAddNewListingForm: !state.ManageListings.viewAddNewListingForm
       }
     };

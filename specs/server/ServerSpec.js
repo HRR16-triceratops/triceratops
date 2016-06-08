@@ -117,7 +117,17 @@ describe('', function() {
           availableFrom: '2016-06-02T07:00:00.000Z',
           availableTo: '2016-06-32T07:00:00.000Z',
           price: 15,
-          author: 'Phillip'
+          author: {
+            username: 'Phillip',
+            displayName: 'Phillip'
+          },
+          locationInfo: {
+            address: 'SF',
+            marker: {
+              lat: 50,
+              lng: -10
+            }
+          }
         }
       };
       request(options2, function (err, res) {
@@ -144,7 +154,17 @@ describe('', function() {
           availableFrom: '2016-06-02T07:00:00.000Z',
           availableTo: '2016-06-32T07:00:00.000Z',
           price: 15,
-          author: 'Phillip'
+          author: {
+            username: 'Phillip',
+            displayName: 'Phillip'
+          },
+          locationInfo: {
+            address: 'SF',
+            marker: {
+              lat: 50,
+              lng: -10
+            }
+          }
         }
       };
       request(options3, function (err, res) {
@@ -186,7 +206,17 @@ describe('', function() {
           price: 15,
           availableFrom: '2016-06-02T07:00:00.000Z',
           availableTo: '2016-06-32T07:00:00.000Z',
-          author: 'Phillip',
+          author: {
+            username: 'Phillip',
+            displayName: 'Phillip'
+          },
+          locationInfo: {
+            address: 'SF',
+            marker: {
+              lat: 50,
+              lng: -10
+            }
+          },
           isActivated: true
         }).save().then(function(){
           done();
@@ -226,7 +256,17 @@ describe('', function() {
           availableFrom: '2016-06-02T07:00:00.000Z',
           availableTo: '2016-06-32T07:00:00.000Z',
           price: 150,
-          author: 'Phillip'
+          author: {
+            username: 'Phillip',
+            displayName: 'Phillip'
+          },
+          locationInfo: {
+            address: 'SF',
+            marker: {
+              lat: 50,
+              lng: -10
+            }
+          }
         }
       };
       request(options1, function (err) {
@@ -260,7 +300,10 @@ describe('', function() {
           availableFrom: '2016-06-02T07:00:00.000Z',
           availableTo: '2016-06-32T07:00:00.000Z',
           price: 150,
-          author: 'Phillip',
+          author: {
+            username: 'Phillip',
+            displayName: 'Phillip'
+          },
           rentSchedule: [
             {
               username: 'Phillip',

@@ -33,6 +33,20 @@ router.get('/:id', function(req, res){
 });
 
 /**
+ *  Request Handler for GET(read) Method to get comment of specific product
+ *  @expected data with Req - nothing
+ *  @return [{Object}, {Object}] - Array of comment objects for this product
+ */
+router.get('/comments/:id', function(req, res){
+  Product.findById(req.params.id).then(function (doc) {
+    res.send(doc.comments);
+  }).catch(function (err) {
+    console.log(err);
+    res.status(404).send('DatabaseError');
+  });
+});
+
+/**
  *  Request Handler for POST(create) Method with JWT verification middleware
  *  @expected data with Req - Complete product data(type, title, imgURL (validated with mongoose-type-url) summary (200 char limit) description, price, locationInfo, author)
  *  @expected Header with Req - { "Authorization": "Bearer <JWT_TOKEN>"}
@@ -107,7 +121,32 @@ router.put('/rent/:id', expressJwt({secret: secret}), function(req, res){
 });
 
 /**
- *  Request Handler for DELETE(remove) Method
+ *  Request Handler for PUT(add comment) Method with JWT verification middleware
+ *  @expected data with Req - 1. ObjectId as parameter(req.params.id)
+ *                            2. Comment info: { author, date, content } as body
+ *  @expected Header with Req - { "Authorization": "Bearer <JWT_TOKEN>"}
+ *  @return {Object} - contains all comments for given product id.
+ */
+router.put('/comments/:id', expressJwt({secret: secret}), function(req, res){
+  var id = req.params.id;
+  var update = req.body;
+  Product.findById(id).then(function(found){
+    return found.addComment(update);
+  })
+  .then(function(updated){
+    return updated.save();
+  })
+  .then(function(saved){
+    res.json(saved);
+  })
+  .catch(function (err) {
+    console.log(err);
+    res.status(404).send('DatabaseError');
+  });
+});
+
+/**
+ *  Request Handler for DELETE(remove) Method to delete specific item
  *  @expected data with Req - nothing
  *  @return {Object} - Object of matching product
  */

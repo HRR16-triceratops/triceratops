@@ -7,9 +7,9 @@ describe('Actions', () => {
   it('should create an action to open general popup', () => {
     const content = 'Test success';
     const expectedAction = {
-      type: types.generalPopupOpen,
+      type: types.popupOpen,
       payload: content
     };
-    expect(actions.generalPopupOpen(content)).to.equal(expectedAction);
+    expect(actions.popupOpen(content)).to.equal(expectedAction);
   });
 });

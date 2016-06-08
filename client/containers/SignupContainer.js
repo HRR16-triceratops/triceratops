@@ -1,13 +1,11 @@
-import React from 'react';
-import { connect } from 'react-redux';
 import * as actions from '../actions/index.js';
 import SignupComponent from '../components/signup.jsx';
 import { reduxForm } from 'redux-form';
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    generalPopupClose: () => {
-      dispatch(actions.generalPopupClose());
+    popupClose: () => {
+      dispatch(actions.popupClose());
     },
     makeSignupRequest: (userData) => {
       dispatch(actions.attemptSignup(userData));

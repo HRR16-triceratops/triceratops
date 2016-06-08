@@ -17,7 +17,6 @@ class ListingsComponent extends Component {
 
   render () {
     const { products, resetSearch } = this.props;
-
     return (
       <div>
       <div className="jumbotron">

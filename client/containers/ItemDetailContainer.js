@@ -1,8 +1,8 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/index.js';
 import ItemDetailComponent from '../components/ItemDetail.js';
 import { push } from 'react-router-redux';
+import helper from '../services/helper.js';
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -14,6 +14,12 @@ const mapDispatchToProps = (dispatch) => {
     },
     popupClose: () => {
       dispatch(actions.popupClose());
+    },
+    setMapCenter: (center) => {
+      dispatch(actions.setMapCenter(center));
+    },
+    postComment: (author, date, content, productId) => {
+      dispatch(actions.addNewComment(author, date, content, productId));
     }
   };
 };

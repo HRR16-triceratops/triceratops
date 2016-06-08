@@ -6,7 +6,6 @@ import { reduxForm, reset } from 'redux-form';
 const mapDispatchToProps = (dispatch) => {
   return {
     search: (query) => {
-      console.log('send query!', query);
       dispatch(actions.search(query));
       dispatch(reset('SearchForm'));
       dispatch(push('/listings'));
