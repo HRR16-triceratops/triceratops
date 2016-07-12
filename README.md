@@ -1,7 +1,6 @@
 [![Stories in Ready](https://badge.waffle.io/HRR16-triceratops/triceratops.png?label=ready&title=Ready)](https://waffle.io/HRR16-triceratops/triceratops)
 # Project Name
 Share Anything
-> Pithy project description
 
 ## Team
 
@@ -20,8 +19,7 @@ Share Anything
 1. [Contributing](#contributing)
 
 ## Usage
-For Hot tub
-> Some usage instructions
+A web application that provides a marketplace where users can share and rent anything
 
 ## Requirements
 
